@@ -92,12 +92,12 @@
   <p>Needs macOS and Node.js 20 or newer. It works with templates alone; <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a> adds the folders you visit most.</p>
 
   <h2>Optional: the small model</h2>
-  <p>For freer phrasing, serve FunctionGemma with Ollama and point reflex at it in <code>~/.config/reflex/config.toml</code>:</p>
-<pre>ollama pull functiongemma</pre>
+  <p>For freer phrasing, serve reflex-core (FunctionGemma 270M, taught the task on invented Macs) with Ollama and point reflex at it in <code>~/.config/reflex/config.toml</code>:</p>
+<pre>ollama pull pelayomendez/reflex-core</pre>
 <pre>[model]
 url = "http://localhost:11434/v1"
-name = "functiongemma"</pre>
-  <p>The base model on its own resolves almost none of the free phrasings; the adapter trained on your Mac is what makes it useful. Commands, aliases, <code>reflex teach</code> and the design in the <a href="https://github.com/pelayomendez/reflex#readme">README</a>.</p>
+name = "pelayomendez/reflex-core"</pre>
+  <p>It learned the task, not anyone's names, so it works on your Mac as it is; <code>reflex learn</code> collects what it missed if you want to teach it more. Commands, aliases, <code>reflex teach</code> and the design in the <a href="https://github.com/pelayomendez/reflex#readme">README</a>.</p>
 
   <footer>MIT · by <a href="https://github.com/pelayomendez">Pelayo Méndez</a> · after Karpathy's <a href="https://x.com/karpathy/status/1938626382248149433">cognitive core</a></footer>
 </main>

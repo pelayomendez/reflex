@@ -69,11 +69,11 @@ Or, while developing it: `claude --plugin-dir /path/to/reflex`.
 Needs Node.js 20 or newer on macOS. Optional:
 
 - **zoxide**, for the folders you visit most.
-- **A small local model** for freer phrasing ("¿me abres brand?"): `ollama pull functiongemma`, then in `~/.config/reflex/config.toml`:
+- **A small local model** for freer phrasing ("¿me abres brand?"): `ollama pull pelayomendez/reflex-core` (FunctionGemma 270M taught the task on invented Macs, so it knows no one's names), then in `~/.config/reflex/config.toml`:
   ```toml
   [model]
   url = "http://localhost:11434/v1"
-  name = "functiongemma"
+  name = "pelayomendez/reflex-core"
   keep_alive = "1h"   # how long Ollama keeps it loaded between phrases (default 1h)
   ```
 - **Aliases**, in the same file:
