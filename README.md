@@ -2,7 +2,7 @@
 
 # reflex
 
-Type "open brand" in Claude Code and it happens at once, without waking Claude.
+Control your Mac from Claude. Type "turn the volume down" or "open Figma" in Claude Code and it happens at once, without waking Claude or spending a token.
 
 While you type, a line above the prompt says what Enter will do on your Mac: `⚡ open ~/Development/pelayomendez/brand`. Press Enter and it runs here; the prompt never reaches the model, so it costs no tokens and no turn. Anything that is not wholly an action goes to Claude as typed, and a leading `\` always sends it to Claude.
 
