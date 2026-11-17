@@ -15,11 +15,13 @@ export const validEntry = entry => !!entry && typeof entry.path === 'string' && 
 // An address that carries a secret is never kept: a query key that reads like a credential, a value that looks like a
 // token (a JWT, a long opaque run), a webhook. Credentials in the authority are stripped, the fragment is dropped.
 const SECRET_KEY = /(token|secret|passw|pwd|credential|cred|auth|session|sig|key|jwt|bearer|otp|code|access|private|signature|apikey)/i
+// Short keys that carry a signature, a key or a one-time code, whatever the value.
+const SHORT_SECRET_KEY = /^(t|h|k|sig|code|key|hash|otp)$/i
 const OPAQUE_VALUE = /^(eyJ[\w-]+\.|[A-Za-z0-9_\-+/=]{32,}$)/
 const MAX_URL = 2000
 // A word in a path or a query key that says the address does something when it is opened (logs out, deletes, confirms,
 // signs in...), or hands over a credential: never an address "the website" may mean.
-const RISKY_WORDS = new Set(['logout', 'signout', 'unsubscribe', 'delete', 'remove', 'verify', 'confirm', 'reset', 'invite', 'magic', 'activate', 'approve', 'cancel', 'token', 'auth', 'oauth', 'login', 'signin', 'hook', 'hooks', 'webhook', 'webhooks', 'callback'])
+const RISKY_WORDS = new Set(['logout', 'signout', 'unsubscribe', 'delete', 'remove', 'verify', 'confirm', 'reset', 'invite', 'magic', 'activate', 'approve', 'cancel', 'token', 'auth', 'oauth', 'login', 'signin', 'hook', 'hooks', 'webhook', 'webhooks', 'callback', 'optout', 'unsub', 'checkout', 'cart', 'pay', 'payment', 'download', 'downloads', 'purchase', 'subscribe'])
 const wordsOfAddress = text => text.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
 const hasRiskyWord = text => { const words = wordsOfAddress(text); return words.some(word => RISKY_WORDS.has(word)) || /sign[-_ ]?(out|in)/i.test(text) }
 // A path segment that is a secret or an id: a UUID, or 16+ characters mixing letters and digits.
@@ -39,7 +41,7 @@ export function privateHost(host) {
   if (!name.includes('.')) return true
   if (/\.(local|internal|corp|lan|localhost|test|invalid|example|home\.arpa|intranet|private)$/.test(name)) return true
   // Reserved for documentation (RFC 2606): a placeholder in a command or a reply, never a site.
-  return /(^|\.)example\.(com|org|net)$/.test(name)
+  return /(^|\.)example\.(com|org|net)$/.test(name) || /(^|\.)(your-?site|yourdomain|mysite|yoursite)(\.|$)/.test(name) || /(^|\.)domain\.com$/.test(name)
 }
 
 /** The address as reflex keeps it, or undefined when it is not one to keep. Idempotent: a kept address cleans to itself. */
@@ -53,7 +55,7 @@ export function cleanUrl(text) {
   if (privateHost(url.hostname)) return undefined
   if (url.hostname === 'hooks.slack.com' || hasRiskyWord(safeDecode(url.pathname))) return undefined
   if (url.pathname.split('/').some(segment => segment && tokenLike(segment))) return undefined
-  for (const [name, value] of url.searchParams) if (SECRET_KEY.test(name) || hasRiskyWord(name) || opaqueValue(value)) return undefined
+  for (const [name, value] of url.searchParams) if (SECRET_KEY.test(name) || SHORT_SECRET_KEY.test(name) || hasRiskyWord(name) || opaqueValue(value)) return undefined
   url.username = ''
   url.password = ''
   url.hash = ''

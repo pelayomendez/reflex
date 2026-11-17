@@ -232,17 +232,17 @@
 {"phrase":"abre el informe","recent":[{"path":"/home/me/work/Brief.docx","ago":30}],"expect":{"status":"pass"},"tags":["context","docword","trap"]}
 {"phrase":"abre el reporte","recent":[{"path":"/home/me/work/Brief.docx","ago":30}],"expect":{"status":"pass"},"tags":["context","docword","trap"]}
 {"phrase":"open the docs","recent":[{"path":"/home/me/work/docs-plan.md","ago":30}],"expect":{"status":"action","verb":"open","value":"/home/me/work/docs-plan.md"},"tags":["context","docword"]}
-{"phrase":"open the webiste","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"action","verb":"open","value":"https://ada-demo.github.io/orbit-notes/"},"tags":["context","typo"]}
+{"phrase":"open the webiste","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"pass"},"tags":["context","typo","trap","guard-only"]}
 {"phrase":"open the webiste","recent":[],"expect":{"status":"pass"},"tags":["context","typo","trap","nolist"]}
-{"phrase":"open the web-site","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"action","verb":"open","value":"https://ada-demo.github.io/orbit-notes/"},"tags":["context","typo"]}
+{"phrase":"open the web-site","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"pass"},"tags":["context","typo","trap","guard-only"]}
 {"phrase":"open the web-site","recent":[],"expect":{"status":"pass"},"tags":["context","typo","trap","nolist"]}
-{"phrase":"open the websites","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"action","verb":"open","value":"https://ada-demo.github.io/orbit-notes/"},"tags":["context","typo"]}
+{"phrase":"open the websites","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"pass"},"tags":["context","typo","trap","guard-only"]}
 {"phrase":"open the websites","recent":[],"expect":{"status":"pass"},"tags":["context","typo","trap","nolist"]}
-{"phrase":"abre la pagina web","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"action","verb":"open","value":"https://ada-demo.github.io/orbit-notes/"},"tags":["context","typo"]}
+{"phrase":"abre la pagina web","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"action","verb":"open","value":"https://ada-demo.github.io/orbit-notes/"},"tags":["context","web"]}
 {"phrase":"abre la pagina web","recent":[],"expect":{"status":"pass"},"tags":["context","typo","trap","nolist"]}
-{"phrase":"open the landng","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"action","verb":"open","value":"https://ada-demo.github.io/orbit-notes/"},"tags":["context","typo"]}
+{"phrase":"open the landng","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":60}],"expect":{"status":"pass"},"tags":["context","typo","trap","guard-only"]}
 {"phrase":"open the landng","recent":[],"expect":{"status":"pass"},"tags":["context","typo","trap","nolist"]}
-{"phrase":"open the artcile","recent":[{"path":"/home/me/work/Brief.docx","ago":30}],"expect":{"status":"action","verb":"open","value":"/home/me/work/Brief.docx"},"tags":["context","typo"]}
+{"phrase":"open the artcile","recent":[{"path":"/home/me/work/Brief.docx","ago":30}],"expect":{"status":"pass"},"tags":["context","typo","trap","guard-only"]}
 {"phrase":"open the documnet","recent":[],"expect":{"status":"pass"},"tags":["context","typo","trap"]}
 {"phrase":"open it","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":10},{"path":"/home/me/work/plan.md","ago":200}],"expect":{"status":"pass"},"tags":["context","pronoun","trap","url-newer"]}
 {"phrase":"open it","recent":[{"path":"/home/me/work/plan.md","ago":10},{"url":"https://ada-demo.github.io/orbit-notes/","ago":200}],"expect":{"status":"pass"},"tags":["context","pronoun","trap","close"]}
@@ -286,3 +286,17 @@
 {"phrase":"open the pr","recent":[{"url":"https://gitlab.com/explore/projects","ago":30}],"expect":{"status":"pass"},"tags":["context","pr","trap","host-page"]}
 {"phrase":"open the website","recent":[{"url":"https://notes-demo.dev/get/app.dmg","ago":30}],"expect":{"status":"pass"},"tags":["context","web","trap","installer"]}
 {"phrase":"open the link","recent":[{"url":"https://notes-demo.dev/get/app.dmg","ago":30}],"expect":{"status":"action","verb":"open","value":"https://notes-demo.dev/get/app.dmg"},"tags":["context","link"]}
+{"phrase":"open the drift","recent":[{"path":"/home/me/work/plan.md","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","short-word"]}
+{"phrase":"open the drifts","recent":[{"path":"/home/me/work/plan.md","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","short-word"]}
+{"phrase":"open the crafts","recent":[{"path":"/home/me/work/plan.md","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","short-word"]}
+{"phrase":"open the graft","recent":[{"path":"/home/me/work/plan.md","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","short-word"]}
+{"phrase":"open the pages","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":30},{"path":"/home/me/work/plan.md","ago":600}],"expect":{"status":"pass"},"tags":["context","trap","plural"]}
+{"phrase":"open the sites","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":30},{"path":"/home/me/work/plan.md","ago":600}],"expect":{"status":"pass"},"tags":["context","trap","plural"]}
+{"phrase":"open the links","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":30},{"path":"/home/me/work/plan.md","ago":600}],"expect":{"status":"pass"},"tags":["context","trap","plural"]}
+{"phrase":"open the urls","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":30},{"path":"/home/me/work/plan.md","ago":600}],"expect":{"status":"pass"},"tags":["context","trap","plural"]}
+{"phrase":"open the webs","recent":[{"url":"https://ada-demo.github.io/orbit-notes/","ago":30},{"path":"/home/me/work/plan.md","ago":600}],"expect":{"status":"pass"},"tags":["context","trap","plural"]}
+{"phrase":"open the website","recent":[{"url":"https://notes-demo.dev/a?t=x","ago":30}],"expect":{"status":"pass"},"tags":["context","web","trap","unsafe-address"]}
+{"phrase":"open the website","recent":[{"url":"https://notes-demo.dev/checkout/1","ago":30}],"expect":{"status":"pass"},"tags":["context","web","trap","unsafe-address"]}
+{"phrase":"open the website","recent":[{"url":"https://notes-demo.dev/unsub/1","ago":30}],"expect":{"status":"pass"},"tags":["context","web","trap","unsafe-address"]}
+{"phrase":"open the website","recent":[{"url":"https://your-site.com/","ago":30}],"expect":{"status":"pass"},"tags":["context","web","trap","unsafe-address"]}
+{"phrase":"open the website","recent":[{"url":"https://domain.com/","ago":30}],"expect":{"status":"pass"},"tags":["context","web","trap","unsafe-address"]}

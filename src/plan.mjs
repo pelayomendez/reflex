@@ -203,7 +203,7 @@ async function resolve(phrase, deps, { path = false, templatesOnly = false } = {
   // "the website", "la web de reflex", "take me to the docs": a generic noun with an article points at something in the
   // conversation. It resolved (or passed) in resolveDeictic when the phrase opened with it; anywhere else in a phrase it is Claude's:
   // neither a folder called "website" nor the model's guess may stand for it. Quoted text to copy is only text.
-  if (parsed.kind !== 'text' && namesGenericThing(phrase)) {
+  if (parsed.kind !== 'text' && namesGenericThing(phrase, index.apps)) {
     const reason = 'a generic word with an article ("the website", "el doc") points at something in the conversation, not at a folder or file of that name: for Claude'
     return { phrase, status: 'pass', reason, trace: [{ step: 'template', reason }] }
   }

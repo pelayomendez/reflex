@@ -321,19 +321,21 @@ test('M1: «it» and the like pass when the newest fresh item is an address, or 
   assert.equal(resolve('abre ese doc', [url(W, 10), file('/w/a.md', 200)]).status, 'action')
 })
 
-test('M2: a typo, a plural or a hyphenated noun after a determiner is still the noun', () => {
-  const recent = [url(W, 10)]
-  for (const phrase of ['open the webiste', 'open the websit', 'open the web-site', 'open the web_site', 'open the websites', 'abre la pagina web', 'abre el sitoi', 'open the landng', 'open the artcile', 'open the documnet', 'open the screnshot', 'open the presentaton']) {
+test('M2/N1: a typo, a plural or a hyphenated noun after a determiner guards the phrase and never resolves to a session item', () => {
+  const recent = [url(W, 10), { path: '/w/plan.md', at: ago(10) }]
+  for (const phrase of ['open the webiste', 'open the websit', 'open the web-site', 'open the web_site', 'open the websites', 'open the landng', 'open the artcile', 'open the documnet', 'open the screnshot', 'open the presentaton', 'open the pages', 'open the sites', 'open the links', 'open the urls', 'open the docss']) {
     assert.equal(namesGenericThing(phrase), true, phrase)
-    const got = resolve(phrase, [])
-    assert.equal(got?.status, 'pass', phrase)
+    assert.equal(resolve(phrase, []).status, 'pass', phrase)
+    assert.equal(resolve(phrase, recent).status, 'pass', `${phrase}: even with a fresh address and a fresh file`)
   }
-  assert.equal(resolve('open the webiste', recent).action.target.value, W)
-  assert.equal(resolve('open the web-site', recent).action.target.value, W)
-  assert.equal(resolve('open the websites', recent).action.target.value, W)
-  assert.equal(resolve('abre la landng', recent).action.target.value, W)
+  // short nouns never fuzz: draft, doc, page and the like are exact or nothing; these are plain names
+  for (const phrase of ['open the drift', 'open the drifts', 'open the crafts', 'open the graft', 'open the dock', 'open the pager'])
+    assert.equal(resolve(phrase, recent), undefined, phrase)
+  // an exact singular noun still resolves
+  assert.equal(resolve('open the website', recent).action.target.value, W)
+  assert.equal(resolve('open the draft', recent).action.target.value, '/w/plan.md')
   // names that are not a generic noun stay names, and the folders every Mac has stay folders
-  for (const phrase of ['open the roadmap', 'open the figma', 'open my documents', 'abre mis documentos', 'open the pictures', 'open the screenshots', 'open the brand', 'open the downloads'])
+  for (const phrase of ['open the roadmap', 'open the figma', 'open my documents', 'abre mis documentos', 'open the pictures', 'open the screenshots', 'open the brand', 'open the downloads', 'open the drift'])
     assert.equal(namesGenericThing(phrase), false, phrase)
 })
 
@@ -342,6 +344,8 @@ test('M2 through plan(): a misspelt generic noun never falls through to a folder
   let asked = 0
   const deps = { index, config: { aliases: {}, model: { url: 'http://model.invalid' } }, zoxide: () => undefined, askModel: async () => { asked++; return { verb: 'open', target: 'website' } } }
   for (const phrase of ['open the webiste', 'open the web-site', 'open the websites', 'take me to the webiste']) assert.equal((await plan(phrase, deps)).status, 'pass', phrase)
+  // with a session address they still pass: a typo never picks it
+  for (const phrase of ['open the webiste', 'open the websites']) assert.equal((await plan(phrase, { ...deps, recent: [url(W, 10)], now: NOW })).status, 'pass', phrase)
   assert.equal(asked, 0)
 })
 
@@ -395,4 +399,28 @@ test('M7: placeholder domains are never kept', () => {
     assert.equal(cleanUrl(`https://${host}/page`), undefined, host)
   assert.equal(cleanUrl('https://notexample.com/page'), 'https://notexample.com/page')
   assert.equal(cleanUrl('https://example.dev/page'), 'https://example.dev/page')
+})
+
+test('N2: an installed app named exactly like the word is no pointer: «open the pages» opens Pages.app, with or without a session address', async () => {
+  const index = { folders: {}, apps: { pages: '/Applications/Pages.app', numbers: '/Applications/Numbers.app', keynote: '/Applications/Keynote.app', photos: '/Applications/Photos.app' }, shortcuts: [], files: [] }
+  const deps = { index, config: { aliases: {}, model: {} }, zoxide: () => undefined }
+  for (const [phrase, app] of [['open the pages', 'Pages'], ['open the numbers', 'Numbers'], ['open the keynote', 'Keynote'], ['open the photos', 'Photos']]) {
+    for (const extra of [{}, { recent: [url(W, 10), { path: '/w/plan.md', at: ago(10) }], now: NOW }]) {
+      const got = await plan(phrase, { ...deps, ...extra })
+      assert.deepEqual({ status: got.status, value: got.action?.target.value }, { status: 'action', value: `/Applications/${app}.app` }, phrase)
+    }
+    assert.equal(namesGenericThing(phrase, index.apps), false, phrase)
+  }
+  // with no such app installed the same word only guards
+  assert.equal((await plan('open the pages', { ...deps, index: { ...index, apps: {} }, recent: [url(W, 10)], now: NOW })).status, 'pass')
+})
+
+test('lows: short secret keys, commerce and unsubscribe paths, and placeholder hosts are never kept', () => {
+  for (const key of ['t', 'h', 'k', 'sig', 'code', 'key', 'hash', 'otp']) assert.equal(cleanUrl(`https://notes-demo.dev/a?${key}=x`), undefined, key)
+  for (const word of ['optout', 'unsub', 'checkout', 'cart', 'pay', 'payment', 'download', 'purchase', 'subscribe'])
+    assert.equal(cleanUrl(`https://notes-demo.dev/${word}/now`), undefined, word)
+  for (const host of ['your-site.com', 'www.yourdomain.com', 'mysite.org', 'yoursite.io', 'domain.com', 'blog.domain.com'])
+    assert.equal(cleanUrl(`https://${host}/`), undefined, host)
+  assert.equal(cleanUrl('https://notes-demo.dev/a?topic=cats'), 'https://notes-demo.dev/a?topic=cats')
+  assert.equal(cleanUrl('https://mydomain.dev/'), 'https://mydomain.dev/')
 })

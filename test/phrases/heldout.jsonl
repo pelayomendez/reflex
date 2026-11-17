@@ -523,3 +523,7 @@
 {"phrase":"open the articel","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
 {"phrase":"take me to the webiste","expect":{"status":"pass"},"tags":["trap","generic","typo","model"]}
 {"phrase":"quiero ver la pagina web","expect":{"status":"pass"},"tags":["trap","generic","typo","model"]}
+{"phrase": "open the drift", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open the pages", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open the sites", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open the links", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}

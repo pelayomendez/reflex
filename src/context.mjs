@@ -120,21 +120,29 @@ function nounLike(text) {
   if (FOLDER_PLURALS.has(plain)) return undefined
   const stems = [plain.replace(/s$/, ''), plain.replace(/es$/, ''), plain]
   for (const word of stems) if (KIND_OF_NOUN.has(word)) return word
-  for (const word of stems) if (word.length >= 5) for (const noun of NOUN_LIST) if (noun.length >= 5 && Math.abs(noun.length - word.length) <= 1 && distance(word, noun) <= 1) return noun
+  for (const word of stems) if (word.length >= 6) for (const noun of NOUN_LIST) if (noun.length >= 6 && Math.abs(noun.length - word.length) <= 1 && distance(word, noun) <= 1) return noun
   return undefined
 }
-/** The phrase with each such word after a determiner written as the table's noun. */
-function canonical(said) {
+/**
+ * The phrase with each such word after a determiner written as the table's noun, and whether any word was rewritten: a rewritten
+ * (typo, plural, hyphenated) noun only guards, it never resolves. A word that is exactly an installed app's name («the pages» with
+ * Pages.app) is no pointer at all: it is marked so that nothing matches it and the app opens as it always did.
+ */
+function canonical(said, apps = {}) {
   const tokens = said.split(' ')
   const out = []
+  let fuzzy = false
   for (let at = 0; at < tokens.length; at++) {
     const after = at > 0 && DET_WORDS.has(tokens[at - 1])
+    if (after && at + 1 < tokens.length && Object.hasOwn(apps, `${tokens[at]} ${tokens[at + 1]}`)) { out.push(`\u0001${tokens[at]}`, tokens[at + 1]); at++; continue }
+    if (after && Object.hasOwn(apps, tokens[at])) { out.push(`\u0001${tokens[at]}`); continue }
     const two = after && at + 1 < tokens.length ? nounLike(`${tokens[at]} ${tokens[at + 1]}`) : undefined
-    if (two?.includes(' ')) { out.push(two); at++; continue }
+    if (two?.includes(' ')) { if (two !== `${tokens[at]} ${tokens[at + 1]}`) fuzzy = true; out.push(two); at++; continue }
     const one = after ? nounLike(tokens[at]) : undefined
+    if (one !== undefined && one !== tokens[at]) fuzzy = true
     out.push(one ?? tokens[at])
   }
-  return out.join(' ')
+  return { text: out.join(' '), fuzzy }
 }
 const nounKind = noun => KIND_OF_NOUN.get(noun.replace(/\s+/g, ' '))
 
@@ -143,8 +151,13 @@ const nounKind = noun => KIND_OF_NOUN.get(noun.replace(/\s+/g, ' '))
  * «<noun> of <name>», «<name>'s <noun>» or «<name> <web noun>»; `{}` when it holds such a pointer and says more (a place, a second
  * request); undefined when it does not point at a generic thing at all («open website», «open the website folder»).
  */
-function pointingOf(typed) {
-  const said = canonical(typed)
+function pointingOf(typed, apps) {
+  const { text: said, fuzzy } = canonical(typed, apps)
+  const found = pointed(said)
+  // A typo, a plural or a hyphenated noun is pointing too, but it never picks something from the session: Claude's.
+  return fuzzy && found?.kind ? {} : found
+}
+function pointed(said) {
   const lead = LEAD.exec(said)
   if (!lead) return undefined
   const [, verbWord, rest] = lead
@@ -166,25 +179,25 @@ function pointingOf(typed) {
  * Whether a phrase points at a generic thing anywhere in it («quiero ver la web», «take me to the docs», «open the reflex site»):
  * the model step and the name grounding never see such a phrase.
  */
-export function namesGenericThing(phrase) {
+export function namesGenericThing(phrase, apps = {}) {
   const typed = wordsOf(phrase)
   if (!typed) return false
-  const said = canonical(typed)
+  const said = canonical(typed, apps).text
   const rest = LEAD.exec(said)?.[2] ?? said
-  if (pointingOf(said) !== undefined || WITH_DET.test(rest)) return true
+  if (pointed(said) !== undefined || WITH_DET.test(rest)) return true
   if (new RegExp(`(?:^|\\s)\\S+'s\\s+${NOUN_Q}$`).test(rest)) return true
   // «llévame a reflex site»: a name and then a web noun, with nothing small in front of the name.
   const front = new RegExp(`(?:^|\\s)(\\S+)\\s+${WEB_NOUN}$`).exec(rest)?.[1]
   return !!front && !NAME_STOP.has(front) && !DET_WORDS.has(front)
 }
 
-function deicticOf(phrase) {
+function deicticOf(phrase, apps) {
   const said = wordsOf(phrase)
   if (HEAD.test(said)) {
     const template = TEMPLATES.find(([pattern]) => pattern.test(said))
     if (template) return { verb: template[1], kind: template[2], ...(template[3] && { pronoun: true }) }
   }
-  const pointing = pointingOf(said)
+  const pointing = pointingOf(said, apps)
   if (pointing?.kind) return pointing
   return pointing || HEAD.test(said) ? {} : undefined
 }
@@ -287,7 +300,7 @@ const URL_KIND_LABEL = { web: 'web page', pr: 'pull request', repo: 'repo', link
  * @param {{ now?: number, isFile?: (path: string) => boolean, aliases?: Record<string, string>, index?: { folders: Record<string, string> }, remoteOf?: (dir: string) => string | undefined, siteFiles?: (dir: string) => { docsIndex?: boolean, cname?: string } | undefined }} [deps]
  */
 export function resolveDeictic(phrase, recent, { now = Date.now(), isFile = defaultIsFile, index, aliases = {}, remoteOf: remote, siteFiles: files } = {}) {
-  const said = deicticOf(phrase)
+  const said = deicticOf(phrase, index?.apps)
   if (!said) return undefined
   const refuse = reason => ({ phrase, status: 'pass', reason, trace: [{ step: 'template', reason }] })
   if (!said.verb) return refuse('a phrase about "that"/"it"/"the website" that also says something else: for Claude')
