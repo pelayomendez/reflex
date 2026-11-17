@@ -7,6 +7,7 @@ import { existsSync, readFileSync, statSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { extname, isAbsolute, join, resolve as resolvePath } from 'node:path'
 import { key } from './index.mjs'
+import { distance } from './ground.mjs'
 import { FILLERS, normalise } from './phrase.mjs'
 import { webUrl } from './remote.mjs'
 import { OPENABLE } from './selectors.mjs'
@@ -25,7 +26,7 @@ const DOC = ['md', 'txt', 'docx', 'pdf', 'rtf', 'html', 'doc', 'pages', 'odt']
 // What each generic noun may mean on disk (the nouns are src/vocab.mjs's GENERIC_NOUNS). html and svg fit a kind and are
 // then shown in Finder, never opened: OPENABLE decides below.
 const EXTENSIONS = {
-  doc: DOC, image: IMAGE,
+  doc: DOC, docword: DOC, image: IMAGE,
   deck: ['pptx', 'ppt', 'key', 'odp', 'pdf'],
   sheet: ['xlsx', 'xls', 'csv', 'numbers', 'ods'],
   video: ['mp4', 'mov', 'm4v', 'mkv', 'avi', 'webm'],
@@ -43,23 +44,24 @@ export const fitsKind = (kind, path, table = EXTENSIONS) => kind === 'any' || !!
 
 // The deictic phrases, whole and nothing else: [pattern, verb, kind]. Folded text (no accents, lower case).
 const TEMPLATES = [
-  [/^(abrelo|abrela)$/, 'open', 'any'],
+  [/^(abrelo|abrela)$/, 'open', 'any', true],
   [/^abre (ese|esa) (doc|documento)$/, 'open', 'doc'],
   [/^abre ese archivo$/, 'open', 'any'],
   [/^abre esa imagen$/, 'open', 'image'],
   [/^abre el (doc|documento) que (has|ha) (hecho|creado|escrito)$/, 'open', 'doc'],
   [/^abre el archivo que (has|ha) (hecho|creado|escrito)$/, 'open', 'any'],
-  [/^abre lo ultimo$/, 'open', 'any'],
-  [/^(muestramelo|muestramela)( en (el )?finder)?$/, 'reveal', 'any'],
-  [/^open (it|this|that|that file)$/, 'open', 'any'],
-  [/^abre (eso|esto)$/, 'open', 'any'],
-  [/^(muestrame|muestra) (eso|esto)$/, 'reveal', 'any'],
-  [/^reveal (it|this|that)$/, 'reveal', 'any'],
+  [/^abre lo ultimo$/, 'open', 'any', true],
+  [/^(muestramelo|muestramela)( en (el )?finder)?$/, 'reveal', 'any', true],
+  [/^open (it|this|that)$/, 'open', 'any', true],
+  [/^open that file$/, 'open', 'any'],
+  [/^abre (eso|esto)$/, 'open', 'any', true],
+  [/^(muestrame|muestra) (eso|esto)$/, 'reveal', 'any', true],
+  [/^reveal (it|this|that)$/, 'reveal', 'any', true],
   [/^open that (doc|document)$/, 'open', 'doc'],
   [/^open that image$/, 'open', 'image'],
   [/^open the (doc|document) you (made|wrote|created)$/, 'open', 'doc'],
   [/^open the file you (made|wrote|created)$/, 'open', 'any'],
-  [/^show (me )?(it|this|that)( in (the )?finder)?$/, 'reveal', 'any'],
+  [/^show (me )?(it|this|that)( in (the )?finder)?$/, 'reveal', 'any', true],
 ]
 // How a deictic phrase begins. Opening this way and not being one of the templates above means it names something else too
 // ("abre ese doc de brand", "open it with Preview"): never reflex's to guess.
@@ -107,6 +109,33 @@ const TAKEN = [
   [new RegExp(`^(?:${DET}\\s+)?${NAME}\\s+(${WEB_NOUN})$`), (m) => ({ noun: m[2], name: m[1] }), true],
   [new RegExp(`^${DET}\\s+(${NOUN})$`), (m) => ({ noun: m[1] }), false],
 ]
+// A word after a determiner that is a generic noun with a typo (one edit or a swap), a plural, or a hyphen or underscore variant
+// («web-site», «webiste», «the sites») is that noun: a misspelling never lets a phrase fall through to the name grounding.
+// Plurals that are folders on every Mac stay names («open my documents»).
+const NOUN_LIST = [...KIND_OF_NOUN.keys()]
+const FOLDER_PLURALS = new Set(['documents', 'documentos', 'pictures', 'screenshots', 'capturas', 'fotos', 'videos', 'downloads'])
+function nounLike(text) {
+  const plain = text.replace(/[-_]+/g, ' ')
+  if (KIND_OF_NOUN.has(plain)) return plain
+  if (FOLDER_PLURALS.has(plain)) return undefined
+  const stems = [plain.replace(/s$/, ''), plain.replace(/es$/, ''), plain]
+  for (const word of stems) if (KIND_OF_NOUN.has(word)) return word
+  for (const word of stems) if (word.length >= 5) for (const noun of NOUN_LIST) if (noun.length >= 5 && Math.abs(noun.length - word.length) <= 1 && distance(word, noun) <= 1) return noun
+  return undefined
+}
+/** The phrase with each such word after a determiner written as the table's noun. */
+function canonical(said) {
+  const tokens = said.split(' ')
+  const out = []
+  for (let at = 0; at < tokens.length; at++) {
+    const after = at > 0 && DET_WORDS.has(tokens[at - 1])
+    const two = after && at + 1 < tokens.length ? nounLike(`${tokens[at]} ${tokens[at + 1]}`) : undefined
+    if (two?.includes(' ')) { out.push(two); at++; continue }
+    const one = after ? nounLike(tokens[at]) : undefined
+    out.push(one ?? tokens[at])
+  }
+  return out.join(' ')
+}
 const nounKind = noun => KIND_OF_NOUN.get(noun.replace(/\s+/g, ' '))
 
 /**
@@ -114,7 +143,8 @@ const nounKind = noun => KIND_OF_NOUN.get(noun.replace(/\s+/g, ' '))
  * «<noun> of <name>», «<name>'s <noun>» or «<name> <web noun>»; `{}` when it holds such a pointer and says more (a place, a second
  * request); undefined when it does not point at a generic thing at all («open website», «open the website folder»).
  */
-function pointingOf(said) {
+function pointingOf(typed) {
+  const said = canonical(typed)
   const lead = LEAD.exec(said)
   if (!lead) return undefined
   const [, verbWord, rest] = lead
@@ -126,7 +156,7 @@ function pointingOf(said) {
     // A name made of request leftovers ("the website of reflex and delete it") is no name.
     if (found.name !== undefined && !validName(found.name)) continue
     const kind = nounKind(found.noun)
-    if (kind) return { verb, kind: kind === 'file' ? 'any' : kind, noun: true, ...(found.name && { name: found.name }) }
+    if (kind) return { verb, kind: kind === 'file' ? 'any' : kind, noun: true, word: found.noun, ...(found.name && { name: found.name }) }
   }
   // Said with more than the template holds. A folder named outright ("the docs folder") is not pointing: AFTER does not allow a name there.
   return WITH_DET.test(rest) || new RegExp(`^(?:${NOUN_Q})\\s+${OF}\\s`).test(rest) ? {} : undefined
@@ -137,8 +167,9 @@ function pointingOf(said) {
  * the model step and the name grounding never see such a phrase.
  */
 export function namesGenericThing(phrase) {
-  const said = wordsOf(phrase)
-  if (!said) return false
+  const typed = wordsOf(phrase)
+  if (!typed) return false
+  const said = canonical(typed)
   const rest = LEAD.exec(said)?.[2] ?? said
   if (pointingOf(said) !== undefined || WITH_DET.test(rest)) return true
   if (new RegExp(`(?:^|\\s)\\S+'s\\s+${NOUN_Q}$`).test(rest)) return true
@@ -151,7 +182,7 @@ function deicticOf(phrase) {
   const said = wordsOf(phrase)
   if (HEAD.test(said)) {
     const template = TEMPLATES.find(([pattern]) => pattern.test(said))
-    if (template) return { verb: template[1], kind: template[2] }
+    if (template) return { verb: template[1], kind: template[2], ...(template[3] && { pronoun: true }) }
   }
   const pointing = pointingOf(said)
   if (pointing?.kind) return pointing
@@ -164,28 +195,36 @@ const defaultIsFile = path => { try { return statSync(path).isFile() } catch { r
 // Where code lives, and what is not a page one reads: an address there is a repo, a PR, an API or a raw file, never "the website".
 const CODE_HOST = /^(?:www\.)?(github\.com|gist\.github\.com|bitbucket\.org|codeberg\.org|gitlab\.[a-z.]+|[a-z0-9.-]*gitlab[a-z0-9.-]*\.[a-z]+)$/i
 const NOT_A_PAGE_HOST = /^(api|raw|registry|cdn|objects|uploads|ghcr|static|assets|files|download|downloads|gist)\.|\.githubusercontent\.com$|^registry\.npmjs\.org$/i
-const NOT_A_PAGE_PATH = /\.(json|js|mjs|css|map|xml|yaml|yml|zip|gz|tgz|tar|png|jpe?g|gif|svg|webp|ico|woff2?|txt|md|csv|pdf)$/i
-const LOCAL_HOST = /^(localhost|127\.\d+\.\d+\.\d+|0\.0\.0\.0|\[::1\]|[a-z0-9-]+\.local)$/i
+const NOT_A_PAGE_PATH = /\.(json|js|mjs|css|map|xml|yaml|yml|zip|gz|tgz|tar|png|jpe?g|gif|svg|webp|ico|woff2?|txt|md|csv|pdf|dmg|pkg|iso|exe|msi|deb|rpm|whl|7z|bz2|xz|apk)$/i
+// The top-level pages of a code host that are not a project: «github.com/settings» is no repo.
+const HOST_PAGES = new Set(['settings', 'features', 'orgs', 'organizations', 'marketplace', 'topics', 'notifications', 'login', 'logout', 'signup', 'join', 'new', 'explore', 'sponsors', 'apps', 'enterprise', 'pricing', 'about', 'security', 'contact', 'search', 'pulls', 'issues', 'users', 'groups', 'help', 'admin', 'dashboard', 'projects', 'collections', 'trending', 'customer-stories', 'readme', 'codespaces', 'copilot', 'sessions', 'password_reset', 'account', 'user', 'profile', 'snippets', 'oauth', 'api', '-'])
 const REPO_SUBPAGES = new Set(['issues', 'pulls', 'pull', 'blob', 'tree', 'commit', 'commits', 'actions', 'releases', 'wiki', 'wikis', 'settings', 'compare', 'branches', 'tags', 'pipelines', 'merge_requests', 'pull-requests', '-'])
 
-/** What an address is, from its text alone: its host, whether it is a code host or local, and the kinds it can answer to. */
+/** What an address is, from its text alone: its host, whether it is a code host, and the kinds it can answer to. */
 export function addressOf(url) {
   let parsed
   try { parsed = new URL(url) } catch { return undefined }
   const host = parsed.hostname.toLowerCase()
   const segments = parsed.pathname.split('/').filter(Boolean)
   const code = CODE_HOST.test(host)
-  const local = LOCAL_HOST.test(host)
   const kinds = new Set(['link'])
-  if (code && (/^\/[^/]+\/[^/]+(?:\/-)?\/pull\/\d+/.test(parsed.pathname) || /\/(-\/)?merge_requests\/\d+/.test(parsed.pathname) || /\/pull-requests\/\d+/.test(parsed.pathname))) kinds.add('pr')
-  if (code && segments.length >= 2 && !segments.slice(1).some(part => REPO_SUBPAGES.has(part)) && (segments.length === 2 || !/^(github\.com|bitbucket\.org|codeberg\.org)$/.test(host.replace(/^www\./, '')))) kinds.add('repo')
+  const reserved = code && HOST_PAGES.has((segments[0] ?? '').toLowerCase())
+  if (code && !reserved && (/^\/[^/]+\/[^/]+(?:\/-)?\/pull\/\d+/.test(parsed.pathname) || /\/(-\/)?merge_requests\/\d+/.test(parsed.pathname) || /\/pull-requests\/\d+/.test(parsed.pathname))) kinds.add('pr')
+  if (code && !reserved && segments.length >= 2 && !segments.slice(1).some(part => REPO_SUBPAGES.has(part)) && (segments.length === 2 || !/^(github\.com|bitbucket\.org|codeberg\.org)$/.test(host.replace(/^www\./, '')))) kinds.add('repo')
   if (!code && !NOT_A_PAGE_HOST.test(host) && !NOT_A_PAGE_PATH.test(parsed.pathname)) kinds.add('web')
-  return { host, path: parsed.pathname, code, local, kinds }
+  return { host, path: parsed.pathname, code, kinds }
 }
 
 const squash = text => key(text).replace(/[\s._-]+/g, '')
-// "the website of reflex": an address that holds the project's name, in its host or path.
-const mentions = (url, name) => { const address = addressOf(url); return !!address && squash(`${address.host}${address.path}`).includes(squash(name)) }
+// A name that is the host's own, a top-level domain or a generic label names nothing: «the website of github» is not ada.github.io.
+const GENERIC_LABELS = new Set(['github', 'gitlab', 'bitbucket', 'codeberg', 'io', 'com', 'org', 'net', 'dev', 'app', 'www', 'pages', 'vercel', 'netlify', 'page', 'site', 'web', 'website', 'docs', 'http', 'https', 'co', 'me', 'ai', 'blog', 'index', 'main', 'master'])
+// "the website of reflex": an address that holds the project's name as a whole host label or a whole path segment.
+const mentions = (url, name) => {
+  const wanted = squash(name)
+  if (wanted.length < 3 || GENERIC_LABELS.has(wanted)) return false
+  const address = addressOf(url)
+  return !!address && [...address.host.split('.'), ...address.path.split('/')].filter(Boolean).some(label => squash(label) === wanted)
+}
 
 /**
  * The GitHub Pages address of a folder, from what is on this Mac and no network: its origin remote says owner and repo, and
@@ -212,8 +251,7 @@ export function pagesOf(dir, { remote = remoteOf, files = siteFiles } = {}) {
 // ---- What a Bash call made ----------------------------------------------------------------------------------------
 /**
  * What a finished Bash command made or showed: the files an `open` was given and the output files it wrote (an absolute or
- * cwd-relative path that is a file whose mtime lies within the call, from `since` to now), and every address it opened or
- * mentioned. `{ path }` and `{ url }` items without a time: the hook stamps them. Reads the disk (stat) and nothing else.
+ * cwd-relative path that is a file whose mtime lies within the call, from `since` to now), and every address it opened (an address in curl, git or a message is never kept). `{ path }` and `{ url }` items without a time: the hook stamps them. Reads the disk (stat) and nothing else.
  * @param {string} command
  * @param {{ cwd?: string, since: number, now?: number, stat?: (path: string) => { isFile: () => boolean, mtimeMs: number } | undefined, home?: string }} context
  */
@@ -221,7 +259,9 @@ export function touchedBy(command, { cwd, since, now = Date.now(), stat = defaul
   const facts = bashFacts(command)
   const absolute = word => {
     const expanded = word === '~' ? home : word.startsWith('~/') ? join(home, word.slice(2)) : word
-    return isAbsolute(expanded) ? resolvePath(expanded) : cwd && isAbsolute(cwd) ? resolvePath(cwd, expanded) : undefined
+    if (isAbsolute(expanded)) return resolvePath(expanded)
+    // After a cd (or -C, --git-dir) a relative path is not cwd/<path>: it names nothing reflex knows.
+    return !facts.relativeUnsafe && cwd && isAbsolute(cwd) ? resolvePath(cwd, expanded) : undefined
   }
   const fileOf = word => { const path = absolute(word); const info = path && stat(path); return info?.isFile() && validEntry({ path, at: 0 }) ? { path, mtimeMs: info.mtimeMs } : undefined }
   const items = []
@@ -230,13 +270,12 @@ export function touchedBy(command, { cwd, since, now = Date.now(), stat = defaul
   for (const url of facts.opened.urls) add({ url })
   // A made file's mtime lies inside the call; a slack of 20 ms covers a clock read a moment apart from the filesystem's.
   for (const word of facts.named) { const file = fileOf(word); if (file && file.mtimeMs >= since - 20 && file.mtimeMs <= now + 20) add({ path: file.path }) }
-  for (const url of facts.urls) add({ url })
   return items.slice(0, 40)
 }
 const defaultStat = path => { try { return statSync(path) } catch { return undefined } }
 
 // ---- Resolving a phrase -------------------------------------------------------------------------------------------
-const FILE_KIND_LABEL = { any: 'file', doc: 'document', deck: 'presentation', sheet: 'spreadsheet', image: 'image', video: 'video', diagram: 'diagram', pdf: 'PDF' }
+const FILE_KIND_LABEL = { any: 'file', doc: 'document', docword: 'document', deck: 'presentation', sheet: 'spreadsheet', image: 'image', video: 'video', diagram: 'diagram', pdf: 'PDF' }
 const URL_KIND_LABEL = { web: 'web page', pr: 'pull request', repo: 'repo', link: 'link' }
 
 /**
@@ -264,10 +303,7 @@ export function resolveDeictic(phrase, recent, { now = Date.now(), isFile = defa
     const entries = list.filter(validUrlEntry)
     let fitting = entries.filter(entry => addressOf(entry.url)?.kinds.has(said.kind))
     if (said.name) fitting = fitting.filter(entry => mentions(entry.url, said.name))
-    // A page on this Mac's own port is the page only when there is no other: a dev server is rarely "the website".
-    const rank = entry => (addressOf(entry.url)?.local ? 1 : 0)
-    const best = Math.min(...fitting.map(rank))
-    fitting = fitting.filter(entry => rank(entry) === best).sort((a, b) => b.at - a.at)
+    fitting = fitting.sort((a, b) => b.at - a.at)
     const [top, next] = fitting
     const usable = entry => entry && now - entry.at >= 0 && now - entry.at <= FRESH_MS
     if (usable(top) && !(usable(next) && top.at - next.at <= SAME_TURN_MS)) {
@@ -294,7 +330,18 @@ export function resolveDeictic(phrase, recent, { now = Date.now(), isFile = defa
   const table = said.noun ? NOUN_EXTENSIONS : EXTENSIONS
   const entries = list.filter(validEntry)
   if (!entries.length) return refuse(said.noun ? `no files Claude wrote in this session: "the ${FILE_KIND_LABEL[said.kind] ?? 'file'}" names nothing reflex knows` : 'no files Claude wrote in this session: "it" names nothing reflex knows')
-  const fitting = entries.filter(entry => fitsKind(said.kind, entry.path, table) && (!said.name || squash(entry.path).includes(squash(said.name)))).sort((a, b) => b.at - a.at)
+  // «it», «this», «eso», «lo último» mean a file; but when the newest fresh thing is an address, or an address and a file are both
+  // fresh and close, which one is meant is not for reflex to guess.
+  if (said.pronoun) {
+    const fresh = entry => now - entry.at >= 0 && now - entry.at <= FRESH_MS
+    const links = list.filter(validUrlEntry).filter(fresh).map(entry => entry.at)
+    const files = entries.filter(fresh).map(entry => entry.at)
+    if (links.length && (!files.length || Math.max(...links) >= Math.max(...files) || Math.max(...files) - Math.max(...links) <= SAME_TURN_MS))
+      return refuse('Claude also showed an address just now: "it" could be the address or the file, which is not for reflex to guess')
+  }
+  // «the post», «the report», «the docs»: guarded like any generic noun, but a file answers only if its own name holds the word.
+  const wordKey = said.kind === 'docword' ? key(said.word) : undefined
+  const fitting = entries.filter(entry => fitsKind(said.kind, entry.path, table) && (!said.name || squash(entry.path).includes(squash(said.name))) && (!wordKey || key(entry.path.split('/').pop()).includes(wordKey))).sort((a, b) => b.at - a.at)
   if (!fitting.length) return refuse(`none of the files Claude wrote is of the kind asked (${FILE_KIND_LABEL[said.kind] ?? said.kind}${named})`)
   const [top, next] = fitting
   const age = now - top.at

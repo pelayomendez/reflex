@@ -129,13 +129,30 @@ test('a Bash command that failed records nothing and asks the CLI nothing', asyn
   expect(await handed($, runs)).toBeUndefined()
 })
 
-test('an address in a Bash command is kept without asking the disk; one with a token is not', async ($, on) => {
-  const runs = remember(on)
-  await $.tool.call({ tool: 'Bash', command: 'curl -s https://ada-demo.github.io/orbit-notes/' })
-  await $.tool.call({ tool: 'Bash', command: 'curl -s "https://example.org/a?token=abc123"' })
-  expect(runs.some(r => r.argv.includes('touched'))).toBe(false)
+test('only an address given to open is kept from a Bash command; curl, git and echo are not, and open asks the CLI', async ($, on) => {
+  const runs = remember(on, { touched: JSON.stringify([{ url: 'https://ada-demo.github.io/orbit-notes/' }]) })
+  await $.tool.call({ tool: 'Bash', command: 'open https://ada-demo.github.io/orbit-notes/' })
   expect((await handed($, runs)).map((item: any) => item.url)).toEqual(['https://ada-demo.github.io/orbit-notes/'])
 })
+
+test('an address in curl, git or echo is never kept, and asks the CLI nothing', async ($, on) => {
+  const runs = remember(on)
+  for (const command of ['curl -s https://ada-demo.github.io/orbit-notes/', 'git clone https://github.com/ada-demo/orbit-notes', 'echo https://ada-demo.github.io/orbit-notes/'])
+    await $.tool.call({ tool: 'Bash', command })
+  expect(runs.some(r => r.argv.includes('touched'))).toBe(false)
+  expect(await handed($, runs)).toBeUndefined()
+})
+
+// A Bash output has no exit code: a failing command comes back as isError; a command moved to the background, or an exit Claude
+// Code reads as meaningful (returnCodeInterpretation), has not made what the command line says.
+for (const [name, bash] of [['returnCodeInterpretation', { result: { stdout: '', stderr: '', interrupted: false, returnCodeInterpretation: 'No matches found' } }], ['a background task', { result: { stdout: '', stderr: '', interrupted: false, backgroundTaskId: 'b1' } }], ['an interrupt', { result: { stdout: '', stderr: '', interrupted: true } }]] as const) {
+  test(`a Bash call with ${name} records nothing`, async ($, on) => {
+    const runs = remember(on, { bash: bash as any, touched: JSON.stringify([{ path: '/w/Brief.docx' }]) })
+    await $.tool.call({ tool: 'Bash', command: 'textutil -convert docx in.html -output Brief.docx' })
+    expect(runs.some(r => r.argv.includes('touched'))).toBe(false)
+    expect(await handed($, runs)).toBeUndefined()
+  })
+}
 
 test('a command that touched nothing worth keeping leaves the list as it was', async ($, on) => {
   const runs = remember(on)

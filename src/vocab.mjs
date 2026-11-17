@@ -162,7 +162,9 @@ export const GENERIC_NOUNS = [
   { kind: 'pr', en: ['pr', 'pull request', 'merge request', 'mr'], es: ['pr', 'pull request', 'merge request', 'mr'] },
   { kind: 'repo', en: ['repo', 'repository'], es: ['repo', 'repositorio'] },
   { kind: 'link', en: ['link', 'url', 'address'], es: ['link', 'enlace', 'url', 'direccion'] },
-  { kind: 'doc', en: ['doc', 'docs', 'document', 'article', 'draft', 'post', 'report', 'paper'], es: ['doc', 'docs', 'documento', 'articulo', 'borrador', 'post', 'informe', 'reporte'] },
+  // Only these four mean "the document Claude just made". The others are guarded as well but resolve only to a file whose own name holds the word.
+  { kind: 'doc', en: ['doc', 'document', 'article', 'draft'], es: ['doc', 'documento', 'articulo', 'borrador'] },
+  { kind: 'docword', en: ['docs', 'post', 'report', 'paper'], es: ['docs', 'post', 'informe', 'reporte'] },
   { kind: 'deck', en: ['deck', 'slides', 'slide deck', 'presentation'], es: ['deck', 'diapositivas', 'presentacion', 'slides'] },
   { kind: 'sheet', en: ['spreadsheet', 'sheet'], es: ['hoja de calculo', 'hoja', 'spreadsheet'] },
   { kind: 'image', en: ['image', 'picture', 'photo', 'screenshot', 'pic'], es: ['imagen', 'foto', 'captura', 'captura de pantalla', 'pantallazo'] },

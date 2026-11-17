@@ -295,7 +295,7 @@ function typoOf(k, entries, ...rivals) {
 }
 
 /** Edit distance counting a swap of two neighbours as one edit. */
-function distance(a, b) {
+export function distance(a, b) {
   const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)])
   for (let j = 1; j <= b.length; j++) d[0][j] = j
   for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {

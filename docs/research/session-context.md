@@ -30,6 +30,17 @@ Real use found three wrong actions: «open the website» opened a folder named `
 
 **What is recorded.** The list now holds `{ path, at }` and `{ url, at }`, newest first, 20 of each kind (links never push files out). After a *successful* Bash call the hook records: the files `open` was given and the addresses it opened; output files (`-output x`, `-o x`, `> x`: an absolute or cwd-relative existing file whose mtime lies inside the call; the hook cannot read the disk, so `reflex touched --since <ms> --cwd <dir> -- "<command>"` does, and runs nothing); and the http(s) addresses in the command. `turn.complete` carries `answer`, the final text of the turn: its http(s) addresses are recorded (the main loop only, never a subagent's). Addresses lose credentials and fragment, and one with a token, key, signature, password or session in the query, a long opaque value, a webhook path, or a non-http(s) scheme is never kept (`cleanUrl`, `src/recent.mjs`); `parseRecent` applies the same check to what the CLI is handed.
 
+**Review hardening.**
+- Bash addresses: only those given to `open` (and `open -a <browser> <url>`) are recorded, never those in curl, git, echo or a commit message. Addresses in Claude's reply stay.
+- Relative paths are dropped when the command has `cd`, `pushd`, `popd`, `-C`, `--git-dir` or `--work-tree`; `open --stdin/--stdout/--stderr` arguments are not opens.
+- A Bash call counts as successful only if its result is not `isError` (a non-zero exit comes back that way: the Bash output type has no exit code field), not interrupted, not moved to the background (`backgroundTaskId`), and has no `returnCodeInterpretation` (an exit Claude Code reads as meaningful).
+- `cleanUrl` also refuses: private, loopback and link-local hosts, single-label and `.local/.internal/.corp/.lan/.home.arpa` hosts, reserved placeholder domains (example.com/org/net, `.test`, `.invalid`, `.example`, `.localhost`), token-like path segments (UUID, 16+ letters and digits), opaque or hex query values, hook/webhook/callback paths, and paths or query keys with logout, signout, delete, verify, confirm, reset, invite, login, auth, token and the like. So localhost is never «the website».
+- A project name matches an address only as a whole host label or path segment (3+ characters; `github`, `io`, `com`, `www`, `app` and other generic labels never qualify). The person's own alias for the name still answers «la web de linkedin».
+- «it / this / that / eso / lo último» pass when the newest fresh item is an address, or an address and a file are fresh within 5 minutes.
+- A typo (one edit or swap), a plural or a hyphen variant of a generic noun after a determiner is that noun. `documents`, `pictures`, `screenshots` and similar folder plurals stay names.
+- Only doc, document, article and draft (and their Spanish forms) mean the document Claude made. docs, post, paper and report are guarded too, but resolve only to a fresh file whose own name holds the word.
+- Code-host pages that are not a project (`/settings`, `/marketplace`, `/explore`...) are not a repo or a PR; installers and archives (`dmg pkg iso exe msi deb rpm whl 7z bz2 xz apk tar tgz`) are not pages.
+
 ## Safety rules
 
 A deictic phrase passes to Claude, with a reason `reflex why` shows, when:

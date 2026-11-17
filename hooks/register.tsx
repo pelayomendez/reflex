@@ -150,7 +150,8 @@ export const register: Register = (on) => {
   }).catch(($, e, next) => next(e)) // observing only: if this throws, the call goes on untouched
 
   // What a Bash command made or showed, for "open the doc" / "open the website": a file `open` was given, a file the command
-  // wrote (`-output x.docx`, `> x.md`: it exists and was touched during the call), and the web addresses it opened or held.
+  // wrote (`-output x.docx`, `> x.md`: it exists and was touched during the call), and the web addresses it opened. An address in
+  // curl, git or a message is never kept: it may be an API, a cloned repo or a link in a commit.
   // Only after the call went through. The CLI reads the disk (this module has no node:*); an address alone needs no disk.
   on('tool.call', { tool: 'Bash' }, async ($, e, next) => {
     const since = Date.now()
@@ -160,7 +161,7 @@ export const register: Register = (on) => {
       if (typeof command !== 'string' || !callSucceeded(result)) return result
       const facts = bashFacts(command)
       const onDisk = facts.opened.paths.length > 0 || facts.named.some(word => /[./]/.test(word))
-      let items: unknown[] = facts.urls.map(url => ({ url }))
+      let items: unknown[] = facts.opened.urls.map(url => ({ url }))
       if (onDisk) {
         const cwd = await Promise.resolve().then(() => $.session.cwd()).catch(() => undefined)
         const { exitCode, stdout } = await cli($, ['touched', '--since', String(since), ...(cwd ? ['--cwd', cwd] : []), '--', command], 5_000)

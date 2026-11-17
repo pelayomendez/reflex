@@ -516,3 +516,10 @@
 {"phrase":"open the website folder","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/website"},"tags":["en","generic","folder"]}
 {"phrase":"open the articles folder","expect":{"status":"action","verb":"open","value":"/Users/me/Documents/Articles"},"tags":["en","generic","folder"]}
 {"phrase":"open my documents","expect":{"status":"action","verb":"open","value":"/Users/me/Documents"},"tags":["en","generic","name"]}
+{"phrase":"open the webiste","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"open the web-site","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"open the websites","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"abre la pagina web","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"open the articel","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"take me to the webiste","expect":{"status":"pass"},"tags":["trap","generic","typo","model"]}
+{"phrase":"quiero ver la pagina web","expect":{"status":"pass"},"tags":["trap","generic","typo","model"]}

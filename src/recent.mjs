@@ -17,6 +17,30 @@ export const validEntry = entry => !!entry && typeof entry.path === 'string' && 
 const SECRET_KEY = /(token|secret|passw|pwd|credential|cred|auth|session|sig|key|jwt|bearer|otp|code|access|private|signature|apikey)/i
 const OPAQUE_VALUE = /^(eyJ[\w-]+\.|[A-Za-z0-9_\-+/=]{32,}$)/
 const MAX_URL = 2000
+// A word in a path or a query key that says the address does something when it is opened (logs out, deletes, confirms,
+// signs in...), or hands over a credential: never an address "the website" may mean.
+const RISKY_WORDS = new Set(['logout', 'signout', 'unsubscribe', 'delete', 'remove', 'verify', 'confirm', 'reset', 'invite', 'magic', 'activate', 'approve', 'cancel', 'token', 'auth', 'oauth', 'login', 'signin', 'hook', 'hooks', 'webhook', 'webhooks', 'callback'])
+const wordsOfAddress = text => text.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean)
+const hasRiskyWord = text => { const words = wordsOfAddress(text); return words.some(word => RISKY_WORDS.has(word)) || /sign[-_ ]?(out|in)/i.test(text) }
+// A path segment that is a secret or an id: a UUID, or 16+ characters mixing letters and digits.
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+const tokenLike = segment => UUID.test(segment) || (segment.length >= 16 && /[a-z]/i.test(segment) && /\d/.test(segment) && /^[A-Za-z0-9_-]+$/.test(segment))
+const opaqueValue = value => OPAQUE_VALUE.test(value) || /^[0-9a-f]{8,}$/i.test(value) || (value.length >= 8 && /^[A-Za-z0-9_-]+$/.test(value) && /[a-z]/i.test(value) && /\d/.test(value))
+
+/** Whether a host is this machine, a private network, or a name that exists nowhere public: never kept. */
+export function privateHost(host) {
+  const name = host.toLowerCase().replace(/\.$/, '')
+  if (!name || name.startsWith('[')) return true
+  const ip = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(name)
+  if (ip) {
+    const [a, b] = [Number(ip[1]), Number(ip[2])]
+    return a === 0 || a === 10 || a === 127 || (a === 169 && b === 254) || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168) || (a === 100 && b >= 64 && b <= 127) || a >= 224
+  }
+  if (!name.includes('.')) return true
+  if (/\.(local|internal|corp|lan|localhost|test|invalid|example|home\.arpa|intranet|private)$/.test(name)) return true
+  // Reserved for documentation (RFC 2606): a placeholder in a command or a reply, never a site.
+  return /(^|\.)example\.(com|org|net)$/.test(name)
+}
 
 /** The address as reflex keeps it, or undefined when it is not one to keep. Idempotent: a kept address cleans to itself. */
 export function cleanUrl(text) {
@@ -26,15 +50,16 @@ export function cleanUrl(text) {
   let url
   try { url = new URL(typed) } catch { return undefined }
   if (url.protocol !== 'https:' && url.protocol !== 'http:') return undefined
-  const host = url.hostname
-  if (!host || !(host.includes('.') || host === 'localhost' || host.startsWith('['))) return undefined
-  if (host === 'hooks.slack.com' || /\/webhooks?\//i.test(url.pathname)) return undefined
-  for (const [name, value] of url.searchParams) if (SECRET_KEY.test(name) || OPAQUE_VALUE.test(value)) return undefined
+  if (privateHost(url.hostname)) return undefined
+  if (url.hostname === 'hooks.slack.com' || hasRiskyWord(safeDecode(url.pathname))) return undefined
+  if (url.pathname.split('/').some(segment => segment && tokenLike(segment))) return undefined
+  for (const [name, value] of url.searchParams) if (SECRET_KEY.test(name) || hasRiskyWord(name) || opaqueValue(value)) return undefined
   url.username = ''
   url.password = ''
   url.hash = ''
   return url.toString()
 }
+const safeDecode = text => { try { return decodeURIComponent(text) } catch { return text } }
 
 /** A web address entry: kept only if it is an address reflex would keep, written exactly as it would keep it. */
 export const validUrlEntry = entry => !!entry && typeof entry.url === 'string' && cleanUrl(entry.url) === entry.url && Number.isFinite(entry.at)
@@ -81,8 +106,12 @@ export const recordItem = (list, item, at, cap = RECENT_CAP) => typeof item?.url
 /** The path a Write, Edit or NotebookEdit call is about, from the event's flat arguments. */
 export const writtenPath = event => [event?.file_path, event?.notebook_path].find(value => typeof value === 'string')
 
+// A Bash call's output has no exit code: a non-zero exit comes back as `isError: true`, except the exits Claude Code reads as
+// meaningful (grep's 1: `returnCodeInterpretation` is set), and a command moved to the background has not finished.
+const bashDidNotFinish = output => !!output && typeof output === 'object' && (output.interrupted === true || typeof output.backgroundTaskId === 'string' || typeof output.returnCodeInterpretation === 'string')
+
 /** Whether a finished tool call went through. Anything that says it failed is not a file Claude made. */
-export const callSucceeded = result => !(result && typeof result === 'object' && (result.isError || result.is_error || result.error || typeof result.deny === 'string' || result.result?.interrupted === true))
+export const callSucceeded = result => !(result && typeof result === 'object' && (result.isError || result.is_error || result.error || typeof result.deny === 'string' || bashDidNotFinish(result.result)))
 
 /** A list as the CLI is handed it: what is neither `{ path, at }` nor `{ url, at }` is dropped; not JSON or not a list is an empty list. */
 export function parseRecent(text) {
@@ -130,18 +159,22 @@ function tokenize(command) {
   return tokens
 }
 
-const OPEN_WITH_ARGUMENT = new Set(['-a', '-b'])
+// `open` options that take the next word as their argument (a file for --stdin/--stdout/--stderr is not something it opened).
+const OPEN_WITH_ARGUMENT = new Set(['-a', '-b', '--stdin', '--stdout', '--stderr'])
+// A command that changes directory, or runs elsewhere, makes a relative path mean something other than cwd/<path>.
+const MOVES = /^(cd|pushd|popd|chdir)$/
+const ELSEWHERE = /^(-C|--git-dir|--work-tree)(=|$)/
 const NOT_A_PATH = /[$`*?\[\]{}<>~]|^-/
 const aPath = word => word.length > 0 && word.length < 1024 && !ODD_CHARACTERS.test(word) && !/^[a-z][a-z0-9+.-]*:\/\//i.test(word)
 
 /**
- * What a command line names, with no disk read: `urls` (every http(s) address in it, as kept), `opened` (what an `open`
- * was given: `paths` and `urls`) and `named` (every other word that could be a file: an argument, an `-o=file` value, the
- * target of `>`). Whether a named path exists and was made by the call is for the CLI to read off the disk.
- * @returns {{ urls: string[], opened: { paths: string[], urls: string[] }, named: string[] }}
+ * What a command line names, with no disk read: `opened` (what an `open` was given: `paths` and `urls`; an address in any
+ * other command, curl or a commit message, is never kept) and `named` (every other word that could be a file: an argument, an `-o=file` value, the
+ * target of `>`). `relativeUnsafe` is set when the command changes directory or runs elsewhere (cd, -C, --git-dir): a relative path then names nothing reflex knows. Whether a named path exists and was made by the call is for the CLI to read off the disk.
+ * @returns {{ opened: { paths: string[], urls: string[] }, named: string[], relativeUnsafe: boolean }}
  */
 export function bashFacts(command) {
-  const facts = { urls: urlsIn(command), opened: { paths: [], urls: [] }, named: [] }
+  const facts = { opened: { paths: [], urls: [] }, named: [], relativeUnsafe: false }
   if (typeof command !== 'string' || command.length > 20_000) return facts
   const commands = []
   let words = []
@@ -159,6 +192,7 @@ export function bashFacts(command) {
     const start = line.findIndex(word => !/^[A-Za-z_]\w*=/.test(word))
     if (start < 0) continue
     const [head, ...args] = line.slice(start)
+    if (MOVES.test(head.split('/').at(-1)) || args.some(arg => ELSEWHERE.test(arg))) facts.relativeUnsafe = true
     if (head.split('/').at(-1) === 'open') {
       for (let at = 0; at < args.length; at++) {
         const arg = args[at]
@@ -177,5 +211,5 @@ export function bashFacts(command) {
     }
   }
   const once = list => [...new Set(list)].slice(0, 40)
-  return { urls: facts.urls, opened: { paths: once(facts.opened.paths), urls: once(facts.opened.urls) }, named: once(facts.named) }
+  return { relativeUnsafe: facts.relativeUnsafe, opened: { paths: once(facts.opened.paths), urls: once(facts.opened.urls) }, named: once(facts.named) }
 }
