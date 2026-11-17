@@ -11,6 +11,9 @@
       "documentos": "/Users/me/Documents",
       "documents": "/Users/me/Documents",
       "calendar 2031": "/Users/me/Documents/Calendar 2031",
+      "website": "/code/orbitdesk/website",
+      "docs": "/code/orbitdesk/docs",
+      "articles": "/Users/me/Documents/Articles",
       "notas": "/Users/me/Notas",
       "music": "/Users/me/Music",
       "musica": "/Users/me/Music"
@@ -124,6 +127,10 @@
     },
     "screenshots": {
       "dir": "/Users/me/Screenshots"
+    },
+    "sites": {
+      "/code/brand": { "docsIndex": true },
+      "/code/orbitdesk": { "docsIndex": true }
     },
     "remotes": {
       "/code/brand": "git@github.com:pelayomendez/brand.git",

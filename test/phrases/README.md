@@ -34,8 +34,9 @@ ever shown to a model that is then scored on it, the score means nothing.
   validation from that file alone, and ignores this Mac's config (aliases are private names).
 
 - `context.jsonl` is the session-context exam (`docs/research/session-context.md`): deictic phrases («ábrelo», «open that doc») against
-  the files Claude wrote. Each line carries `recent: [{ path, ago (seconds), missing? }]`, read against a fixed clock; lines without one
-  see no list, so the other exams are untouched. Run it with `reflex eval test/phrases/context.jsonl` (templates only, no model).
+  what Claude made or showed, and generic nouns with an article («open the website», «open the doc»). Each line carries
+  `recent: [{ path | url, ago (seconds), missing? }]`, read against a fixed clock; lines without one see no list, so the other exams
+  are untouched. A project's Pages address reads the fixture's `fs.remotes` and `fs.sites`. Run it with `reflex eval test/phrases/context.jsonl` (templates only, no model).
 
 Every positive in `model.jsonl` is reachable: a test plays an oracle model that answers every run of
 consecutive words of the phrase with each verb, and at least one answer must give the expected action

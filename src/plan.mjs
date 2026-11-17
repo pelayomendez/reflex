@@ -4,7 +4,7 @@
 import { basename } from 'node:path'
 import { processAncestry } from './ancestry.mjs'
 import { loadConfig } from './config.mjs'
-import { resolveDeictic } from './context.mjs'
+import { namesGenericThing, resolveDeictic } from './context.mjs'
 import { ground } from './ground.mjs'
 import { key, loadIndex } from './index.mjs'
 import { MODIFIERS, extractModifier, isTextFile, resolveApp } from './modifiers.mjs'
@@ -65,7 +65,7 @@ export async function plan(phrase, deps = {}) {
   const config = deps.config ?? loadConfig()
   const index = deps.index ?? loadIndex()
   // "abre ese doc", "open it": the file Claude wrote, from the list the hooks hand over, or Claude's. Never the model's, never a name.
-  const deictic = resolveDeictic(phrase, deps.recent, { now: deps.now, isFile: deps.isFile })
+  const deictic = resolveDeictic(phrase, deps.recent, { now: deps.now, isFile: deps.isFile, index, aliases: config.aliases, remoteOf: deps.remoteOf, siteFiles: deps.siteFiles })
   if (deictic) return deictic
   // A fixed system phrase ("abre ajustes de sonido", "bloquea la pantalla", "volumen al 30") is the table's alone.
   const system = systemAction(phrase, { index, config, screenLockStatus: deps.screenLockStatus })
@@ -199,6 +199,14 @@ async function resolve(phrase, deps, { path = false, templatesOnly = false } = {
   const model = deps.askModel ?? askModel
   const parsed = parse(phrase)
   const trace = []
+
+  // "the website", "la web de reflex", "take me to the docs": a generic noun with an article points at something in the
+  // conversation. It resolved (or passed) in resolveDeictic when the phrase opened with it; anywhere else in a phrase it is Claude's:
+  // neither a folder called "website" nor the model's guess may stand for it. Quoted text to copy is only text.
+  if (parsed.kind !== 'text' && namesGenericThing(phrase, index.apps)) {
+    const reason = 'a generic word with an article ("the website", "el doc") points at something in the conversation, not at a folder or file of that name: for Claude'
+    return { phrase, status: 'pass', reason, trace: [{ step: 'template', reason }] }
+  }
 
   if ('verb' in parsed) {
     const latest = selectLatest(phrase, parsed, { index, config, ...deps })

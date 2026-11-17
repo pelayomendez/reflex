@@ -475,3 +475,55 @@
 {"phrase":"ábrelo, por favor","expect":{"status":"pass"},"tags":["es","trap","deictic"]}
 {"phrase":"abre ese doc, porfa","expect":{"status":"pass"},"tags":["es","trap","deictic"]}
 {"phrase":"show it, please","expect":{"status":"pass"},"tags":["en","trap","deictic"]}
+{"phrase":"open the website","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the website of reflex","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"abre la web de reflex","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"open reflex's website","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"la web de reflex","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"open the site","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"abre la web","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"open the landing page","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the doc","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the article","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the docs","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"abre el doc","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"abre el artículo","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"abre los docs","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"open this doc","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the post","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the report","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"abre el informe","expect":{"status":"pass"},"tags":["es","trap","generic"]}
+{"phrase":"open the deck","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the slides","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the presentation","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the screenshot","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the image","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the repo","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"open the pr","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"show me the website","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"oye abre la web, porfa","expect":{"status":"pass"},"tags":["en","trap","generic"]}
+{"phrase":"take me to the docs","expect":{"status":"pass"},"tags":["trap","generic","model"]}
+{"phrase":"quiero ver la web","expect":{"status":"pass"},"tags":["trap","generic","model"]}
+{"phrase":"llévame a la web de reflex","expect":{"status":"pass"},"tags":["trap","generic","model"]}
+{"phrase":"I want to see the website","expect":{"status":"pass"},"tags":["trap","generic","model"]}
+{"phrase":"go to the article","expect":{"status":"pass"},"tags":["trap","generic","model"]}
+{"phrase":"quiero ver el artículo","expect":{"status":"pass"},"tags":["trap","generic","model"]}
+{"phrase":"open website","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/website"},"tags":["en","generic","name"]}
+{"phrase":"abre website","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/website"},"tags":["es","generic","name"]}
+{"phrase":"open docs","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/docs"},"tags":["en","generic","name"]}
+{"phrase":"open the docs folder","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/docs"},"tags":["en","generic","folder"]}
+{"phrase":"abre la carpeta docs","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/docs"},"tags":["es","generic","folder"]}
+{"phrase":"open the website folder","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/website"},"tags":["en","generic","folder"]}
+{"phrase":"open the articles folder","expect":{"status":"action","verb":"open","value":"/Users/me/Documents/Articles"},"tags":["en","generic","folder"]}
+{"phrase":"open my documents","expect":{"status":"action","verb":"open","value":"/Users/me/Documents"},"tags":["en","generic","name"]}
+{"phrase":"open the webiste","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"open the web-site","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"open the websites","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"abre la pagina web","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"open the articel","expect":{"status":"pass"},"tags":["trap","generic","typo"]}
+{"phrase":"take me to the webiste","expect":{"status":"pass"},"tags":["trap","generic","typo","model"]}
+{"phrase":"quiero ver la pagina web","expect":{"status":"pass"},"tags":["trap","generic","typo","model"]}
+{"phrase": "open the drift", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open the pages", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open the sites", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open the links", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}

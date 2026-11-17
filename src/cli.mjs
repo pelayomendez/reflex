@@ -3,7 +3,8 @@
 // reflex --json "<phrase>"   the plan as JSON, run nothing (for plugins and agents)
 // reflex --count --json "<phrase>"   as --json, and read the Trash's count from Finder when the phrase is Empty Trash (the hooks do it at Enter only)
 // reflex --confirmed <n> "<phrase>"   run a confirmed Empty Trash: only if the Trash still holds no more than n items. Nothing else empties it
-// reflex --recent '[{"path":"/abs/file.md","at":1700000000000}]' ...   the files Claude wrote (newest first), so "open it" can mean one
+// reflex --recent '[{"path":"/abs/file.md","at":1700000000000},{"url":"https://x.example/","at":1700000000000}]' ...   the files and addresses from this session (newest first), so "open it" / "open the website" can mean one
+// reflex touched --since <ms> [--cwd <dir>] -- "<bash command>"   what a finished Bash command made or showed, as JSON [{path}|{url}] (for the hooks; reads the disk, runs nothing)
 // reflex why "<phrase>"      every step of the decision
 // reflex eval [--model] [--json] [--quoted] [--index file] [file]   score the held-out phrases against the fixture (or another Mac's index.json); exit 1 on any wrong action
 // reflex teach [--count N] [--out DIR] [--index file] [--print-prompt]   have Claude write the training set (sends index names, never paths or contents)
@@ -14,7 +15,7 @@ import { homedir } from 'node:os'
 import { createInterface } from 'node:readline/promises'
 import { readFileSync } from 'node:fs'
 import { loadConfig } from './config.mjs'
-import { parseRecent } from './context.mjs'
+import { parseRecent, touchedBy } from './context.mjs'
 import { evaluate, fakeDeps } from './eval.mjs'
 import { loadIndex, readIndexFile } from './index.mjs'
 import { readTrashCount } from './query.mjs'
@@ -59,6 +60,17 @@ if (args[0] === 'teach') {
     printSummary(result)
     if (!result.written) { console.error(`reflex teach: nothing was kept, ${result.out} is untouched`); process.exit(1) }
   } catch (error) { console.error(`reflex teach: ${error.message}`); process.exit(1) }
+  process.exit(0)
+}
+if (args[0] === 'touched') {
+  // From the hooks: what a Bash command that went through made or showed. Silent on any problem: an empty list.
+  const option = name => { const at = args.indexOf(name); return at < 0 ? undefined : args.splice(at, 2)[1] }
+  const since = Number(option('--since')), cwd = option('--cwd')
+  const dash = args.indexOf('--')
+  const command = dash >= 0 ? args.slice(dash + 1).join(' ') : ''
+  let items = []
+  try { if (Number.isFinite(since)) items = touchedBy(command, { cwd, since }) } catch {}
+  console.log(JSON.stringify(items))
   process.exit(0)
 }
 if (args[0] === 'learn') {

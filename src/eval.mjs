@@ -38,7 +38,7 @@ export function classify(expect, got) {
  * remotes: { dir: 'the origin as written' } }`. Without data nothing exists, so an exam never reads the Mac it runs on.
  */
 export function fakeDeps(data = {}) {
-  const { listings = {}, screenshots = {}, remotes = {} } = data
+  const { listings = {}, screenshots = {}, remotes = {}, sites = {} } = data
   return {
     listing: dir => (Object.hasOwn(listings, dir) ? listings[dir] : []),
     screenshotLocation: () => screenshots,
@@ -46,6 +46,8 @@ export function fakeDeps(data = {}) {
     screenLockStatus: () => 'screenLock delay is immediate',
     // ...and never reads it for a query or a Trash count either: with nothing to read, those phrases pass.
     readCommand: () => { throw new Error('an exam does not read this Mac') },
+    // ...nor which of its folders publish a site: `sites: { dir: { docsIndex, cname } }`.
+    siteFiles: dir => (Object.hasOwn(sites, dir) ? sites[dir] : undefined),
     remoteOf: dir => (Object.hasOwn(remotes, dir) ? remotes[dir] ?? undefined : undefined),
   }
 }
@@ -54,9 +56,9 @@ export async function evaluate(cases, deps = {}) {
   const results = []
   for (const { phrase, expect, tags = [], recent } of cases) {
     const started = performance.now()
-    // A case may carry the files Claude wrote: `recent: [{ path, ago (seconds), missing? }]` against a fixed clock, files
+    // A case may carry what Claude made or showed: `recent: [{ path | url, ago (seconds), missing? }]` against a fixed clock, files
     // existing unless marked missing. Cases without one see no list, exactly as before.
-    const context = recent && { recent: recent.map(({ path, ago }) => ({ path, at: CLOCK - ago * 1000 })), now: CLOCK, isFile: path => !recent.some(entry => entry.path === path && entry.missing) }
+    const context = recent && { recent: recent.map(({ path, url, ago }) => ({ ...(url ? { url } : { path }), at: CLOCK - ago * 1000 })), now: CLOCK, isFile: path => !recent.some(entry => entry.path === path && entry.missing) }
     const got = await plan(phrase, { zoxide: () => undefined, ...fakeDeps(), ...deps, ...context })
     const ms = performance.now() - started
     results.push({
