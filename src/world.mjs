@@ -4,7 +4,7 @@
 // touches the network.
 
 import { execFileSync } from 'node:child_process'
-import { existsSync, readdirSync, statSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { expandHome } from './config.mjs'
 
@@ -39,4 +39,11 @@ export function remoteOf(dir) {
   try {
     return execFileSync('git', ['-C', dir, 'remote', 'get-url', 'origin'], { encoding: 'utf8', timeout: 2000, stdio: ['ignore', 'pipe', 'ignore'], env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } }).trim() || undefined
   } catch { return undefined }
+}
+
+/** @returns {{ docsIndex: boolean, cname?: string }} whether a repo folder holds a site to publish: docs/index.html, and the domain a CNAME file names */
+export function siteFiles(dir) {
+  const read = file => { try { return readFileSync(join(dir, file), 'utf8').split('\n')[0].trim().slice(0, 253) } catch { return undefined } }
+  const cname = read('CNAME') || read('docs/CNAME')
+  return { docsIndex: existsSync(join(dir, 'docs', 'index.html')), ...(cname && { cname }) }
 }

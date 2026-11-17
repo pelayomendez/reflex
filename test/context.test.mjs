@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
 import { FRESH_MS, RECENT_CAP, callSucceeded, fitsKind, parseRecent, record, resolveDeictic, writtenPath } from '../src/context.mjs'
-import { evaluate } from '../src/eval.mjs'
+import { evaluate, fakeDeps } from '../src/eval.mjs'
 import { plan } from '../src/plan.mjs'
 
 const NOW = 1_800_000_000_000
@@ -172,15 +172,17 @@ test('the CLI reads --recent, keeps no state, and runs nothing under --json', ()
 
 test('the context exam: every line answers as written, none wrong', async () => {
   const cases = readFileSync(new URL('./phrases/context.jsonl', import.meta.url), 'utf8').trim().split('\n').map(line => JSON.parse(line))
-  assert.ok(cases.length >= 60)
+  assert.ok(cases.length >= 200)
   assert.ok(cases.every(c => Array.isArray(c.recent)), 'each line carries recent')
-  const { results, summary } = await evaluate(cases, { index: { folders: {}, apps: {}, shortcuts: [], files: [] }, config: { aliases: {}, model: {} }, env: {} })
+  // The exam's own world, as `reflex eval` builds it: the fixture's folders, aliases and repos (a project's website reads them).
+  const fixture = JSON.parse(readFileSync(new URL('./phrases/fixture.json', import.meta.url), 'utf8'))
+  const { results, summary } = await evaluate(cases, { index: fixture.index, config: { ...fixture.config, model: {} }, env: {}, ...fakeDeps(fixture.fs) })
   assert.deepEqual(results.filter(r => r.outcome === 'wrong' || r.outcome === 'missed').map(r => r.phrase), [])
   assert.equal(summary.wrong, 0)
   assert.equal(summary.missed, 0)
 })
 
-test('the hook records writes only: Write, Edit and NotebookEdit, never a Read', () => {
+test('the hook records writes by Write, Edit and NotebookEdit, never a Read', () => {
   const source = readFileSync(new URL('../hooks/register.tsx', import.meta.url), 'utf8')
   const listed = source.match(/for \(const tool of \[([^\]]+)\]/)?.[1].split(',').map(name => name.trim().replace(/'/g, ''))
   assert.deepEqual(listed, ['Write', 'Edit', 'NotebookEdit'])

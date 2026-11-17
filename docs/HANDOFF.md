@@ -12,6 +12,10 @@ Where reflex stands and how to pick it up. The person is now using it for a week
 - **Brand:** icon approved (invented-creature template, brand `style.md`); landing in `docs/` (built by the brand repo's `scripts/build.mjs`). Repo is **private** and **Pages is off**: nothing is public yet.
 - **Article:** notes with 18 lessons and the numbers in `docs/article/notes.md`; a first draft in `docs/article/draft-es.md` (uncommitted, not reviewed).
 
+## Session context (branch `context-urls`)
+
+Three wrong actions from real use are fixed and held by traps: «open the website» opened a folder called `website`, «open the website of reflex» opened the reflex folder (model step), «open the doc» / «open the article» opened `~/Documents` / `~/Documents/Articles`. A generic noun with an article (table `GENERIC_NOUNS` in `src/vocab.mjs`) is now deictic: it resolves only through the session's recent items (files and web addresses; `src/context.mjs`), else it goes to Claude. The hooks also record, after a successful Bash call, what `open` was given, the files a command made (mtime inside the call, read by `reflex touched`) and the http(s) addresses in the command, plus the addresses in Claude's reply (`turn.complete`'s `answer`). Exams after: held-out 214/518, foreign 180/288, model 106/174, context 119/227, all 0 wrong. Design and trade-offs: `docs/research/session-context.md`. `src/catalogue.mjs` is untouched (no retraining).
+
 ## This week
 
 The person uses reflex as usual and reports. For each report:

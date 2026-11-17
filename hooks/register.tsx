@@ -9,11 +9,11 @@ import type { EngineInterface, Register } from 'claude-code'
 
 import type { Plan } from './preview.ts'
 import { mightBeAction, previewLine } from './preview.ts'
-import { callSucceeded, record, writtenPath } from '../src/recent.mjs'
+import { bashFacts, callSucceeded, record, recordItem, recordUrl, urlsIn, writtenPath } from '../src/recent.mjs'
 import { createObserver } from '../src/observe.mjs'
 
 const preview = atom({ plugin: 'reflex', key: 'preview' } as const, null)
-// The files Claude wrote this session, newest first (src/recent.mjs keeps the rules). Plugin state, so the CLI keeps none.
+// What Claude wrote or showed this session, newest first: files and web addresses (src/recent.mjs keeps the rules). Plugin state, so the CLI keeps none.
 const recent = atom({ plugin: 'reflex', key: 'recent' } as const, [])
 
 // What use teaches, logged locally (src/learnlog.mjs). It only observes: never awaited for a decision,
@@ -148,6 +148,45 @@ export const register: Register = (on) => {
     try { observer($).toolCall('Bash', { command: (e as { command?: string }).command }) } catch {}
     return next(e)
   }).catch(($, e, next) => next(e)) // observing only: if this throws, the call goes on untouched
+
+  // What a Bash command made or showed, for "open the doc" / "open the website": a file `open` was given, a file the command
+  // wrote (`-output x.docx`, `> x.md`: it exists and was touched during the call), and the web addresses it opened or held.
+  // Only after the call went through. The CLI reads the disk (this module has no node:*); an address alone needs no disk.
+  on('tool.call', { tool: 'Bash' }, async ($, e, next) => {
+    const since = Date.now()
+    const result = await next(e)
+    try {
+      const command = (e as { command?: string }).command
+      if (typeof command !== 'string' || !callSucceeded(result)) return result
+      const facts = bashFacts(command)
+      const onDisk = facts.opened.paths.length > 0 || facts.named.some(word => /[./]/.test(word))
+      let items: unknown[] = facts.urls.map(url => ({ url }))
+      if (onDisk) {
+        const cwd = await Promise.resolve().then(() => $.session.cwd()).catch(() => undefined)
+        const { exitCode, stdout } = await cli($, ['touched', '--since', String(since), ...(cwd ? ['--cwd', cwd] : []), '--', command], 5_000)
+        const found = exitCode === 0 ? JSON.parse(stdout) : undefined
+        if (Array.isArray(found)) items = found
+      }
+      const now = Date.now()
+      if (items.length) await update($, recent, list => [...items].reverse().reduce((kept: any, item) => recordItem(kept, item, now), list))
+    } catch {}
+    return result
+  }).catch(($, e, next) => next(e))
+
+  // The web addresses in Claude's own reply (a site it just published, a PR it opened): "open the website" can mean one.
+  // The main loop's final text of a turn only, never a subagent's.
+  on('turn.complete', async ($, e, next) => {
+    const result = await next(e)
+    try {
+      const answer = (e as { answer?: string; agentId?: string }).answer
+      if (typeof answer === 'string' && !(e as { agentId?: string }).agentId) {
+        const urls = urlsIn(answer)
+        const now = Date.now()
+        if (urls.length) await update($, recent, list => [...urls].reverse().reduce((kept: any, url) => recordUrl(kept, url, now), list))
+      }
+    } catch {}
+    return result
+  }).catch(($, e, next) => next(e))
 
   // Records the files Claude writes, for "open it" / "abre ese doc". Only after the call went through, so a failed write is
   // never "the file Claude made"; a read never reaches here (Read is not listed). Observes only: the call is never touched.

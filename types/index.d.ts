@@ -6,9 +6,13 @@ export type Preview = {
 }
 
 export type Recent = {
-  /** A file Claude wrote or edited this session, by its absolute path. */
+  /** A file Claude wrote, edited, opened or made with a command this session, by its absolute path; or, instead of `path`, ... */
   path: string
-  /** When the write went through, in milliseconds since the epoch. */
+  /** When it was recorded, in milliseconds since the epoch. */
+  at: number
+} | {
+  /** ... a web address Claude opened, ran a command on or showed in its reply: http or https, no credentials, no token in it. */
+  url: string
   at: number
 }
 

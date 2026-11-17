@@ -145,3 +145,29 @@ export const REQUEST_FORMS = [
 export const UNGATED_FORMS = ['quiero ver', 'necesito', 'let me see', 'I want to see']
 // Words that make a phrase a question or talk, not a request (src/plan.mjs keeps it from the model; the gate from the CLI)
 export const QUESTION = /\b(por que|porque|why|como|how|que pasa|si funciona|whether|who|quien|what|when|cuando|where|donde|which|cual|whose|cuant(o|os|a|as)|para que|(ver|saber) que|see (that|if))\b/
+
+// Generic nouns: a word that names a KIND of thing, not one thing («the website», «el doc», «la web de reflex»). With a
+// definite article or a demonstrative the person points at something in the conversation, so such a phrase is deictic:
+// it resolves only through the session's recent items (src/context.mjs) and otherwise belongs to Claude. It never
+// grounds by name, whatever folder or file happens to be called «website» or «docs» (every developer Mac has some).
+// `kind` is what the resolver looks for: web (a page, never a code host), pr, repo, link (any address), doc, deck,
+// sheet, image, video, diagram, pdf, file (any file). Accents folded, lower case; longest noun wins ("pull request").
+// Singular only, but «docs»: «documents», «documentos» and «pictures» are folders on every Mac, and «open my documents» means one.
+export const DEICTIC_DETERMINERS = {
+  en: ['the', 'this', 'that', 'these', 'those', 'my'],
+  es: ['el', 'la', 'los', 'las', 'este', 'esta', 'estos', 'estas', 'ese', 'esa', 'esos', 'esas', 'aquel', 'aquella', 'mi', 'mis'],
+}
+export const GENERIC_NOUNS = [
+  { kind: 'web', en: ['website', 'web site', 'site', 'web', 'webpage', 'web page', 'page', 'landing', 'landing page', 'homepage', 'home page'], es: ['web', 'pagina', 'pagina web', 'sitio', 'sitio web', 'landing', 'pagina de inicio'] },
+  { kind: 'pr', en: ['pr', 'pull request', 'merge request', 'mr'], es: ['pr', 'pull request', 'merge request', 'mr'] },
+  { kind: 'repo', en: ['repo', 'repository'], es: ['repo', 'repositorio'] },
+  { kind: 'link', en: ['link', 'url', 'address'], es: ['link', 'enlace', 'url', 'direccion'] },
+  { kind: 'doc', en: ['doc', 'docs', 'document', 'article', 'draft', 'post', 'report', 'paper'], es: ['doc', 'docs', 'documento', 'articulo', 'borrador', 'post', 'informe', 'reporte'] },
+  { kind: 'deck', en: ['deck', 'slides', 'slide deck', 'presentation'], es: ['deck', 'diapositivas', 'presentacion', 'slides'] },
+  { kind: 'sheet', en: ['spreadsheet', 'sheet'], es: ['hoja de calculo', 'hoja', 'spreadsheet'] },
+  { kind: 'image', en: ['image', 'picture', 'photo', 'screenshot', 'pic'], es: ['imagen', 'foto', 'captura', 'captura de pantalla', 'pantallazo'] },
+  { kind: 'video', en: ['video', 'clip', 'recording'], es: ['video', 'clip', 'grabacion'] },
+  { kind: 'diagram', en: ['diagram', 'chart', 'graph'], es: ['diagrama', 'grafico'] },
+  { kind: 'pdf', en: ['pdf'], es: ['pdf'] },
+  { kind: 'file', en: ['file'], es: ['archivo', 'fichero'] },
+]
