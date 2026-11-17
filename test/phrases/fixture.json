@@ -1,0 +1,134 @@
+{
+  "index": {
+    "folders": {
+      "brand": "/code/brand",
+      "reflex": "/code/reflex",
+      "orbitdesk": "/code/orbitdesk",
+      "descargas": "/Users/me/Downloads",
+      "downloads": "/Users/me/Downloads",
+      "escritorio": "/Users/me/Desktop",
+      "desktop": "/Users/me/Desktop",
+      "documentos": "/Users/me/Documents",
+      "documents": "/Users/me/Documents",
+      "calendar 2031": "/Users/me/Documents/Calendar 2031",
+      "notas": "/Users/me/Notas",
+      "music": "/Users/me/Music",
+      "musica": "/Users/me/Music"
+    },
+    "apps": {
+      "figma": "/Applications/Figma.app",
+      "google chrome": "/Applications/Google Chrome.app",
+      "safari": "/Applications/Safari.app",
+      "spotify": "/Applications/Spotify.app",
+      "slack": "/Applications/Slack.app",
+      "visual studio code": "/Applications/Visual Studio Code.app",
+      "cursor": "/Applications/Cursor.app",
+      "ghostty": "/Applications/Ghostty.app",
+      "terminal": "/System/Applications/Utilities/Terminal.app",
+      "calendar": "/System/Applications/Calendar.app",
+      "openvpn connect": "/Applications/OpenVPN Connect.app",
+      "mail": "/System/Applications/Mail.app",
+      "mimestream": "/Applications/Mimestream.app",
+      "notes": "/System/Applications/Notes.app",
+      "music": "/System/Applications/Music.app"
+    },
+    "defaults": {
+      "mail": "/Applications/Mimestream.app",
+      "browser": "/Applications/Google Chrome.app"
+    },
+    "shortcuts": ["Modo foco", "Modo noche", "Reunión de equipo", "Apagar luces"],
+    "files": [
+      "/code/brand/posts/2026-11-06-watchmen.md",
+      "/code/brand/cards/watchmen-post.png",
+      "/code/brand/cards/cache-nudge-post.png",
+      "/code/reflex/docs/design.md",
+      "/code/reflex/docs/roadmap.md",
+      "/code/reflex/README.md",
+      "/code/orbitdesk/README.md",
+      "/Users/me/Documents/factura-octubre.pdf",
+      "/Users/me/Documents/contrato-alquiler.pdf",
+      "/Users/me/Desktop/captura-2026-11-05.png",
+      "/Users/me/Downloads/informe-trimestral.pdf",
+      "/Users/me/Downloads/informe-trimestral-v2.pdf",
+      "/Users/me/Downloads/vpn-meme.png",
+      "/Users/me/Downloads/vpn-speedtest.png",
+      "/Users/me/Projects/web/icons/calendar.svg",
+      "/Users/me/Projects/web/src/calendar-add.tsx"
+    ]
+  },
+  "config": {
+    "aliases": {
+      "linkedin": "https://www.linkedin.com/feed/",
+      "github": "https://github.com/pelayomendez",
+      "correo": "https://mail.google.com/",
+      "calendario": "https://calendar.google.com/"
+    },
+    "model": {}
+  },
+  "fs": {
+    "listings": {
+      "/Users/me/Screenshots": [
+        {
+          "name": "Screenshot 2026-11-05 at 10.00.00.png",
+          "mtimeMs": 1000
+        },
+        {
+          "name": "Screenshot 2026-11-07 at 09.30.00.png",
+          "mtimeMs": 3000
+        },
+        {
+          "name": "Screenshot 2026-11-06 at 18.00.00.png",
+          "mtimeMs": 2000
+        },
+        {
+          "name": "notes.txt",
+          "mtimeMs": 9000
+        }
+      ],
+      "/Users/me/Downloads": [
+        {
+          "name": "informe-viejo.pdf",
+          "mtimeMs": 100
+        },
+        {
+          "name": "foto-viaje.jpg",
+          "mtimeMs": 600
+        },
+        {
+          "name": "clip.mov",
+          "mtimeMs": 500
+        },
+        {
+          "name": "ticket-concierto.pdf",
+          "mtimeMs": 900
+        },
+        {
+          "name": "descarga-a-medias.zip.crdownload",
+          "mtimeMs": 1000
+        },
+        {
+          "name": ".DS_Store",
+          "mtimeMs": 1100
+        }
+      ],
+      "/Users/me/Documents": [
+        {
+          "name": "plan.pdf",
+          "mtimeMs": 100
+        },
+        {
+          "name": "plan-b.pdf",
+          "mtimeMs": 200
+        }
+      ]
+    },
+    "screenshots": {
+      "dir": "/Users/me/Screenshots"
+    },
+    "remotes": {
+      "/code/brand": "git@github.com:pelayomendez/brand.git",
+      "/code/reflex": "https://github.com/pelayomendez/reflex.git",
+      "/code/orbitdesk": "git@gitlab.example.com:platform/orbitdesk.git"
+    }
+  }
+}

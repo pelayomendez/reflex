@@ -1,0 +1,11 @@
+{
+  "name": "pelayomendez",
+  "owner": { "name": "Pelayo Méndez", "url": "https://github.com/pelayomendez" },
+  "plugins": [
+    {
+      "name": "reflex",
+      "source": "./",
+      "description": "Type \"open brand\" and it happens at once, without waking Claude."
+    }
+  ]
+}

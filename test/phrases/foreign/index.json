@@ -1,0 +1,196 @@
+{
+  "builtAt": 1794000000000,
+  "folders": {
+    "descargas": "/Users/alex/Downloads",
+    "downloads": "/Users/alex/Downloads",
+    "escritorio": "/Users/alex/Desktop",
+    "desktop": "/Users/alex/Desktop",
+    "documentos": "/Users/alex/Documents",
+    "documents": "/Users/alex/Documents",
+    "imagenes": "/Users/alex/Pictures",
+    "pictures": "/Users/alex/Pictures",
+    "fotos": "/Users/alex/Pictures",
+    "musica": "/Users/alex/Music",
+    "music": "/Users/alex/Music",
+    "inicio": "/Users/alex",
+    "home": "/Users/alex",
+    "casa": "/Users/alex",
+    "aplicaciones": "/Applications",
+    "applications": "/Applications",
+    "tangerine": "/Users/alex/Projects/tangerine",
+    "cuaderno-azul": "/Users/alex/Projects/cuaderno-azul",
+    "holamundo": "/Users/alex/Projects/holaMundo",
+    "pixelforge": "/Users/alex/Projects/pixelforge",
+    "ventanilla": "/Users/alex/Projects/ventanilla",
+    "harbor-lights": "/Users/alex/Projects/harbor-lights",
+    "q4-planning": "/Users/alex/Projects/q4-planning",
+    "mercadillo": "/Users/alex/Projects/mercadillo",
+    "lighthouse": "/Users/alex/Projects/lighthouse",
+    "tortuga": "/Users/alex/Projects/tortuga",
+    "novabank": "/Users/alex/Projects/novaBank",
+    "kiosco": "/Users/alex/Projects/kiosco",
+    "beacon": "/Users/alex/Projects/beacon",
+    "dev-notes-2025": "/Users/alex/Projects/dev-notes-2025",
+    "fresadora": "/Users/alex/Projects/fresadora",
+    "ribbon": "/Users/alex/Projects/ribbon",
+    "saltmarsh": "/Users/alex/Projects/saltmarsh",
+    "gazpacho": "/Users/alex/Projects/gazpacho",
+    "lunaroja": "/Users/alex/Projects/lunaRoja",
+    "orbit9": "/Users/alex/Projects/orbit9",
+    "cobalt": "/Users/alex/Projects/cobalt",
+    "entrenamiento": "/Users/alex/Projects/entrenamiento",
+    "paperboat": "/Users/alex/Projects/paperboat",
+    "greenhouse": "/Users/alex/Projects/greenhouse",
+    "taller-mecanico": "/Users/alex/Projects/taller-mecanico",
+    "vinilos": "/Users/alex/Projects/vinilos"
+  },
+  "apps": {
+    "obsidian": "/Applications/Obsidian.app",
+    "discord": "/Applications/Discord.app",
+    "zoom": "/Applications/zoom.us.app",
+    "1password": "/Applications/1Password.app",
+    "whatsapp": "/Applications/WhatsApp.app",
+    "telegram": "/Applications/Telegram.app",
+    "postman": "/Applications/Postman.app",
+    "sketch": "/Applications/Sketch.app",
+    "cursor": "/Applications/Cursor.app",
+    "docker": "/Applications/Docker.app",
+    "iterm": "/Applications/iTerm.app",
+    "raycast": "/Applications/Raycast.app",
+    "things": "/Applications/Things3.app",
+    "todoist": "/Applications/Todoist.app",
+    "pixelmator pro": "/Applications/Pixelmator Pro.app",
+    "davinci resolve": "/Applications/DaVinci Resolve.app",
+    "brave browser": "/Applications/Brave Browser.app",
+    "spotify": "/Applications/Spotify.app",
+    "safari": "/Applications/Safari.app",
+    "google chrome": "/Applications/Google Chrome.app",
+    "vlc": "/Applications/VLC.app",
+    "terminal": "/System/Applications/Utilities/Terminal.app"
+  },
+  "shortcuts": ["Evening Wind Down", "Enviar ubicación", "Lista de compras", "Modo lectura"],
+  "files": [
+    "/Users/alex/Projects/tangerine/README.md",
+    "/Users/alex/Projects/tangerine/docs/architecture.md",
+    "/Users/alex/Projects/tangerine/src/checkout.ts",
+    "/Users/alex/Projects/cuaderno-azul/apuntes-termodinamica.md",
+    "/Users/alex/Projects/cuaderno-azul/resumen-tema-3.pdf",
+    "/Users/alex/Projects/holaMundo/README.md",
+    "/Users/alex/Projects/holaMundo/docs/primeros-pasos.md",
+    "/Users/alex/Projects/pixelforge/docs/brushes-spec.md",
+    "/Users/alex/Projects/pixelforge/assets/logo-pixelforge.png",
+    "/Users/alex/Projects/pixelforge/src/renderer.ts",
+    "/Users/alex/Projects/ventanilla/presupuesto-reforma.xlsx",
+    "/Users/alex/Projects/ventanilla/docs/requisitos.docx",
+    "/Users/alex/Projects/harbor-lights/design-brief.pdf",
+    "/Users/alex/Projects/harbor-lights/mockups/home-screen.png",
+    "/Users/alex/Projects/harbor-lights/docs/changelog.md",
+    "/Users/alex/Projects/q4-planning/okrs-q4.md",
+    "/Users/alex/Projects/q4-planning/hiring-plan.xlsx",
+    "/Users/alex/Projects/q4-planning/slides/kickoff-deck.pptx",
+    "/Users/alex/Projects/mercadillo/docs/catalogo-productos.pdf",
+    "/Users/alex/Projects/mercadillo/src/carrito.ts",
+    "/Users/alex/Projects/mercadillo/assets/banner-otoño.png",
+    "/Users/alex/Projects/lighthouse/docs/runbook.md",
+    "/Users/alex/Projects/lighthouse/docs/incident-2025-03-14.md",
+    "/Users/alex/Projects/lighthouse/src/alerts.ts",
+    "/Users/alex/Projects/tortuga/guia-de-estilo.pdf",
+    "/Users/alex/Projects/tortuga/src/rutas.ts",
+    "/Users/alex/Projects/novaBank/docs/api-reference.md",
+    "/Users/alex/Projects/novaBank/docs/threat-model.pdf",
+    "/Users/alex/Projects/novaBank/src/transfers.ts",
+    "/Users/alex/Projects/kiosco/inventario-octubre.xlsx",
+    "/Users/alex/Projects/kiosco/docs/manual-de-caja.docx",
+    "/Users/alex/Projects/beacon/docs/onboarding.md",
+    "/Users/alex/Projects/beacon/src/telemetry.ts",
+    "/Users/alex/Projects/beacon/assets/diagram-beacon.png",
+    "/Users/alex/Projects/dev-notes-2025/ideas-pendientes.md",
+    "/Users/alex/Projects/dev-notes-2025/retro-enero.md",
+    "/Users/alex/Projects/fresadora/docs/plano-pieza-14.pdf",
+    "/Users/alex/Projects/fresadora/src/gcode.ts",
+    "/Users/alex/Projects/ribbon/docs/pricing-strategy.docx",
+    "/Users/alex/Projects/ribbon/src/billing.ts",
+    "/Users/alex/Projects/saltmarsh/field-notes.md",
+    "/Users/alex/Projects/saltmarsh/survey-results.xlsx",
+    "/Users/alex/Projects/gazpacho/recetas-verano.md",
+    "/Users/alex/Projects/gazpacho/lista-ingredientes.pdf",
+    "/Users/alex/Projects/lunaRoja/docs/guion-episodio-2.docx",
+    "/Users/alex/Projects/lunaRoja/assets/portada.png",
+    "/Users/alex/Projects/orbit9/docs/mission-plan.md",
+    "/Users/alex/Projects/orbit9/src/trajectory.ts",
+    "/Users/alex/Projects/cobalt/docs/security-audit.pdf",
+    "/Users/alex/Projects/cobalt/src/vault.ts",
+    "/Users/alex/Projects/entrenamiento/rutina-semanal.md",
+    "/Users/alex/Projects/entrenamiento/progreso-marzo.png",
+    "/Users/alex/Projects/paperboat/docs/manifesto.md",
+    "/Users/alex/Projects/paperboat/assets/cover-art.png",
+    "/Users/alex/Projects/greenhouse/docs/sensor-calibration.md",
+    "/Users/alex/Projects/greenhouse/src/irrigation.ts",
+    "/Users/alex/Projects/taller-mecanico/presupuesto-frenos.pdf",
+    "/Users/alex/Projects/taller-mecanico/docs/ficha-cliente.docx",
+    "/Users/alex/Projects/vinilos/coleccion.xlsx",
+    "/Users/alex/Projects/vinilos/portada-kind-of-blue.png",
+    "/Users/alex/Documents/declaracion-renta-2024.pdf",
+    "/Users/alex/Documents/pasaporte-escaneado.pdf",
+    "/Users/alex/Documents/cv-alex-garcia.docx",
+    "/Users/alex/Downloads/billete-tren-sevilla.pdf",
+    "/Users/alex/Downloads/boarding-pass-lisbon.pdf",
+    "/Users/alex/Desktop/captura-2026-10-30.png",
+    "/Users/alex/Desktop/lista-regalos.md"
+  ],
+  "fs": {
+    "listings": {
+      "/Users/alex/Pictures/Capturas": [
+        {
+          "name": "Captura de pantalla 2026-11-02 a las 19.01.10.png",
+          "mtimeMs": 4000
+        },
+        {
+          "name": "Captura de pantalla 2026-11-06 a las 08.15.00.png",
+          "mtimeMs": 8000
+        },
+        {
+          "name": "notas.txt",
+          "mtimeMs": 9000
+        }
+      ],
+      "/Users/alex/Downloads": [
+        {
+          "name": "billete-tren-sevilla.pdf",
+          "mtimeMs": 300
+        },
+        {
+          "name": "boarding-pass-lisbon.pdf",
+          "mtimeMs": 700
+        },
+        {
+          "name": "receta.jpg",
+          "mtimeMs": 650
+        },
+        {
+          "name": "instalador.dmg",
+          "mtimeMs": 800
+        }
+      ],
+      "/Users/alex/Documents": [
+        {
+          "name": "declaracion-renta-2024.pdf",
+          "mtimeMs": 50
+        },
+        {
+          "name": "cv-alex-garcia.docx",
+          "mtimeMs": 90
+        }
+      ]
+    },
+    "screenshots": {
+      "dir": "/Users/alex/Pictures/Capturas"
+    },
+    "remotes": {
+      "/Users/alex/Projects/tangerine": "git@github.com:alexgarcia/tangerine.git",
+      "/Users/alex/Projects/pixelforge": "https://gitlab.pixelforge.io/studio/pixelforge.git",
+      "/Users/alex/Projects/lighthouse": "ssh://git@git.lighthouse.dev:2222/ops/lighthouse.git",
+      "/Users/alex/Projects/novaBank": "https://deploy:tkn_9f2c@github.com/novabank/novaBank.git"
+    }
+  }
+}

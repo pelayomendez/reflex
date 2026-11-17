@@ -1,0 +1,10 @@
+{
+  "name": "reflex",
+  "version": "0.6.2",
+  "description": "Type \"open brand\" and it happens at once, without waking Claude: open folders, files, apps and pages, reveal in Finder, copy to the clipboard, run Shortcuts.",
+  "author": { "name": "Pelayo Méndez", "url": "https://github.com/pelayomendez" },
+  "repository": "https://github.com/pelayomendez/reflex",
+  "license": "MIT",
+  "keywords": ["actions", "macos", "launcher", "local", "tokens", "shortcuts"],
+  "types": "./types/index.d.ts"
+}

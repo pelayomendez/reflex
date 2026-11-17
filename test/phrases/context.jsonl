@@ -1,0 +1,119 @@
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"ábrela","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre ese documento","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre ese archivo","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre el doc que has hecho","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre el doc que has creado","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre el documento que has escrito","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre el archivo que has hecho","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre lo último","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"oye ábrelo","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"ábrelo por favor","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"¿ábrelo?","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open that","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open that doc","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open that file","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open the doc you made","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open the file you wrote","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"please open it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open it please","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"muéstramelo","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"muéstramelo en el Finder","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"muéstramela en finder","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"show it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"show me that","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"show it in finder","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"show that in the finder","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/diagram.png","ago":30},{"path":"/home/me/work/notes.md","ago":900},{"path":"/home/me/work/data.json","ago":1500}],"expect":{"status":"action","verb":"open","value":"/home/me/work/notes.md"},"tags":["context","kind"]}
+{"phrase":"abre esa imagen","recent":[{"path":"/home/me/work/diagram.png","ago":30},{"path":"/home/me/work/notes.md","ago":900},{"path":"/home/me/work/data.json","ago":1500}],"expect":{"status":"action","verb":"open","value":"/home/me/work/diagram.png"},"tags":["context","kind"]}
+{"phrase":"open that image","recent":[{"path":"/home/me/work/diagram.png","ago":30},{"path":"/home/me/work/notes.md","ago":900},{"path":"/home/me/work/data.json","ago":1500}],"expect":{"status":"action","verb":"open","value":"/home/me/work/diagram.png"},"tags":["context","kind"]}
+{"phrase":"open it","recent":[{"path":"/home/me/work/diagram.png","ago":30},{"path":"/home/me/work/notes.md","ago":900},{"path":"/home/me/work/data.json","ago":1500}],"expect":{"status":"action","verb":"open","value":"/home/me/work/diagram.png"},"tags":["context","kind"]}
+{"phrase":"open that file","recent":[{"path":"/home/me/work/diagram.png","ago":30},{"path":"/home/me/work/notes.md","ago":900},{"path":"/home/me/work/data.json","ago":1500}],"expect":{"status":"action","verb":"open","value":"/home/me/work/diagram.png"},"tags":["context","kind"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/x.png","ago":20},{"path":"/home/me/work/report.pdf","ago":50},{"path":"/home/me/work/old.md","ago":3000}],"expect":{"status":"action","verb":"open","value":"/home/me/work/report.pdf"},"tags":["context","kind"]}
+{"phrase":"muéstramelo","recent":[{"path":"/home/me/work/run.sh","ago":40}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/run.sh"},"tags":["context","reveal"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":50}],"expect":{"status":"pass"},"tags":["context","trap","ambiguous"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":50}],"expect":{"status":"pass"},"tags":["context","trap","ambiguous"]}
+{"phrase":"open that doc","recent":[{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":50}],"expect":{"status":"pass"},"tags":["context","trap","ambiguous"]}
+{"phrase":"open it","recent":[{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":50}],"expect":{"status":"pass"},"tags":["context","trap","ambiguous"]}
+{"phrase":"muéstramelo","recent":[{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":50}],"expect":{"status":"pass"},"tags":["context","trap","ambiguous"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":3630}],"expect":{"status":"action","verb":"open","value":"/home/me/work/a.md"},"tags":["context","kind"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/pic.png","ago":10},{"path":"/home/me/work/a.md","ago":30},{"path":"/home/me/work/b.md","ago":40}],"expect":{"status":"pass"},"tags":["context","trap","ambiguous"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/plan.md","ago":1860}],"expect":{"status":"pass"},"tags":["context","trap","stale"]}
+{"phrase":"open it","recent":[{"path":"/home/me/work/plan.md","ago":18000}],"expect":{"status":"pass"},"tags":["context","trap","stale"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/plan.md","ago":1740}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","edge"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/plan.md","ago":60,"missing":true}],"expect":{"status":"pass"},"tags":["context","trap","missing"]}
+{"phrase":"open that doc","recent":[{"path":"/home/me/work/plan.md","ago":60,"missing":true},{"path":"/home/me/work/older.md","ago":500}],"expect":{"status":"pass"},"tags":["context","trap","missing"]}
+{"phrase":"abre esa imagen","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","kind"]}
+{"phrase":"open that image","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","kind"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/pic.png","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","kind"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/notes.csv","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","kind"]}
+{"phrase":"ábrelo","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"open that doc","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/setup.command","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/tool.sh","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/bundle.app","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/script.py","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"abre ese doc de brand","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre ese doc y borra el otro","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"ábrelo en el editor","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre ese archivo con Preview","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open it with Preview","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open that doc and delete it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open it in the editor","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"show it in the browser","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open that doc in finder","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre lo último de descargas","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre ese doc y ábrelo en el editor","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"muéstramelo y ábrelo","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open that doc, then close it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre ese doc no","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"don't open it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"no lo abras","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"no abras ese doc","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"I opened it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"ya lo abrí","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"what is that doc","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open the doc you made and the one before","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre esa foto","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open it again now","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"explícame ese doc","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/page.html","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"abre ese archivo","recent":[{"path":"/home/me/work/page.html","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"open it","recent":[{"path":"/home/me/work/page.html","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"abre lo último","recent":[{"path":"/home/me/work/page.html","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"muéstramelo","recent":[{"path":"/home/me/work/page.html","ago":30}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/page.html"},"tags":["context","reveal"]}
+{"phrase":"ábrelo","recent":[{"path":"/home/me/work/logo.svg","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"abre ese archivo","recent":[{"path":"/home/me/work/logo.svg","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"open it","recent":[{"path":"/home/me/work/logo.svg","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"abre lo último","recent":[{"path":"/home/me/work/logo.svg","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"muéstramelo","recent":[{"path":"/home/me/work/logo.svg","ago":30}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/logo.svg"},"tags":["context","reveal"]}
+{"phrase":"abre ese doc","recent":[{"path":"/home/me/work/page.html","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"abre esa imagen","recent":[{"path":"/home/me/work/logo.svg","ago":30}],"expect":{"status":"pass"},"tags":["context","trap","unsafe"]}
+{"phrase":"open it, please","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","punctuation"]}
+{"phrase":"open it.","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","punctuation"]}
+{"phrase":"open it!","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","punctuation"]}
+{"phrase":"ábrelo, por favor","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","punctuation"]}
+{"phrase":"abre ese doc, porfa","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","punctuation"]}
+{"phrase":"open that doc;","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","punctuation"]}
+{"phrase":"show it, please","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"show me it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"reveal it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"reveal that","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"show me this","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"muéstrame eso","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"muestra eso","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"reveal","value":"/home/me/work/plan.md"},"tags":["context","reveal"]}
+{"phrase":"open this","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre eso","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"abre esto","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"action","verb":"open","value":"/home/me/work/plan.md"},"tags":["context","deictic"]}
+{"phrase":"open it, and delete it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open it, then close it","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"reveal it in the browser","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"abre eso y bórralo","recent":[{"path":"/home/me/work/plan.md","ago":60}],"expect":{"status":"pass"},"tags":["context","trap","names-more"]}
+{"phrase":"open it, please","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"reveal it","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"show me it","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"open this","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"abre eso","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}
+{"phrase":"muéstrame eso","recent":[],"expect":{"status":"pass"},"tags":["context","trap","nolist"]}

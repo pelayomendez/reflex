@@ -1,0 +1,180 @@
+{"phrase":"quiero ver brand","expect":{"status":"action","verb":"open","value":"/code/brand"},"tags":["es","model","open","folder"]}
+{"phrase":"quiero ver orbitdesk ya","expect":{"status":"action","verb":"open","value":"/code/orbitdesk"},"tags":["es","model","open","folder"]}
+{"phrase":"quiero ver mi calendario","expect":{"status":"action","verb":"open","value":"https://calendar.google.com/"},"tags":["es","model","open","url"]}
+{"phrase":"quiero ver linkedin","expect":{"status":"action","verb":"open","value":"https://www.linkedin.com/feed/"},"tags":["es","model","open","url"]}
+{"phrase":"quiero ver spotify porfa","expect":{"status":"action","verb":"open","value":"/Applications/Spotify.app"},"tags":["es","model","open","app"]}
+{"phrase":"necesito descargas","expect":{"status":"action","verb":"open","value":"/Users/me/Downloads"},"tags":["es","model","open","folder"]}
+{"phrase":"necesito figma otra vez","expect":{"status":"action","verb":"open","value":"/Applications/Figma.app"},"tags":["es","model","open","app"]}
+{"phrase":"necesito slack ya","expect":{"status":"action","verb":"open","value":"/Applications/Slack.app"},"tags":["es","model","open","app"]}
+{"phrase":"necesito el terminal","expect":{"status":"action","verb":"open","value":"/System/Applications/Utilities/Terminal.app"},"tags":["es","model","open","app"]}
+{"phrase":"necesito que me abras reflex","expect":{"status":"action","verb":"open","value":"/code/reflex"},"tags":["es","model","open","folder"]}
+{"phrase":"llévame a mi calendario","expect":{"status":"action","verb":"open","value":"https://calendar.google.com/"},"tags":["es","model","open","url"]}
+{"phrase":"llévame a github por favor","expect":{"status":"action","verb":"open","value":"https://github.com/pelayomendez"},"tags":["es","model","open","url"]}
+{"phrase":"llevame a escritorio","expect":{"status":"action","verb":"open","value":"/Users/me/Desktop"},"tags":["es","model","open","folder"]}
+{"phrase":"llévame a la carpeta de documentos","expect":{"status":"action","verb":"open","value":"/Users/me/Documents"},"tags":["es","model","open","folder"]}
+{"phrase":"llévame a safari ahora","expect":{"status":"action","verb":"open","value":"/Applications/Safari.app"},"tags":["es","model","open","app"]}
+{"phrase":"ve a escritorio","expect":{"status":"action","verb":"open","value":"/Users/me/Desktop"},"tags":["es","model","open","folder"]}
+{"phrase":"ve a la carpeta de descargas","expect":{"status":"action","verb":"open","value":"/Users/me/Downloads"},"tags":["es","model","open","folder"]}
+{"phrase":"ve a orbitdesk porfa","expect":{"status":"action","verb":"open","value":"/code/orbitdesk"},"tags":["es","model","open","folder"]}
+{"phrase":"ve a mi calendario","expect":{"status":"action","verb":"open","value":"https://calendar.google.com/"},"tags":["es","model","open","url"]}
+{"phrase":"lanza figma","expect":{"status":"action","verb":"open","value":"/Applications/Figma.app"},"tags":["es","model","open","app"]}
+{"phrase":"lanza spotify ahora","expect":{"status":"action","verb":"open","value":"/Applications/Spotify.app"},"tags":["es","model","open","app"]}
+{"phrase":"lánzame visual studio code","expect":{"status":"action","verb":"open","value":"/Applications/Visual Studio Code.app"},"tags":["es","model","open","app"]}
+{"phrase":"lanza google chrome porfa","expect":{"status":"action","verb":"open","value":"/Applications/Google Chrome.app"},"tags":["es","model","open","app"]}
+{"phrase":"activa safari","expect":{"status":"action","verb":"open","value":"/Applications/Safari.app"},"tags":["es","model","open","app"]}
+{"phrase":"activa slack otra vez","expect":{"status":"action","verb":"open","value":"/Applications/Slack.app"},"tags":["es","model","open","app"]}
+{"phrase":"enciende el terminal","expect":{"status":"action","verb":"open","value":"/System/Applications/Utilities/Terminal.app"},"tags":["es","model","open","app"]}
+{"phrase":"enciende spotify ya","expect":{"status":"action","verb":"open","value":"/Applications/Spotify.app"},"tags":["es","model","open","app"]}
+{"phrase":"¿me abres google chrome?","expect":{"status":"action","verb":"open","value":"/Applications/Google Chrome.app"},"tags":["es","model","open","app"]}
+{"phrase":"¿puedes abrirme brand?","expect":{"status":"action","verb":"open","value":"/code/brand"},"tags":["es","model","open","folder"]}
+{"phrase":"¿me llevas a descargas?","expect":{"status":"action","verb":"open","value":"/Users/me/Downloads"},"tags":["es","model","open","folder"]}
+{"phrase":"me abres el terminal porfa","expect":{"status":"action","verb":"open","value":"/System/Applications/Utilities/Terminal.app"},"tags":["es","model","open","app"]}
+{"phrase":"vamos a reflex","expect":{"status":"action","verb":"open","value":"/code/reflex"},"tags":["es","model","open","folder"]}
+{"phrase":"ponme spotify","expect":{"status":"action","verb":"open","value":"/Applications/Spotify.app"},"tags":["es","model","open","app"]}
+{"phrase":"take me to brand","expect":{"status":"action","verb":"open","value":"/code/brand"},"tags":["en","model","open","folder"]}
+{"phrase":"take me to my downloads","expect":{"status":"action","verb":"open","value":"/Users/me/Downloads"},"tags":["en","model","open","folder"]}
+{"phrase":"take me to reflex please","expect":{"status":"action","verb":"open","value":"/code/reflex"},"tags":["en","model","open","folder"]}
+{"phrase":"can you take me to linkedin","expect":{"status":"action","verb":"open","value":"https://www.linkedin.com/feed/"},"tags":["en","model","open","url"]}
+{"phrase":"take me to the documents folder","expect":{"status":"action","verb":"open","value":"/Users/me/Documents"},"tags":["en","model","open","folder"]}
+{"phrase":"bring up figma","expect":{"status":"action","verb":"open","value":"/Applications/Figma.app"},"tags":["en","model","open","app"]}
+{"phrase":"bring up the terminal","expect":{"status":"action","verb":"open","value":"/System/Applications/Utilities/Terminal.app"},"tags":["en","model","open","app"]}
+{"phrase":"please bring up visual studio code","expect":{"status":"action","verb":"open","value":"/Applications/Visual Studio Code.app"},"tags":["en","model","open","app"]}
+{"phrase":"bring up my calendario","expect":{"status":"action","verb":"open","value":"https://calendar.google.com/"},"tags":["en","model","open","url"]}
+{"phrase":"go to github","expect":{"status":"action","verb":"open","value":"https://github.com/pelayomendez"},"tags":["en","model","open","url"]}
+{"phrase":"go to my desktop","expect":{"status":"action","verb":"open","value":"/Users/me/Desktop"},"tags":["en","model","open","folder"]}
+{"phrase":"hey go to documents","expect":{"status":"action","verb":"open","value":"/Users/me/Documents"},"tags":["en","model","open","folder"]}
+{"phrase":"go to orbitdesk now","expect":{"status":"action","verb":"open","value":"/code/orbitdesk"},"tags":["en","model","open","folder"]}
+{"phrase":"let me see my calendario","expect":{"status":"action","verb":"open","value":"https://calendar.google.com/"},"tags":["en","model","open","url"]}
+{"phrase":"let me see reflex","expect":{"status":"action","verb":"open","value":"/code/reflex"},"tags":["en","model","open","folder"]}
+{"phrase":"let me see the desktop folder","expect":{"status":"action","verb":"open","value":"/Users/me/Desktop"},"tags":["en","model","open","folder"]}
+{"phrase":"let me see slack","expect":{"status":"action","verb":"open","value":"/Applications/Slack.app"},"tags":["en","model","open","app"]}
+{"phrase":"i want to see orbitdesk","expect":{"status":"action","verb":"open","value":"/code/orbitdesk"},"tags":["en","model","open","folder"]}
+{"phrase":"i want to see my documents folder","expect":{"status":"action","verb":"open","value":"/Users/me/Documents"},"tags":["en","model","open","folder"]}
+{"phrase":"i want to see my correo","expect":{"status":"action","verb":"open","value":"https://mail.google.com/"},"tags":["en","model","open","url"]}
+{"phrase":"i want to see safari","expect":{"status":"action","verb":"open","value":"/Applications/Safari.app"},"tags":["en","model","open","app"]}
+{"phrase":"launch spotify","expect":{"status":"action","verb":"open","value":"/Applications/Spotify.app"},"tags":["en","model","open","app"]}
+{"phrase":"launch google chrome now","expect":{"status":"action","verb":"open","value":"/Applications/Google Chrome.app"},"tags":["en","model","open","app"]}
+{"phrase":"could you launch safari","expect":{"status":"action","verb":"open","value":"/Applications/Safari.app"},"tags":["en","model","open","app"]}
+{"phrase":"launch the terminal for me","expect":{"status":"action","verb":"open","value":"/System/Applications/Utilities/Terminal.app"},"tags":["en","model","open","app"]}
+{"phrase":"would you open slack for me?","expect":{"status":"action","verb":"open","value":"/Applications/Slack.app"},"tags":["en","model","open","app"]}
+{"phrase":"i need figma","expect":{"status":"action","verb":"open","value":"/Applications/Figma.app"},"tags":["en","model","open","app"]}
+{"phrase":"i need to see downloads","expect":{"status":"action","verb":"open","value":"/Users/me/Downloads"},"tags":["en","model","open","folder"]}
+{"phrase":"i need my linkedin","expect":{"status":"action","verb":"open","value":"https://www.linkedin.com/feed/"},"tags":["en","model","open","url"]}
+{"phrase":"can you start visual studio code","expect":{"status":"action","verb":"open","value":"/Applications/Visual Studio Code.app"},"tags":["en","model","open","app"]}
+{"phrase":"pon orbitdesk en el finder","expect":{"status":"action","verb":"reveal","value":"/code/orbitdesk"},"tags":["es","model","reveal","folder"]}
+{"phrase":"ponme descargas en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Downloads"},"tags":["es","model","reveal","folder"]}
+{"phrase":"pon el design de reflex en el finder","expect":{"status":"action","verb":"reveal","value":"/code/reflex/docs/design.md"},"tags":["es","model","reveal","file"]}
+{"phrase":"ponme el readme de orbitdesk en el finder","expect":{"status":"action","verb":"reveal","value":"/code/orbitdesk/README.md"},"tags":["es","model","reveal","file"]}
+{"phrase":"llévame al roadmap de reflex en el finder","expect":{"status":"action","verb":"reveal","value":"/code/reflex/docs/roadmap.md"},"tags":["es","model","reveal","file"]}
+{"phrase":"llévame a la factura de octubre en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["es","model","reveal","file"]}
+{"phrase":"llévame a la captura de 2026-11-05 en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["es","model","reveal","image"]}
+{"phrase":"dónde está el contrato de alquiler","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents/contrato-alquiler.pdf"},"tags":["es","model","reveal","file"]}
+{"phrase":"dónde está la captura de 2026-11-05 ya","expect":{"status":"action","verb":"reveal","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["es","model","reveal","image"]}
+{"phrase":"donde esta el informe trimestral v2","expect":{"status":"action","verb":"reveal","value":"/Users/me/Downloads/informe-trimestral-v2.pdf"},"tags":["es","model","reveal","file"]}
+{"phrase":"dónde está el roadmap de reflex","expect":{"status":"action","verb":"reveal","value":"/code/reflex/docs/roadmap.md"},"tags":["es","model","reveal","file"]}
+{"phrase":"dónde está escritorio","expect":{"status":"action","verb":"reveal","value":"/Users/me/Desktop"},"tags":["es","model","reveal","folder"]}
+{"phrase":"necesito la factura de octubre en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["es","model","reveal","file"]}
+{"phrase":"quiero ver el contrato de alquiler en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents/contrato-alquiler.pdf"},"tags":["es","model","reveal","file"]}
+{"phrase":"quiero ver 2026-11-06-watchmen en el finder","expect":{"status":"action","verb":"reveal","value":"/code/brand/posts/2026-11-06-watchmen.md"},"tags":["es","model","reveal","file"]}
+{"phrase":"put reflex in finder","expect":{"status":"action","verb":"reveal","value":"/code/reflex"},"tags":["en","model","reveal","folder"]}
+{"phrase":"put downloads in finder please","expect":{"status":"action","verb":"reveal","value":"/Users/me/Downloads"},"tags":["en","model","reveal","folder"]}
+{"phrase":"put the roadmap in finder","expect":{"status":"action","verb":"reveal","value":"/code/reflex/docs/roadmap.md"},"tags":["en","model","reveal","file"]}
+{"phrase":"put the orbitdesk readme in finder","expect":{"status":"action","verb":"reveal","value":"/code/orbitdesk/README.md"},"tags":["en","model","reveal","file"]}
+{"phrase":"take me to the roadmap in finder","expect":{"status":"action","verb":"reveal","value":"/code/reflex/docs/roadmap.md"},"tags":["en","model","reveal","file"]}
+{"phrase":"take me to the factura de octubre in finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["en","model","reveal","file"]}
+{"phrase":"let me see the design doc in finder","expect":{"status":"action","verb":"reveal","value":"/code/reflex/docs/design.md"},"tags":["en","model","reveal","file"]}
+{"phrase":"i want to see the captura de 2026-11-05 in finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["en","model","reveal","image"]}
+{"phrase":"find the contrato de alquiler in finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents/contrato-alquiler.pdf"},"tags":["en","model","reveal","file"]}
+{"phrase":"find the informe trimestral v2 in the finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Downloads/informe-trimestral-v2.pdf"},"tags":["en","model","reveal","file"]}
+{"phrase":"go to the documents folder in finder","expect":{"status":"action","verb":"reveal","value":"/Users/me/Documents"},"tags":["en","model","reveal","folder"]}
+{"phrase":"pásame la factura de octubre al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["es","model","copy","file"]}
+{"phrase":"pásame la captura de 2026-11-05 al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["es","model","copy","image"]}
+{"phrase":"me pasas el informe trimestral v2 al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/me/Downloads/informe-trimestral-v2.pdf"},"tags":["es","model","copy","file"]}
+{"phrase":"pásame el contrato de alquiler","expect":{"status":"action","verb":"copy","value":"/Users/me/Documents/contrato-alquiler.pdf"},"tags":["es","model","copy","file"]}
+{"phrase":"pásame el readme de reflex ya","expect":{"status":"action","verb":"copy","value":"/code/reflex/README.md"},"tags":["es","model","copy","file"]}
+{"phrase":"me copias la factura de octubre al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["es","model","copy","file"]}
+{"phrase":"pásame la imagen del cache nudge post al portapapeles","expect":{"status":"action","verb":"copy","value":"/code/brand/cards/cache-nudge-post.png"},"tags":["es","model","copy","image"]}
+{"phrase":"necesito la captura de 2026-11-05 en el portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["es","model","copy","image"]}
+{"phrase":"pon la captura de 2026-11-05 en el portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["es","model","copy","image"]}
+{"phrase":"quiero el roadmap de reflex en el portapapeles","expect":{"status":"action","verb":"copy","value":"/code/reflex/docs/roadmap.md"},"tags":["es","model","copy","file"]}
+{"phrase":"pásame «git status -sb» al portapapeles","expect":{"status":"action","verb":"copy","value":"git status -sb"},"tags":["es","model","copy","text","quoted"]}
+{"phrase":"me pasas «npm test» al portapapeles","expect":{"status":"action","verb":"copy","value":"npm test"},"tags":["es","model","copy","text","quoted"]}
+{"phrase":"necesito «docker ps -a» en el portapapeles","expect":{"status":"action","verb":"copy","value":"docker ps -a"},"tags":["es","model","copy","text","quoted"]}
+{"phrase":"put the factura de octubre to the clipboard","expect":{"status":"action","verb":"copy","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["en","model","copy","file"]}
+{"phrase":"put the design doc to the clipboard","expect":{"status":"action","verb":"copy","value":"/code/reflex/docs/design.md"},"tags":["en","model","copy","file"]}
+{"phrase":"could you put the contrato de alquiler on my clipboard","expect":{"status":"action","verb":"copy","value":"/Users/me/Documents/contrato-alquiler.pdf"},"tags":["en","model","copy","file"]}
+{"phrase":"can you put the captura de 2026-11-05 on the clipboard","expect":{"status":"action","verb":"copy","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["en","model","copy","image"]}
+{"phrase":"put the roadmap to the clipboard","expect":{"status":"action","verb":"copy","value":"/code/reflex/docs/roadmap.md"},"tags":["en","model","copy","file"]}
+{"phrase":"put the cache-nudge post to the clipboard","expect":{"status":"action","verb":"copy","value":"/code/brand/cards/cache-nudge-post.png"},"tags":["en","model","copy","image"]}
+{"phrase":"give me the informe trimestral v2 on my clipboard","expect":{"status":"action","verb":"copy","value":"/Users/me/Downloads/informe-trimestral-v2.pdf"},"tags":["en","model","copy","file"]}
+{"phrase":"get me the orbitdesk readme on the clipboard","expect":{"status":"action","verb":"copy","value":"/code/orbitdesk/README.md"},"tags":["en","model","copy","file"]}
+{"phrase":"i need the captura de 2026-11-05 on my clipboard","expect":{"status":"action","verb":"copy","value":"/Users/me/Desktop/captura-2026-11-05.png"},"tags":["en","model","copy","image"]}
+{"phrase":"i want the factura de octubre in my clipboard","expect":{"status":"action","verb":"copy","value":"/Users/me/Documents/factura-octubre.pdf"},"tags":["en","model","copy","file"]}
+{"phrase":"copy 'npm run build' to the clipboard","expect":{"status":"action","verb":"copy","value":"npm run build"},"tags":["en","model","copy","text","quoted"]}
+{"phrase":"put \"ls -la\" to the clipboard","expect":{"status":"action","verb":"copy","value":"ls -la"},"tags":["en","model","copy","text","quoted"]}
+{"phrase":"can you copy 'git log --oneline' to the clipboard","expect":{"status":"action","verb":"copy","value":"git log --oneline"},"tags":["en","model","copy","text","quoted"]}
+{"phrase":"necesito que ejecutes el atajo modo noche","expect":{"status":"action","verb":"shortcut","value":"Modo noche"},"tags":["es","model","shortcut"]}
+{"phrase":"me ejecutas el atajo apagar luces","expect":{"status":"action","verb":"shortcut","value":"Apagar luces"},"tags":["es","model","shortcut"]}
+{"phrase":"¿puedes ejecutar el atajo reunión de equipo?","expect":{"status":"action","verb":"shortcut","value":"Reunión de equipo"},"tags":["es","model","shortcut"]}
+{"phrase":"me ejecutas el atajo de modo foco porfa","expect":{"status":"action","verb":"shortcut","value":"Modo foco"},"tags":["es","model","shortcut"]}
+{"phrase":"lánzame el modo foco","expect":{"status":"action","verb":"shortcut","value":"Modo foco"},"tags":["es","model","shortcut"]}
+{"phrase":"pon el modo noche","expect":{"status":"action","verb":"shortcut","value":"Modo noche"},"tags":["es","model","shortcut"]}
+{"phrase":"activa apagar luces","expect":{"status":"action","verb":"shortcut","value":"Apagar luces"},"tags":["es","model","shortcut"]}
+{"phrase":"enciende el modo foco","expect":{"status":"action","verb":"shortcut","value":"Modo foco"},"tags":["es","model","shortcut"]}
+{"phrase":"ponme modo foco porfa","expect":{"status":"action","verb":"shortcut","value":"Modo foco"},"tags":["es","model","shortcut"]}
+{"phrase":"would you run the shortcut modo noche","expect":{"status":"action","verb":"shortcut","value":"Modo noche"},"tags":["en","model","shortcut"]}
+{"phrase":"i need you to run the shortcut apagar luces","expect":{"status":"action","verb":"shortcut","value":"Apagar luces"},"tags":["en","model","shortcut"]}
+{"phrase":"please trigger reunión de equipo","expect":{"status":"action","verb":"shortcut","value":"Reunión de equipo"},"tags":["en","model","shortcut"]}
+{"phrase":"trigger modo noche","expect":{"status":"action","verb":"shortcut","value":"Modo noche"},"tags":["en","model","shortcut"]}
+{"phrase":"activate modo foco","expect":{"status":"action","verb":"shortcut","value":"Modo foco"},"tags":["en","model","shortcut"]}
+{"phrase":"turn on apagar luces","expect":{"status":"action","verb":"shortcut","value":"Apagar luces"},"tags":["en","model","shortcut"]}
+{"phrase":"let me run the shortcut reunión de equipo","expect":{"status":"action","verb":"shortcut","value":"Reunión de equipo"},"tags":["en","model","shortcut"]}
+{"phrase":"run the shortcut modo foco for me","expect":{"status":"action","verb":"shortcut","value":"Modo foco"},"tags":["en","model","shortcut"]}
+{"phrase":"start the shortcut modo noche","expect":{"status":"action","verb":"shortcut","value":"Modo noche"},"tags":["en","model","shortcut"]}
+{"phrase":"quiero ver el log de errores","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"necesito que me expliques el bug","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"quiero ver el changelog de figma","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"necesito una explicación del error de figma","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"quiero ver el estado del PR de brand","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"necesito que revises el código de reflex","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"quiero ver el diff completo","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"activa los tests","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"lanza los tests de reflex","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"ejecuta los tests de orbitdesk","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"ejecuta el script de build de brand","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"arranca el servidor de desarrollo de reflex","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"inicia el deploy de orbitdesk a producción","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"necesito ayuda con slack","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"busca el bug en el login de slack","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"encuentra la causa de que safari vaya lento","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"muéstrame un ejemplo de rebase","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"dame un resumen del diff de reflex","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"necesito brand para mañana","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"quiero ver el diff de reflex","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"llévame por el código paso a paso","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"ponme al día con orbitdesk","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"enséñame un ejemplo del módulo de descargas","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"quiero el modo noche ya","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"necesito la reunión de equipo","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"saca las conclusiones del informe de spotify","expect":{"status":"pass"},"tags":["es","model","nonaction"]}
+{"phrase":"i want to see the stack trace","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i want to see a demo of this","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i need you to explain the bug","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"let me see the diff in reflex","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"run the tests in orbitdesk","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"start the dev server for reflex","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"show me an example of squashing commits in brand","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"give me a summary of the diff","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"find the bug in the slack login flow","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i need help with figma","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"take me through the brand code","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i need an explanation of the error","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"go over the reflex roadmap with me","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i want to see more tests for reflex","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i want to see the crash log of figma","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i want modo foco","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"let me see the structure notes for brand","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"launch the build pipeline for orbitdesk","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"bring up the idea of caching in the meeting","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"i need spotify to stop crashing","expect":{"status":"pass"},"tags":["en","model","nonaction"]}
+{"phrase":"trigger a rebuild of the reflex docs","expect":{"status":"pass"},"tags":["en","model","nonaction"]}

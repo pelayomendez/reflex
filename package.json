@@ -1,0 +1,11 @@
+{
+  "name": "reflex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Act on your Mac from Claude Code's prompt without waking the model",
+  "bin": { "reflex": "bin/reflex" },
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "license": "MIT"
+}

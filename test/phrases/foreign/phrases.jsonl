@@ -1,0 +1,288 @@
+{"phrase":"abre tangerine","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿me abres tangerine?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine"},"tags":["es","open","folder","foreign"]}
+{"phrase":"llévame a tangerine","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine"},"tags":["es","open","folder","foreign"]}
+{"phrase":"quiero ver cuaderno-azul","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/cuaderno-azul"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abrre cuaderno-azul","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/cuaderno-azul"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre holaMundo","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/holaMundo"},"tags":["es","open","folder","foreign"]}
+{"phrase":"necesito holaMundo ya","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/holaMundo"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿puedes abrirme pixelforge?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/pixelforge"},"tags":["es","open","folder","foreign"]}
+{"phrase":"ve a pixelforge porfa","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/pixelforge"},"tags":["es","open","folder","foreign"]}
+{"phrase":"llévame a ventanilla","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/ventanilla"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre la carpeta ventanilla","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/ventanilla"},"tags":["es","open","folder","foreign"]}
+{"phrase":"quiero ver harbor-lights","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/harbor-lights"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿me abres q4-planning?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/q4-planning"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre mercadillo por favor","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/mercadillo"},"tags":["es","open","folder","foreign"]}
+{"phrase":"pon mercadillo en pantalla","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/mercadillo"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abreme lighthouse","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/lighthouse"},"tags":["es","open","folder","foreign"]}
+{"phrase":"ábreme tortuga","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tortuga"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿me llevas a tortuga?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tortuga"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre novaBank","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/novaBank"},"tags":["es","open","folder","foreign"]}
+{"phrase":"quiero ver novaBank ya","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/novaBank"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre el repo kiosco","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/kiosco"},"tags":["es","open","folder","foreign"]}
+{"phrase":"llévame a beacon","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/beacon"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre dev-notes-2025","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/dev-notes-2025"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿me abres dev-notes-2025 porfa?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/dev-notes-2025"},"tags":["es","open","folder","foreign"]}
+{"phrase":"necesito fresadora","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/fresadora"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre ribbon","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/ribbon"},"tags":["es","open","folder","foreign"]}
+{"phrase":"llévame a saltmarsh ahora","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/saltmarsh"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre gazpacho","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/gazpacho"},"tags":["es","open","folder","foreign"]}
+{"phrase":"quiero ver lunaRoja","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/lunaRoja"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre orbit9","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/orbit9"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿me abres cobalt?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/cobalt"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre entrenamiento","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/entrenamiento"},"tags":["es","open","folder","foreign"]}
+{"phrase":"ve a paperboat","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/paperboat"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre greenhouse","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/greenhouse"},"tags":["es","open","folder","foreign"]}
+{"phrase":"llévame a taller-mecanico","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/taller-mecanico"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre el taller mecanico","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/taller-mecanico"},"tags":["es","open","folder","foreign"]}
+{"phrase":"quiero ver vinilos","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/vinilos"},"tags":["es","open","folder","foreign"]}
+{"phrase":"llévame a descargas","expect":{"status":"action","verb":"open","value":"/Users/alex/Downloads"},"tags":["es","open","folder","foreign"]}
+{"phrase":"¿me abres el escritorio?","expect":{"status":"action","verb":"open","value":"/Users/alex/Desktop"},"tags":["es","open","folder","foreign"]}
+{"phrase":"abre documentos","expect":{"status":"action","verb":"open","value":"/Users/alex/Documents"},"tags":["es","open","folder","foreign"]}
+{"phrase":"open tangerine","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine"},"tags":["en","open","folder","foreign"]}
+{"phrase":"take me to tangerine","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine"},"tags":["en","open","folder","foreign"]}
+{"phrase":"can you open pixelforge?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/pixelforge"},"tags":["en","open","folder","foreign"]}
+{"phrase":"i want to see harbor-lights","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/harbor-lights"},"tags":["en","open","folder","foreign"]}
+{"phrase":"bring up lighthouse","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/lighthouse"},"tags":["en","open","folder","foreign"]}
+{"phrase":"open the lighthouse repo","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/lighthouse"},"tags":["en","open","folder","foreign"]}
+{"phrase":"let me see beacon","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/beacon"},"tags":["en","open","folder","foreign"]}
+{"phrase":"go to ribbon please","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/ribbon"},"tags":["en","open","folder","foreign"]}
+{"phrase":"open saltmarsh","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/saltmarsh"},"tags":["en","open","folder","foreign"]}
+{"phrase":"i need orbit9","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/orbit9"},"tags":["en","open","folder","foreign"]}
+{"phrase":"could you open cobalt?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/cobalt"},"tags":["en","open","folder","foreign"]}
+{"phrase":"take me to paperboat now","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/paperboat"},"tags":["en","open","folder","foreign"]}
+{"phrase":"pull up greenhouse","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/greenhouse"},"tags":["en","open","folder","foreign"]}
+{"phrase":"open novaBank","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/novaBank"},"tags":["en","open","folder","foreign"]}
+{"phrase":"open holaMundo","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/holaMundo"},"tags":["en","open","folder","foreign"]}
+{"phrase":"take me to downloads","expect":{"status":"action","verb":"open","value":"/Users/alex/Downloads"},"tags":["en","open","folder","foreign"]}
+{"phrase":"open my desktop","expect":{"status":"action","verb":"open","value":"/Users/alex/Desktop"},"tags":["en","open","folder","foreign"]}
+{"phrase":"abre obsidian","expect":{"status":"action","verb":"open","value":"/Applications/Obsidian.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"¿me abres obsidian?","expect":{"status":"action","verb":"open","value":"/Applications/Obsidian.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre discord","expect":{"status":"action","verb":"open","value":"/Applications/Discord.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"quiero ver discord","expect":{"status":"action","verb":"open","value":"/Applications/Discord.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"lanza zoom","expect":{"status":"action","verb":"open","value":"/Applications/zoom.us.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre 1password","expect":{"status":"action","verb":"open","value":"/Applications/1Password.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abrre whatsapp","expect":{"status":"action","verb":"open","value":"/Applications/WhatsApp.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre telegram porfa","expect":{"status":"action","verb":"open","value":"/Applications/Telegram.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"necesito postman","expect":{"status":"action","verb":"open","value":"/Applications/Postman.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"llévame a sketch","expect":{"status":"action","verb":"open","value":"/Applications/Sketch.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre cursor","expect":{"status":"action","verb":"open","value":"/Applications/Cursor.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"¿puedes abrir docker?","expect":{"status":"action","verb":"open","value":"/Applications/Docker.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre iterm","expect":{"status":"action","verb":"open","value":"/Applications/iTerm.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre raycast ya","expect":{"status":"action","verb":"open","value":"/Applications/Raycast.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"quiero ver things","expect":{"status":"action","verb":"open","value":"/Applications/Things3.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre todoist","expect":{"status":"action","verb":"open","value":"/Applications/Todoist.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre pixelmator pro","expect":{"status":"action","verb":"open","value":"/Applications/Pixelmator Pro.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"¿me abres davinci resolve?","expect":{"status":"action","verb":"open","value":"/Applications/DaVinci Resolve.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre brave browser","expect":{"status":"action","verb":"open","value":"/Applications/Brave Browser.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"abre la app vlc","expect":{"status":"action","verb":"open","value":"/Applications/VLC.app"},"tags":["es","open","app","foreign"]}
+{"phrase":"open obsidian","expect":{"status":"action","verb":"open","value":"/Applications/Obsidian.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"can you open discord?","expect":{"status":"action","verb":"open","value":"/Applications/Discord.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"launch zoom","expect":{"status":"action","verb":"open","value":"/Applications/zoom.us.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"i need 1password","expect":{"status":"action","verb":"open","value":"/Applications/1Password.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open whatsapp please","expect":{"status":"action","verb":"open","value":"/Applications/WhatsApp.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"bring up telegram","expect":{"status":"action","verb":"open","value":"/Applications/Telegram.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open postman","expect":{"status":"action","verb":"open","value":"/Applications/Postman.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"let me see sketch","expect":{"status":"action","verb":"open","value":"/Applications/Sketch.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open cursor","expect":{"status":"action","verb":"open","value":"/Applications/Cursor.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"start docker","expect":{"status":"action","verb":"open","value":"/Applications/Docker.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open raycast now","expect":{"status":"action","verb":"open","value":"/Applications/Raycast.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open todoist","expect":{"status":"action","verb":"open","value":"/Applications/Todoist.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open davinci resolve","expect":{"status":"action","verb":"open","value":"/Applications/DaVinci Resolve.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"open spotify","expect":{"status":"action","verb":"open","value":"/Applications/Spotify.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"pull up safari","expect":{"status":"action","verb":"open","value":"/Applications/Safari.app"},"tags":["en","open","app","foreign"]}
+{"phrase":"muéstrame el runbook de lighthouse en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/lighthouse/docs/runbook.md"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"enséñame la architecture de tangerine en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/tangerine/docs/architecture.md"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"¿dónde está el design brief de harbor-lights?","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/harbor-lights/design-brief.pdf"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"enséñame el presupuesto de la reforma en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/ventanilla/presupuesto-reforma.xlsx"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"revela los okrs de q4-planning","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/q4-planning/okrs-q4.md"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"muestrame las recetas de verano en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/gazpacho/recetas-verano.md"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"¿me enseñas el manual de caja en finder?","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/kiosco/docs/manual-de-caja.docx"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"mustrame el threat model de novaBank en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/novaBank/docs/threat-model.pdf"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"dónde está el plano de la pieza 14","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/fresadora/docs/plano-pieza-14.pdf"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"enséñame la declaración de la renta en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Documents/declaracion-renta-2024.pdf"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"muéstrame el billete de tren de sevilla en el finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Downloads/billete-tren-sevilla.pdf"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"¿me enseñas la portada de kind of blue en el finder?","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/vinilos/portada-kind-of-blue.png"},"tags":["es","reveal","image","foreign"]}
+{"phrase":"revela la rutina semanal","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/entrenamiento/rutina-semanal.md"},"tags":["es","reveal","file","foreign"]}
+{"phrase":"show me the incident 2025-03-14 in finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/lighthouse/docs/incident-2025-03-14.md"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"reveal the pricing strategy in finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/ribbon/docs/pricing-strategy.docx"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"where is the security audit of cobalt?","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/cobalt/docs/security-audit.pdf"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"show the mission plan in finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/orbit9/docs/mission-plan.md"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"can you show me the boarding pass in finder?","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Downloads/boarding-pass-lisbon.pdf"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"show me the api reference in finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/novaBank/docs/api-reference.md"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"reveal the survey results","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/saltmarsh/survey-results.xlsx"},"tags":["en","reveal","file","foreign"]}
+{"phrase":"show me the pixelforge logo in finder","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/pixelforge/assets/logo-pixelforge.png"},"tags":["en","reveal","image","foreign"]}
+{"phrase":"copia el resumen del tema 3","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/cuaderno-azul/resumen-tema-3.pdf"},"tags":["es","copy","file","foreign"]}
+{"phrase":"cópiame el catálogo de productos al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/mercadillo/docs/catalogo-productos.pdf"},"tags":["es","copy","file","foreign"]}
+{"phrase":"¿me copias la guía de estilo al portapapeles?","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/tortuga/guia-de-estilo.pdf"},"tags":["es","copy","file","foreign"]}
+{"phrase":"pásame el cv de alex garcia al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/alex/Documents/cv-alex-garcia.docx"},"tags":["es","copy","file","foreign"]}
+{"phrase":"copia el pasaporte escaneado","expect":{"status":"action","verb":"copy","value":"/Users/alex/Documents/pasaporte-escaneado.pdf"},"tags":["es","copy","file","foreign"]}
+{"phrase":"copiame el hiring plan al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/q4-planning/hiring-plan.xlsx"},"tags":["es","copy","file","foreign"]}
+{"phrase":"copia el guion del episodio 2","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/lunaRoja/docs/guion-episodio-2.docx"},"tags":["es","copy","file","foreign"]}
+{"phrase":"copia la imagen del banner de otoño","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/mercadillo/assets/banner-otoño.png"},"tags":["es","copy","image","foreign"]}
+{"phrase":"cópiame la home screen al portapapeles","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/harbor-lights/mockups/home-screen.png"},"tags":["es","copy","image","foreign"]}
+{"phrase":"copy the kickoff deck to the clipboard","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/q4-planning/slides/kickoff-deck.pptx"},"tags":["en","copy","file","foreign"]}
+{"phrase":"copy the sensor calibration to my clipboard","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/greenhouse/docs/sensor-calibration.md"},"tags":["en","copy","file","foreign"]}
+{"phrase":"can you copy the beacon diagram to the clipboard?","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/beacon/assets/diagram-beacon.png"},"tags":["en","copy","image","foreign"]}
+{"phrase":"put the cover art on the clipboard","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/paperboat/assets/cover-art.png"},"tags":["en","copy","image","foreign"]}
+{"phrase":"copy the brushes spec","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/pixelforge/docs/brushes-spec.md"},"tags":["en","copy","file","foreign"]}
+{"phrase":"copy the inventario de octubre to the clipboard","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/kiosco/inventario-octubre.xlsx"},"tags":["en","copy","file","foreign"]}
+{"phrase":"copy the lista de regalos please","expect":{"status":"action","verb":"copy","value":"/Users/alex/Desktop/lista-regalos.md"},"tags":["en","copy","file","foreign"]}
+{"phrase":"abre el checkout de tangerine","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine/src/checkout.ts"},"tags":["es","open","file","foreign"]}
+{"phrase":"abre las ideas pendientes","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/dev-notes-2025/ideas-pendientes.md"},"tags":["es","open","file","foreign"]}
+{"phrase":"quiero ver primeros pasos","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/holaMundo/docs/primeros-pasos.md"},"tags":["es","open","file","foreign"]}
+{"phrase":"¿me abres la retro de enero?","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/dev-notes-2025/retro-enero.md"},"tags":["es","open","file","foreign"]}
+{"phrase":"abre el progreso de marzo","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/entrenamiento/progreso-marzo.png"},"tags":["es","open","image","foreign"]}
+{"phrase":"abre la ficha del cliente","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/taller-mecanico/docs/ficha-cliente.docx"},"tags":["es","open","file","foreign"]}
+{"phrase":"llévame a la colección de vinilos","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/vinilos/coleccion.xlsx"},"tags":["es","open","file","foreign"]}
+{"phrase":"ábreme los requisitos","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/ventanilla/docs/requisitos.docx"},"tags":["es","open","file","foreign"]}
+{"phrase":"open the harbor-lights changelog","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/harbor-lights/docs/changelog.md"},"tags":["en","open","file","foreign"]}
+{"phrase":"open the onboarding doc","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/beacon/docs/onboarding.md"},"tags":["en","open","file","foreign"]}
+{"phrase":"i want to see the manifesto","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/paperboat/docs/manifesto.md"},"tags":["en","open","file","foreign"]}
+{"phrase":"open alerts of lighthouse","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/lighthouse/src/alerts.ts"},"tags":["en","open","file","foreign"]}
+{"phrase":"open the field notes","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/saltmarsh/field-notes.md"},"tags":["en","open","file","foreign"]}
+{"phrase":"open the screenshot of 2026-10-30","expect":{"status":"action","verb":"open","value":"/Users/alex/Desktop/captura-2026-10-30.png"},"tags":["en","open","image","foreign"]}
+{"phrase":"ejecuta evening wind down","expect":{"status":"action","verb":"shortcut","value":"Evening Wind Down"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"ejecuta modo lectura","expect":{"status":"action","verb":"shortcut","value":"Modo lectura"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"lanza el atajo modo lectura","expect":{"status":"action","verb":"shortcut","value":"Modo lectura"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"ejecuta lista de compras","expect":{"status":"action","verb":"shortcut","value":"Lista de compras"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"¿me ejecutas enviar ubicación?","expect":{"status":"action","verb":"shortcut","value":"Enviar ubicación"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"ejecuta enviar ubicacion","expect":{"status":"action","verb":"shortcut","value":"Enviar ubicación"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"lanza el atajo evening wind down porfa","expect":{"status":"action","verb":"shortcut","value":"Evening Wind Down"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"activa el modo lectura","expect":{"status":"action","verb":"shortcut","value":"Modo lectura"},"tags":["es","shortcut","shortcut","foreign"]}
+{"phrase":"run evening wind down","expect":{"status":"action","verb":"shortcut","value":"Evening Wind Down"},"tags":["en","shortcut","shortcut","foreign"]}
+{"phrase":"run the shortcut evening wind down","expect":{"status":"action","verb":"shortcut","value":"Evening Wind Down"},"tags":["en","shortcut","shortcut","foreign"]}
+{"phrase":"please run modo lectura","expect":{"status":"action","verb":"shortcut","value":"Modo lectura"},"tags":["en","shortcut","shortcut","foreign"]}
+{"phrase":"can you run lista de compras?","expect":{"status":"action","verb":"shortcut","value":"Lista de compras"},"tags":["en","shortcut","shortcut","foreign"]}
+{"phrase":"run the enviar ubicación shortcut","expect":{"status":"action","verb":"shortcut","value":"Enviar ubicación"},"tags":["en","shortcut","shortcut","foreign"]}
+{"phrase":"abre el README de tangerine","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/tangerine/README.md"},"tags":["es","open","file","foreign"]}
+{"phrase":"quiero ver el README de holaMundo","expect":{"status":"action","verb":"open","value":"/Users/alex/Projects/holaMundo/README.md"},"tags":["es","open","file","foreign"]}
+{"phrase":"abre el README","expect":{"status":"choose"},"tags":["es","ambiguous","foreign"]}
+{"phrase":"open the README","expect":{"status":"choose"},"tags":["en","ambiguous","foreign"]}
+{"phrase":"quiero ver cómo funciona tangerine","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"¿qué es lighthouse?","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"explícame para qué sirve cobalt","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"no abras discord","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"no quiero que abras obsidian","expect":{"status":"pass"},"tags":["es","negation","foreign"]}
+{"phrase":"nunca abras la carpeta tangerine","expect":{"status":"pass"},"tags":["es","negation","foreign"]}
+{"phrase":"no copies el pasaporte escaneado","expect":{"status":"pass"},"tags":["es","negation","foreign"]}
+{"phrase":"no ejecutes modo lectura","expect":{"status":"pass"},"tags":["es","negation","foreign"]}
+{"phrase":"ayer abrí docker","expect":{"status":"pass"},"tags":["es","past","foreign"]}
+{"phrase":"ya abrí pixelforge y no hay nada","expect":{"status":"pass"},"tags":["es","past","foreign"]}
+{"phrase":"abrí novaBank esta mañana","expect":{"status":"pass"},"tags":["es","past","foreign"]}
+{"phrase":"ejecuté evening wind down anoche","expect":{"status":"pass"},"tags":["es","past","foreign"]}
+{"phrase":"copié el cv de alex garcia ayer","expect":{"status":"pass"},"tags":["es","past","foreign"]}
+{"phrase":"cuando abro whatsapp se cuelga","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"tangerine es mi proyecto favorito","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"¿por qué falla el checkout de tangerine?","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"¿dónde guardé las notas?","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"abre mercadillo y arregla el carrito","expect":{"status":"pass"},"tags":["es","compound","foreign"]}
+{"phrase":"abre tortuga y dime qué hay dentro","expect":{"status":"pass"},"tags":["es","compound","foreign"]}
+{"phrase":"ábreme postman y lanza la petición","expect":{"status":"pass"},"tags":["es","compound","foreign"]}
+{"phrase":"copia el resumen del tema 3 y mándaselo a marta","expect":{"status":"pass"},"tags":["es","compound","foreign"]}
+{"phrase":"necesito arreglar el runbook de lighthouse","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"quiero saber qué hace beacon","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"necesito que me expliques el threat model de novaBank","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"enséñame un ejemplo de async await","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"muéstrame cómo se usa gazpacho","expect":{"status":"pass"},"tags":["es","nonaction","foreign"]}
+{"phrase":"abre blender","expect":{"status":"pass"},"tags":["es","missing","foreign"]}
+{"phrase":"abre la carpeta torreon","expect":{"status":"pass"},"tags":["es","missing","foreign"]}
+{"phrase":"ejecuta modo cine","expect":{"status":"pass"},"tags":["es","missing","foreign"]}
+{"phrase":"abre notion","expect":{"status":"pass"},"tags":["es","missing","foreign"]}
+{"phrase":"copia el documento inexistente","expect":{"status":"pass"},"tags":["es","missing","foreign"]}
+{"phrase":"what is pixelforge","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"why does saltmarsh crash on startup","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"explain what orbit9 does","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"i want to see why the cobalt build fails","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"don't open discord","expect":{"status":"pass"},"tags":["en","negation","foreign"]}
+{"phrase":"never launch docker","expect":{"status":"pass"},"tags":["en","negation","foreign"]}
+{"phrase":"do not copy the pricing strategy","expect":{"status":"pass"},"tags":["en","negation","foreign"]}
+{"phrase":"i opened obsidian yesterday","expect":{"status":"pass"},"tags":["en","past","foreign"]}
+{"phrase":"i ran lista de compras this morning","expect":{"status":"pass"},"tags":["en","past","foreign"]}
+{"phrase":"i copied the cover art earlier","expect":{"status":"pass"},"tags":["en","past","foreign"]}
+{"phrase":"i'm opening telegram now","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"when i open zoom it freezes","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"if you open ribbon you will see the billing code","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"open greenhouse and fix the irrigation bug","expect":{"status":"pass"},"tags":["en","compound","foreign"]}
+{"phrase":"open lighthouse and summarise the runbook","expect":{"status":"pass"},"tags":["en","compound","foreign"]}
+{"phrase":"run evening wind down then open spotify","expect":{"status":"pass"},"tags":["en","compound","foreign"]}
+{"phrase":"show me the security audit and explain it","expect":{"status":"pass"},"tags":["en","compound","foreign"]}
+{"phrase":"i need to fix the alerts in lighthouse","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"i want to know what harbor-lights is for","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"tell me about beacon","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"give me an example of a retry loop","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"show me how to use tangerine","expect":{"status":"pass"},"tags":["en","nonaction","foreign"]}
+{"phrase":"open figma","expect":{"status":"pass"},"tags":["en","missing","foreign"]}
+{"phrase":"open the folder moonshot","expect":{"status":"pass"},"tags":["en","missing","foreign"]}
+{"phrase":"run the shortcut party mode","expect":{"status":"pass"},"tags":["en","missing","foreign"]}
+{"phrase":"take me to the blueprint folder","expect":{"status":"pass"},"tags":["en","missing","foreign"]}
+{"phrase":"abre el runbook de lighthouse en Cursor","expect":{"status":"action","verb":"edit","value":"/Users/alex/Projects/lighthouse/docs/runbook.md","app":"/Applications/Cursor.app"},"tags":["es","edit","file","modifier","foreign"]}
+{"phrase":"abre el changelog de harbor-lights para editar","expect":{"status":"action","verb":"edit","value":"/Users/alex/Projects/harbor-lights/docs/changelog.md"},"tags":["es","edit","file","modifier","foreign"]}
+{"phrase":"open architecture.md in Cursor","expect":{"status":"action","verb":"edit","value":"/Users/alex/Projects/tangerine/docs/architecture.md","app":"/Applications/Cursor.app"},"tags":["en","edit","file","modifier","foreign"]}
+{"phrase":"abre renderer.ts en la línea 120 en Cursor","expect":{"status":"action","verb":"edit","value":"/Users/alex/Projects/pixelforge/src/renderer.ts","app":"/Applications/Cursor.app","line":120},"tags":["es","edit","file","modifier","line","foreign"]}
+{"phrase":"abre una terminal en tangerine","expect":{"status":"action","verb":"terminal","value":"/Users/alex/Projects/tangerine","app":"/System/Applications/Utilities/Terminal.app"},"tags":["es","terminal","folder","modifier","foreign"]}
+{"phrase":"open a terminal in beacon","expect":{"status":"action","verb":"terminal","value":"/Users/alex/Projects/beacon","app":"/System/Applications/Utilities/Terminal.app"},"tags":["en","terminal","folder","modifier","foreign"]}
+{"phrase":"abre lighthouse en iTerm","expect":{"status":"action","verb":"terminal","value":"/Users/alex/Projects/lighthouse","app":"/Applications/iTerm.app"},"tags":["es","terminal","folder","modifier","foreign"]}
+{"phrase":"terminal en descargas","expect":{"status":"action","verb":"terminal","value":"/Users/alex/Downloads","app":"/System/Applications/Utilities/Terminal.app"},"tags":["es","terminal","folder","modifier","foreign"]}
+{"phrase":"abre una terminal en el runbook de lighthouse","expect":{"status":"pass"},"tags":["es","terminal","kind-misfit","modifier","foreign"]}
+{"phrase":"open Obsidian in the editor","expect":{"status":"pass"},"tags":["en","edit","kind-misfit","modifier","foreign"]}
+{"phrase":"abre tangerine en Sublime Text","expect":{"status":"pass"},"tags":["es","edit","missing","modifier","foreign"]}
+{"phrase":"no abras una terminal en beacon","expect":{"status":"pass"},"tags":["es","terminal","negation","modifier","foreign"]}
+{"phrase":"abre una terminal en beacon y lanza los tests","expect":{"status":"pass"},"tags":["es","terminal","compound","modifier","foreign"]}
+{"phrase":"how do I open a terminal in tangerine","expect":{"status":"pass"},"tags":["en","terminal","nonaction-named","modifier","foreign"]}
+{"phrase":"edita el changelog de harbor-lights","expect":{"status":"pass"},"tags":["es","edit","bare-verb","modifier","foreign"]}
+{"phrase":"abre design-brief.pdf en Cursor","expect":{"status":"pass"},"tags":["es","edit","kind-misfit","modifier","foreign"]}
+{"phrase":"abre lighthouse en Warp","expect":{"status":"pass"},"tags":["es","terminal","missing","modifier","foreign"]}
+{"phrase":"busca el runbook de lighthouse","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/lighthouse/docs/runbook.md"},"tags":["es","reveal","file","find","foreign"]}
+{"phrase":"encuentra el threat model de novaBank","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/novaBank/docs/threat-model.pdf"},"tags":["es","reveal","file","find","foreign"]}
+{"phrase":"find the api reference","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/novaBank/docs/api-reference.md"},"tags":["en","reveal","file","find","foreign"]}
+{"phrase":"locate the mission plan","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/orbit9/docs/mission-plan.md"},"tags":["en","reveal","file","find","foreign"]}
+{"phrase":"busca el changelog de harbor-lights","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/harbor-lights/docs/changelog.md"},"tags":["es","reveal","file","find","known-gap","foreign"]}
+{"phrase":"find the pricing strategy","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/ribbon/docs/pricing-strategy.docx"},"tags":["en","reveal","file","find","foreign"]}
+{"phrase":"localiza el manifesto","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/paperboat/docs/manifesto.md"},"tags":["es","reveal","file","find","foreign"]}
+{"phrase":"busca el readme","expect":{"status":"pass"},"tags":["es","reveal","file","find","several","foreign"]}
+{"phrase":"find the declaración de la renta","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Documents/declaracion-renta-2024.pdf"},"tags":["es","reveal","file","find","known-gap","foreign"]}
+{"phrase":"busca info de tangerine","expect":{"status":"pass"},"tags":["es","nonaction-named","find","foreign"]}
+{"phrase":"busca una receta de gazpacho","expect":{"status":"pass"},"tags":["es","nonaction-named","find","foreign"]}
+{"phrase":"busca el bug del carrito","expect":{"status":"pass"},"tags":["es","nonaction","find","foreign"]}
+{"phrase":"find the budget for the wedding","expect":{"status":"pass"},"tags":["en","missing","find","foreign"]}
+{"phrase":"abre la última captura","expect":{"status":"action","verb":"open","value":"/Users/alex/Pictures/Capturas/Captura de pantalla 2026-11-06 a las 08.15.00.png"},"tags":["es","open","file","latest","foreign"]}
+{"phrase":"open my latest screenshot","expect":{"status":"action","verb":"open","value":"/Users/alex/Pictures/Capturas/Captura de pantalla 2026-11-06 a las 08.15.00.png"},"tags":["en","open","file","latest","foreign"]}
+{"phrase":"copy my last screenshot to the clipboard","expect":{"status":"action","verb":"copy","value":"/Users/alex/Pictures/Capturas/Captura de pantalla 2026-11-06 a las 08.15.00.png"},"tags":["en","copy","file","latest","foreign"]}
+{"phrase":"muestra la última descarga","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Downloads/instalador.dmg"},"tags":["es","reveal","file","latest","foreign"]}
+{"phrase":"abre la última descarga","expect":{"status":"pass"},"tags":["es","latest","launches","foreign"]}
+{"phrase":"abre el último pdf de descargas","expect":{"status":"action","verb":"open","value":"/Users/alex/Downloads/boarding-pass-lisbon.pdf"},"tags":["es","open","file","latest","foreign"]}
+{"phrase":"open my latest image from downloads","expect":{"status":"action","verb":"open","value":"/Users/alex/Downloads/receta.jpg"},"tags":["en","open","file","latest","image","foreign"]}
+{"phrase":"abre el último pdf de documentos","expect":{"status":"action","verb":"open","value":"/Users/alex/Documents/declaracion-renta-2024.pdf"},"tags":["es","open","file","latest","foreign"]}
+{"phrase":"abre el último vídeo","expect":{"status":"pass"},"tags":["es","latest","no-place","foreign"]}
+{"phrase":"abre la última factura","expect":{"status":"pass"},"tags":["es","latest","unknown-kind","foreign"]}
+{"phrase":"copia la ruta de tangerine","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/tangerine","type":"text"},"tags":["es","copy","text","path","modifier","foreign"]}
+{"phrase":"copy the path of the runbook of lighthouse","expect":{"status":"action","verb":"copy","value":"/Users/alex/Projects/lighthouse/docs/runbook.md","type":"text"},"tags":["en","copy","text","path","modifier","foreign"]}
+{"phrase":"copia la ruta de 1password","expect":{"status":"pass"},"tags":["es","path","kind-misfit","modifier","foreign"]}
+{"phrase":"copia la ruta del readme","expect":{"status":"pass"},"tags":["es","copy","text","path","modifier","several","foreign"]}
+{"phrase":"abre tangerine en GitHub","expect":{"status":"action","verb":"open","value":"https://github.com/alexgarcia/tangerine"},"tags":["es","open","url","web","modifier","foreign"]}
+{"phrase":"open pixelforge on gitlab","expect":{"status":"action","verb":"open","value":"https://gitlab.pixelforge.io/studio/pixelforge"},"tags":["en","open","url","web","modifier","foreign"]}
+{"phrase":"abre lighthouse en el navegador","expect":{"status":"action","verb":"open","value":"https://git.lighthouse.dev/ops/lighthouse"},"tags":["es","open","url","web","modifier","foreign"]}
+{"phrase":"open novaBank on github","expect":{"status":"action","verb":"open","value":"https://github.com/novabank/novaBank"},"tags":["en","open","url","web","modifier","foreign"]}
+{"phrase":"abre ventanilla en GitHub","expect":{"status":"pass"},"tags":["es","web","no-remote","modifier","foreign"]}
+{"phrase":"abre pixelforge en GitHub","expect":{"status":"pass"},"tags":["es","web","wrong-host","modifier","foreign"]}
+{"phrase":"abre tangerine en GitLab","expect":{"status":"pass"},"tags":["es","web","wrong-host","modifier","foreign"]}
+{"phrase":"abre discord en el navegador","expect":{"status":"pass"},"tags":["es","web","kind-misfit","modifier","foreign"]}
+{"phrase":"busca tests","expect":{"status":"pass"},"tags":["es","find","code-search","foreign"]}
+{"phrase":"find the config","expect":{"status":"pass"},"tags":["en","find","code-search","foreign"]}
+{"phrase":"busca el archivo logo-pixelforge.png","expect":{"status":"action","verb":"reveal","value":"/Users/alex/Projects/pixelforge/assets/logo-pixelforge.png"},"tags":["es","reveal","file","find","extension","foreign"]}
+{"phrase":"oculta Discord","expect":{"status":"action","verb":"hide","value":"/Applications/Discord.app"},"tags":["es","hide","template","system"]}
+{"phrase":"hide Zoom","expect":{"status":"action","verb":"hide","value":"/Applications/zoom.us.app"},"tags":["en","hide","template","system"]}
+{"phrase":"esconde Obsidian","expect":{"status":"action","verb":"hide","value":"/Applications/Obsidian.app"},"tags":["es","hide","template","system"]}
+{"phrase":"bloquea el mac","expect":{"status":"action","verb":"lock","value":"screen"},"tags":["es","lock","template","system"]}
+{"phrase":"lock the screen","expect":{"status":"action","verb":"lock","value":"screen"},"tags":["en","lock","template","system"]}
+{"phrase":"volumen 40","expect":{"status":"action","verb":"volume","value":"40"},"tags":["es","volume","template","system"]}
+{"phrase":"silencia","expect":{"status":"action","verb":"volume","value":"mute"},"tags":["es","volume","template","system"]}
+{"phrase":"open Wi-Fi settings","expect":{"status":"action","verb":"settings","value":"x-apple.systempreferences:com.apple.wifi-settings-extension"},"tags":["en","settings","template","system"]}
+{"phrase":"ajustes de teclado","expect":{"status":"action","verb":"settings","value":"x-apple.systempreferences:com.apple.Keyboard-Settings.extension"},"tags":["es","settings","template","system"]}
+{"phrase":"abre ajustes","expect":{"status":"action","verb":"open","value":"/System/Applications/System Settings.app"},"tags":["es","settings","template","system"]}
+{"phrase":"hide Zoomm","expect":{"status":"pass"},"tags":["en","hide","system","trap"]}
+{"phrase":"no silencies","expect":{"status":"pass"},"tags":["es","volume","system","trap"]}
+{"phrase":"abre ajustes de bluetooth y wifi","expect":{"status":"pass"},"tags":["es","settings","compound","system","trap"]}
+{"phrase":"activa el sonido","expect":{"status":"pass"},"tags":["es","volume","collision","system","trap"]}
+{"phrase":"lock the door","expect":{"status":"pass"},"tags":["en","lock","system","trap"]}
+{"phrase":"volume 101","expect":{"status":"pass"},"tags":["en","volume","system","trap"]}
