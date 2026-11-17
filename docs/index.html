@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>reflex · a Claude Code plugin</title>
-  <meta name="description" content="Type "open brand" in Claude Code and your Mac does it at once, without waking Claude. A tiny model trained on your own Mac understands free phrasing; anything that is not wholly an action goes to Claude.">
+  <meta name="description" content="Control your Mac from Claude Code without leaving it and without spending a token. Type "open brand" and your Mac does it at once; a tiny local model understands free phrasing, and anything that is not wholly an action goes to Claude.">
   <link rel="icon" href="icon.png">
   <meta property="og:title" content="reflex">
   <meta property="og:description" content="Your Mac does what you type at once, without waking Claude.">
@@ -42,7 +42,7 @@
   <header>
     <img src="icon.png" alt="">
     <h1>reflex</h1>
-    <p class="tag">Type "open brand" in Claude Code and your Mac does it at once, without waking Claude. A tiny model trained on your own Mac understands free phrasing, and anything that is not wholly an action goes to Claude as typed.</p>
+    <p class="tag">Control your Mac without leaving Claude Code and without spending a token. Type "open brand" and your Mac does it at once; a tiny local model understands free phrasing, and anything that is not wholly an action goes to Claude as typed.</p>
     <p class="cta"><a class="primary" href="#install">Install</a><a href="https://github.com/pelayomendez/reflex">GitHub</a></p>
   </header>
 
@@ -58,22 +58,27 @@
   <h2>What it can do</h2>
   <table>
     <tr><td><code>abre brand</code> · <code>open Downloads</code></td><td>Opens a folder: your repos under <code>~/Development</code>, your home folders, zoxide's.</td></tr>
-    <tr><td><code>abre Figma</code></td><td>Opens an installed app.</td></tr>
+    <tr><td><code>abre Figma</code> · <code>abre el correo</code></td><td>Opens an app by its name, or by what it does: mail, browser, calendar, music, notes, maps, photos, contacts, messages, the VPN.</td></tr>
+    <tr><td><code>ábrelo</code> · <code>open that doc</code></td><td>Opens the file Claude just wrote in this session.</td></tr>
+    <tr><td><code>muéstrame el post de watchmen</code> · <code>busca el contrato</code></td><td>Shows a file in Finder, found by the words of its path; or the newest of a kind: <code>el último pdf de descargas</code>.</td></tr>
+    <tr><td><code>abre el README en el editor</code> · <code>terminal en reflex</code></td><td>Opens a file in your editor, at a line if you say one; a terminal in a folder; a repo on GitHub.</td></tr>
     <tr><td><code>abre linkedin</code></td><td>Opens a page: an address, or an alias you set.</td></tr>
-    <tr><td><code>muéstrame el post de watchmen</code></td><td>Shows a file in Finder, found by the words of its path.</td></tr>
-    <tr><td><code>copia "hola"</code></td><td>Copies an image, a file or text to the clipboard.</td></tr>
-    <tr><td><code>ejecuta modo foco</code></td><td>Runs a Shortcut from the Shortcuts app.</td></tr>
+    <tr><td><code>copia "hola"</code> · <code>copia la ruta del README</code></td><td>Copies an image, a file, text or a path to the clipboard.</td></tr>
+    <tr><td><code>ejecuta modo foco</code></td><td>Runs a Shortcut from the Shortcuts app, by its exact name.</td></tr>
+    <tr><td><code>baja el volumen</code> · <code>bloquea la pantalla</code> · <code>pon el modo oscuro</code></td><td>Volume, mute, lock, dark mode, sleep the displays, screen saver, hide other apps, screenshot, Mission Control, Settings panes, quit or hide an app.</td></tr>
+    <tr><td><code>¿cuánta batería tengo?</code> · <code>espacio en disco</code></td><td>Answers battery, disk and VPN status in one line, without Claude.</td></tr>
+    <tr><td><code>vacía la papelera</code></td><td>Empties the Trash, after asking, with «No» as the default.</td></tr>
   </table>
-  <p>Spanish and English. A short, closed catalogue of verbs, run as fixed argument lists, never through a shell. Nothing it does writes, moves, deletes or sends.</p>
+  <p>Spanish and English. A short, closed catalogue of verbs, run as fixed argument lists, never through a shell. State changes need a verb: a bare «dark mode» answering Claude's question stays with Claude. The only action that deletes anything, emptying the Trash, asks first.</p>
 
   <h2>Templates, then a small model, then Claude</h2>
   <p>reflex is Karpathy's <em>cognitive core</em> at the scale of one machine: a small model that knows your system rather than the world, acts on it locally, and asks a big model, the oracle, when it is not sure.</p>
   <table>
     <tr><td class="green">Templates</td><td>Phrase patterns in Spanish and English, matched against the whole phrase. Free and instant.</td></tr>
-    <tr><td class="accent">Small model</td><td>FunctionGemma 270M with a LoRA adapter trained on your Mac, served by Ollama. It finds what you mean in free phrasing ("¿me abres brand?"). It proposes; reflex decides: the verb, the place and whether it is a request come from the phrase, and the target must exist in your Mac's own index.</td></tr>
+    <tr><td class="accent">Small model</td><td>reflex-core: FunctionGemma 270M taught the task on invented Macs, served by Ollama on yours. It finds what you mean in free phrasing ("¿me abres brand?"). It proposes; reflex decides: the verb, the place and whether it is a request come from the phrase, and the target must exist in your Mac's own index.</td></tr>
     <tr><td>Claude</td><td>Anything that is not wholly an action, and anything reflex is not sure of, goes to Claude as typed.</td></tr>
   </table>
-  <p>Claude is also the teacher. <code>reflex teach</code> has Claude write the training phrases from the names in your index (folder, app, Shortcut and file names, never full paths or file contents); a LoRA trains on the Mac with mlx in 4 to 8 minutes on an M4, and an adapter is kept only if it scores better on the exam. The adapter is 14.5 MB on top of the shared base model.</p>
+  <p>Claude is also the teacher. It wrote the training phrases for three invented people's Macs; a small adapter learned from them on a Mac in minutes, and a version is kept only if it scores better on the exam with no wrong action. Because it learned the task and not anyone's names, the same model works on your Mac as it is. <code>reflex learn</code> keeps what it missed, for the next version.</p>
 
   <h2>The numbers</h2>
   <p>Precision first: passing a phrase to Claude is fine, acting wrongly is not. On a held-out exam of phrases with the expected action, including traps that must go to Claude:</p>
@@ -84,6 +89,8 @@
     <tr><td>Trained model alone, v1 → v4</td><td>44 → 88 of 127 reachable requests, but 11 → 19 wrong</td></tr>
     <tr><td>v4, with reflex deciding what the phrase states</td><td>99 of 127 right, <span class="green">0 wrong</span></td></tr>
     <tr><td>v4 packaged in Ollama</td><td>97 of 127 right, <span class="green">0 wrong</span>, p95 about 155 ms</td></tr>
+    <tr><td>Public model, never saw this Mac</td><td>106 of 127 right, <span class="green">0 wrong</span></td></tr>
+    <tr><td>On an invented person's Mac</td><td>180 of 200 requests right, <span class="green">0 wrong</span></td></tr>
   </table>
   <p>Most of the gains came from what surrounds the model: templates, grounding every target in what really exists, and an allow-list of request words.</p>
 
@@ -92,12 +99,12 @@
   <p>Needs macOS and Node.js 20 or newer. It works with templates alone; <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a> adds the folders you visit most.</p>
 
   <h2>Optional: the small model</h2>
-  <p>For freer phrasing, serve reflex-core (FunctionGemma 270M, taught the task on invented Macs) with Ollama and point reflex at it in <code>~/.config/reflex/config.toml</code>:</p>
+  <p>For freer phrasing, pull reflex-core with <a href="https://ollama.com/mfpelayo/reflex-core">Ollama</a> and point reflex at it in <code>~/.config/reflex/config.toml</code>:</p>
 <pre>ollama pull mfpelayo/reflex-core</pre>
 <pre>[model]
 url = "http://localhost:11434/v1"
 name = "mfpelayo/reflex-core"</pre>
-  <p>It learned the task, not anyone's names, so it works on your Mac as it is; <code>reflex learn</code> collects what it missed if you want to teach it more. Commands, aliases, <code>reflex teach</code> and the design in the <a href="https://github.com/pelayomendez/reflex#readme">README</a>.</p>
+  <p>Without it, templates still do the fixed phrasings. Commands, aliases, <code>reflex teach</code> and the design in the <a href="https://github.com/pelayomendez/reflex#readme">README</a>.</p>
 
   <footer>MIT · by <a href="https://github.com/pelayomendez">Pelayo Méndez</a> · after Karpathy's <a href="https://x.com/karpathy/status/1938626382248149433">cognitive core</a></footer>
 </main>
