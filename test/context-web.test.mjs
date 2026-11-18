@@ -227,18 +227,18 @@ test('«the doc», «the article», «the deck»…: the newest file of that kin
   assert.equal(by('open the file', '/w/anything.docx'), '/w/anything.docx')
 })
 
-test('a noun with an article and more words is Claude\'s; a bare noun and a named folder are not pointing', () => {
+test('a noun with an article and more words is Claude\'s; a bare kind word and a named folder are not pointing', () => {
   const recent = [url(W, 10), file('/w/Brief.docx', 10)]
   for (const phrase of ['open the website in the browser', 'open the website and delete it', 'abre la web y bórrala', 'open the doc with Pages', 'show the article in finder', 'open the doc, then close it'])
     assert.equal(resolve(phrase, recent).status, 'pass', phrase)
-  for (const phrase of ['open website', 'abre docs', 'open the docs folder', 'abre la carpeta docs', 'open the website folder', 'open my documents', 'open the roadmap', 'open the repo reflex', 'abre el post de watchmen'])
+  for (const phrase of ['abre docs', 'open the docs folder', 'abre la carpeta docs', 'open the website folder', 'open my documents', 'open the roadmap', 'open the repo reflex', 'abre el post de watchmen'])
     assert.equal(resolve(phrase, recent), undefined, phrase)
 })
 
 test('where else a pointer hides: anywhere in a phrase it never becomes a folder or a model\'s guess', () => {
   for (const phrase of ['quiero ver la web', 'take me to the docs', 'llévame a la web de reflex', 'I want to see the website', 'go to the article', 've a reflex site', 'open the doc', 'show me reflex\'s website'])
     assert.equal(namesGenericThing(phrase), true, phrase)
-  for (const phrase of ['open website', 'open docs', 'open the docs folder', 'abre brand en la web', 'open brand in the browser', 'open brand on the web', 'quiero ver el estado del PR de brand', 'open the roadmap', 'open my documents', 'abre la carpeta brand', 'go to the settings'])
+  for (const phrase of ['open docs', 'open the docs folder', 'abre brand en la web', 'open brand in the browser', 'open brand on the web', 'quiero ver el estado del PR de brand', 'open the roadmap', 'open my documents', 'abre la carpeta brand', 'go to the settings'])
     assert.equal(namesGenericThing(phrase), false, phrase)
 })
 
@@ -250,12 +250,15 @@ test('through plan(): a folder called website, docs or articles and a model that
   for (const phrase of ['open the website', 'open the website of reflex', 'abre la web de reflex', 'open the article', 'open the doc', 'open the docs', 'abre los docs', 'llévame a la web de reflex', 'take me to the docs', 'quiero ver la web', 'show me reflex\'s website'])
     assert.equal((await plan(phrase, deps)).status, 'pass', phrase)
   assert.equal(asked, 0, 'the model never saw one')
-  // without the article the exact folder still opens, as it always did
-  assert.equal((await plan('open website', deps)).action.target.value, '/c/orbitdesk/website')
+  // a word for an address points even without the article; a folder named outright still opens
+  assert.equal((await plan('open website', deps)).status, 'pass')
+  assert.equal((await plan('open url', deps)).status, 'pass')
   assert.equal((await plan('open the website folder', deps)).action.target.value, '/c/orbitdesk/website')
   // and with a session address the same phrase is that address
-  const got = await plan('open the website', { ...deps, recent: [url(W, 60)], now: NOW })
-  assert.deepEqual(outcome(got), { status: 'action', verb: 'open', type: 'url', value: W })
+  for (const phrase of ['open the website', 'open website', 'open url', 'open the landing url'])
+    assert.deepEqual(outcome(await plan(phrase, { ...deps, recent: [url(W, 60)], now: NOW })), { status: 'action', verb: 'open', type: 'url', value: W }, phrase)
+  // an app named exactly like the bare word opens as it always did
+  assert.equal(namesGenericThing('open web', { web: '/Applications/Web.app' }), false)
 })
 
 test('the CLI: --recent takes addresses; touched reports what a command made, running nothing', () => {
