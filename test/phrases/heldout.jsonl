@@ -508,8 +508,7 @@
 {"phrase":"I want to see the website","expect":{"status":"pass"},"tags":["trap","generic","model"]}
 {"phrase":"go to the article","expect":{"status":"pass"},"tags":["trap","generic","model"]}
 {"phrase":"quiero ver el artículo","expect":{"status":"pass"},"tags":["trap","generic","model"]}
-{"phrase":"open website","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/website"},"tags":["en","generic","name"]}
-{"phrase":"abre website","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/website"},"tags":["es","generic","name"]}
+{"phrase":"abre website","expect":{"status":"pass"},"tags":["es","generic","name"]}
 {"phrase":"open docs","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/docs"},"tags":["en","generic","name"]}
 {"phrase":"open the docs folder","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/docs"},"tags":["en","generic","folder"]}
 {"phrase":"abre la carpeta docs","expect":{"status":"action","verb":"open","value":"/code/orbitdesk/docs"},"tags":["es","generic","folder"]}
@@ -527,3 +526,12 @@
 {"phrase": "open the pages", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
 {"phrase": "open the sites", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
 {"phrase": "open the links", "expect": {"status": "pass"}, "tags": ["trap", "generic", "plural"]}
+{"phrase": "open website", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "open url", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "open landing", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "open link", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "open the landing url", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "open website url", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "open pr", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
+{"phrase": "abre web", "expect": {"status": "pass"}, "tags": ["es", "trap", "generic", "bare"]}
+{"phrase": "abre url", "expect": {"status": "pass"}, "tags": ["es", "trap", "generic", "bare"]}

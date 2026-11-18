@@ -87,6 +87,9 @@ const WEB_NOUN = alternatives(nounsOf(['web']))
 // name (the file watchmen, the folder brand), which the ordinary rules read as they always did.
 const QUALIFIABLE = ['web', 'pr', 'link']
 const NOUN_Q = alternatives(nounsOf(QUALIFIABLE))
+const LINK_NOUN = alternatives(nounsOf(['link']))
+// Only the words for an address point without an article: «open image» or «open docs» bare still name a file or folder.
+const BARE_NOUN = alternatives(nounsOf(['web', 'link', 'pr']))
 const DET = alternatives([...DEICTIC_DETERMINERS.en, ...DEICTIC_DETERMINERS.es])
 const OF = '(?:de|del|de la|de los|de las|of)'
 const OPEN_VERBS = [...VERBS.open]
@@ -108,6 +111,10 @@ const TAKEN = [
   [new RegExp(`^(?:${DET}\\s+)?${NAME}'s\\s+(${NOUN_Q})$`), (m) => ({ noun: m[2], name: m[1] }), true],
   [new RegExp(`^(?:${DET}\\s+)?${NAME}\\s+(${WEB_NOUN})$`), (m) => ({ noun: m[2], name: m[1] }), true],
   [new RegExp(`^${DET}\\s+(${NOUN})$`), (m) => ({ noun: m[1] }), false],
+  // «the landing url», «website link»: a web noun and then a word for an address is the web page.
+  [new RegExp(`^(?:${DET}\\s+)?(${WEB_NOUN})\\s+${LINK_NOUN}$`), (m) => ({ noun: m[1] }), false],
+  // «open website», «open url»: with no article, a word for an address is still no folder or app of that name.
+  [new RegExp(`^(${BARE_NOUN})$`), (m) => ({ noun: m[1], bare: true }), false],
 ]
 // A word after a determiner that is a generic noun with a typo (one edit or a swap), a plural, or a hyphen or underscore variant
 // («web-site», «webiste», «the sites») is that noun: a misspelling never lets a phrase fall through to the name grounding.
@@ -154,6 +161,8 @@ const nounKind = noun => KIND_OF_NOUN.get(noun.replace(/\s+/g, ' '))
 function pointingOf(typed, apps) {
   const { text: said, fuzzy } = canonical(typed, apps)
   const found = pointed(said)
+  // A bare word that is exactly an installed app's name opens that app as it always did.
+  if (found?.bare && Object.hasOwn(apps ?? {}, found.word)) return undefined
   // A typo, a plural or a hyphenated noun is pointing too, but it never picks something from the session: Claude's.
   return fuzzy && found?.kind ? {} : found
 }
@@ -169,7 +178,7 @@ function pointed(said) {
     // A name made of request leftovers ("the website of reflex and delete it") is no name.
     if (found.name !== undefined && !validName(found.name)) continue
     const kind = nounKind(found.noun)
-    if (kind) return { verb, kind: kind === 'file' ? 'any' : kind, noun: true, word: found.noun, ...(found.name && { name: found.name }) }
+    if (kind) return { verb, kind: kind === 'file' ? 'any' : kind, noun: true, word: found.noun, ...(found.name && { name: found.name }), ...(found.bare && { bare: true }) }
   }
   // Said with more than the template holds. A folder named outright ("the docs folder") is not pointing: AFTER does not allow a name there.
   return WITH_DET.test(rest) || new RegExp(`^(?:${NOUN_Q})\\s+${OF}\\s`).test(rest) ? {} : undefined
@@ -184,7 +193,9 @@ export function namesGenericThing(phrase, apps = {}) {
   if (!typed) return false
   const said = canonical(typed, apps).text
   const rest = LEAD.exec(said)?.[2] ?? said
-  if (pointed(said) !== undefined || WITH_DET.test(rest)) return true
+  const found = pointed(said)
+  if (found?.bare && Object.hasOwn(apps, found.word)) return false
+  if (found !== undefined || WITH_DET.test(rest)) return true
   if (new RegExp(`(?:^|\\s)\\S+'s\\s+${NOUN_Q}$`).test(rest)) return true
   // «llévame a reflex site»: a name and then a web noun, with nothing small in front of the name.
   const front = new RegExp(`(?:^|\\s)(\\S+)\\s+${WEB_NOUN}$`).exec(rest)?.[1]
