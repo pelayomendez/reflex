@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>reflex · a Claude Code plugin</title>
-  <meta name="description" content="Control your Mac from Claude Code without spending a token. Type "turn the volume down" or "open Figma" and your Mac does it at once; a tiny local model understands free phrasing, and anything that is not wholly an action goes to Claude.">
+  <title>reflex · control your Mac from Claude</title>
+  <meta name="description" content="Control your Mac from Claude. Type &quot;turn the volume down&quot; or &quot;open Figma&quot; in Claude Code and it happens at once, on your Mac, without waking Claude or spending a token.">
   <link rel="icon" href="icon.png">
   <meta property="og:title" content="reflex">
   <meta property="og:description" content="Control your Mac from Claude.">
@@ -20,7 +20,7 @@
     body { margin: 0; background: var(--ink); color: var(--cream); font: 17px/1.6 ui-sans-serif, system-ui, -apple-system, sans-serif; }
     main { max-width: 760px; margin: 0 auto; padding: 56px 24px 80px; }
     header { text-align: center; }
-    header img { width: 168px; height: 168px; }
+    header img { width: 200px; height: 200px; }
     h1 { font-size: 44px; margin: 12px 0 4px; letter-spacing: -0.5px; }
     .tag { color: var(--dim); font-size: 19px; margin: 0 auto; max-width: 560px; }
     h2 { color: var(--accent); font-size: 20px; margin: 44px 0 10px; }
@@ -30,6 +30,7 @@
     table { border-collapse: collapse; width: 100%; }
     td { padding: 8px 10px; border-top: 1px solid #2c2c3c; vertical-align: top; }
     td:first-child { white-space: nowrap; font-weight: 600; }
+    .tiers td { font-size: 15px; width: 29%; } .tiers td:first-child { width: auto; } .tiers tr:first-child td { font-weight: 700; border-top: none; }
     a { color: var(--accent); }
     .cta { text-align: center; margin-top: 28px; }
     .cta a { display: inline-block; margin: 0 6px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--accent); text-decoration: none; }
@@ -38,73 +39,218 @@
   </style>
 </head>
 <body>
+<canvas id="rf-grid" aria-hidden="true"></canvas>
+<button id="rf-motion" type="button" aria-pressed="false">❚❚ pause motion</button>
+<style>
+  body { background: #090f12; }
+  /* The scene lives behind the header only and fades out under it; the text below sits on plain ink. */
+  #rf-grid { position: absolute; top: 0; left: 0; width: 100%; height: 760px; z-index: 0; pointer-events: none; display: block; -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+  header { padding: 40px 0 70px; }
+  header img { position: relative; }
+  #rf-grid.fallback { background:
+      linear-gradient(#090f12 0, #0b2c30 58%, transparent 58%),
+      repeating-linear-gradient(90deg, rgba(46,196,182,.45) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(0deg, rgba(46,196,182,.45) 0 1px, transparent 1px 32px), #090f12; }
+  main { position: relative; z-index: 1; max-width: 860px; }
+  header h1 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: 6px; text-shadow: 0 0 12px rgba(46,196,182,.9), 0 0 2px #fff; }
+  header .tag { color: #FFF4E0; text-shadow: 0 0 6px #090f12, 0 0 14px #090f12; }
+  header a:not(.primary), header .button:not(.primary) { background: rgba(9,15,18,.85); color: #FFF4E0; }
+  .panel { position: relative; margin-top: 40px; padding: 6px 26px 26px; background: #0f1a1e; border: 1px solid rgba(46,196,182,.35); border-radius: 3px; }
+  .panel::before, .panel::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid var(--accent); }
+  .panel::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+  .panel::after { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+  .label { font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 3px; text-transform: uppercase; color: #F2A541; margin: 18px 0 0; }
+  .panel h2 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .5px; text-shadow: 0 0 8px rgba(46,196,182,.6); }
+  .carts { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+  .cart { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; background: rgba(9,15,18,.9); border: 1px solid #21403f; border-left: 3px solid var(--accent); border-radius: 3px; }
+  .cart b { font: 600 14px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent); }
+  .cart span { font-size: 15px; line-height: 1.4; }
+  .cart em { font-style: normal; display: flex; flex-wrap: wrap; gap: 4px; }
+  .cart i { font: 11px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; font-style: normal; padding: 0 6px; border: 1px solid #21403f; border-radius: 2px; color: #a9a6b8; }
+  .cart i.risky { color: #F2A541; border-color: rgba(242,165,65,.5); }
+  .flows { display: flex; flex-direction: column; gap: 12px; }
+  .flow { padding: 10px 14px; background: rgba(9,15,18,.9); border: 1px solid #21403f; border-radius: 3px; }
+  .flow b { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent); }
+  .flow code { font-size: 13.5px; line-height: 1.9; white-space: normal; }
+  .panel pre { background: rgba(7,12,14,.92); }
+  #rf-motion { position: fixed; right: 14px; bottom: 14px; z-index: 2; font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 1px; color: #FFF4E0; background: rgba(15,26,30,.9); border: 1px solid var(--accent); border-radius: 3px; padding: 8px 10px; cursor: pointer; }
+  #rf-motion:focus-visible { outline: 2px solid #F2A541; outline-offset: 2px; }
+</style>
+<script>
+(() => {
+  const grid = document.getElementById('rf-grid')
+  const button = document.getElementById('rf-motion')
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)')
+  let paused = reduce.matches
+  let t0 = performance.now(), frozen = 0
+  const dpr = () => Math.min(devicePixelRatio || 1, 1.5)
+
+  // The sky, the sun and the infinite grid: one fragment shader on a full-screen triangle.
+  const gl = grid.getContext('webgl2', { antialias: false, alpha: false })
+  let draw = () => {}
+  if (!gl) grid.classList.add('fallback')
+  else {
+    const vs = `#version 300 es
+      in vec2 p; void main() { gl_Position = vec4(p, 0.0, 1.0); }`
+    const fs = `#version 300 es
+      precision highp float;
+      uniform vec2 r; uniform float t; uniform float hz; out vec4 o;
+      void main() {
+        vec2 uv = gl_FragCoord.xy / r;
+        vec3 ink = vec3(0.035, 0.059, 0.071), vio = vec3(0.180, 0.769, 0.714), pink = vec3(0.42, 0.90, 0.84);
+        vec3 c;
+        if (uv.y > hz) {
+          float h = (uv.y - hz) / (1.0 - hz);
+          c = mix(vec3(0.04, 0.17, 0.19), ink, pow(h, 0.55));
+          vec2 q = vec2((uv.x - 0.5) * r.x / r.y, uv.y - hz - 0.2);
+          float d = length(q);
+          float sun = smoothstep(0.36, 0.355, d);
+          if (q.y < 0.08) { float k = fract(q.y * 16.0 + t * 0.12); sun *= step(0.15 + (0.08 - q.y) * 2.2, k); }
+          c = mix(c, mix(pink, vio, clamp(0.5 - q.y * 3.0, 0.0, 1.0)), sun * 0.9);
+          c += vio * 0.30 * exp(-max(d - 0.35, 0.0) * 6.0);
+        } else {
+          float y = hz - uv.y;
+          float z = 0.32 / max(y, 0.0008);
+          vec2 g = vec2((uv.x - 0.5) * z * 2.4, z + t * 0.55);
+          vec2 w = fwidth(g) * 1.2;
+          vec2 l = abs(fract(g - 0.5) - 0.5) / max(w, vec2(1e-4));
+          float line = 1.0 - min(min(l.x, l.y), 1.0);
+          c = mix(vec3(0.03, 0.12, 0.13), ink, clamp(y / hz * 1.6, 0.0, 1.0));
+          c += vio * line * exp(-z * 0.09) * 1.25;
+          c += vio * 0.35 * exp(-y * 28.0);
+        }
+        o = vec4(c, 1.0);
+      }`
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s }
+    const prog = gl.createProgram()
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog)
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) grid.classList.add('fallback')
+    else {
+      gl.useProgram(prog)
+      gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer())
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+      const at = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(at); gl.vertexAttribPointer(at, 2, gl.FLOAT, false, 0, 0)
+      const ur = gl.getUniformLocation(prog, 'r'), ut = gl.getUniformLocation(prog, 't'), uh = gl.getUniformLocation(prog, 'hz')
+      draw = time => { gl.viewport(0, 0, grid.width, grid.height); gl.uniform2f(ur, grid.width, grid.height); gl.uniform1f(ut, time); gl.uniform1f(uh, 0.22); gl.drawArrays(gl.TRIANGLES, 0, 3) }
+    }
+  }
+
+  function size() {
+    const header = document.querySelector('header')
+    if (header) { const h = Math.round(header.getBoundingClientRect().bottom + scrollY + 60); grid.style.height = h + 'px' }
+    grid.width = Math.round(grid.clientWidth * dpr()); grid.height = Math.round(grid.clientHeight * dpr())
+    frame(performance.now(), true)
+  }
+  function frame(now, still) {
+    const time = paused ? frozen : (now - t0) / 1000
+    draw(time)
+  }
+  function loop(now) {
+    if (!paused && !document.hidden && !(scrollY > grid.clientHeight)) frame(now, false)
+    requestAnimationFrame(loop)
+  }
+  function setPaused(value) {
+    if (value) frozen = (performance.now() - t0) / 1000
+    else t0 = performance.now() - frozen * 1000
+    paused = value
+    button.textContent = paused ? '▶ play motion' : '❚❚ pause motion'
+    button.setAttribute('aria-pressed', String(paused))
+    if (paused) frame(performance.now(), true)
+  }
+  button.addEventListener('click', () => setPaused(!paused))
+  reduce.addEventListener('change', e => setPaused(e.matches))
+  addEventListener('resize', size)
+  const start = () => { size(); setPaused(paused); requestAnimationFrame(loop) }
+  if (document.readyState === 'loading') addEventListener('DOMContentLoaded', start)
+  else start()
+})()
+</script>
 <main>
   <header>
-    <img src="icon.png" alt="">
+    <img src="sticker.png" alt="reflex mascot">
     <h1>reflex</h1>
-    <p class="tag">Control your Mac from Claude Code without spending a token. Type "turn the volume down" or "open Figma" and your Mac does it at once; a tiny local model understands free phrasing, and anything that is not wholly an action goes to Claude as typed.</p>
+    <p class="tag">Control your Mac from Claude.</p>
     <p class="cta"><a class="primary" href="#install">Install</a><a href="https://github.com/pelayomendez/reflex">GitHub</a></p>
   </header>
 
-  <h2>Why</h2>
-  <p>Acting on your own machine should not cost a model turn. Asking Claude to open a folder means a turn, tokens and a wait for something your Mac can do by itself. reflex recognises those phrases while you type, shows what Enter will do, and does it locally: the prompt never reaches the model, so it costs no tokens and no turn.</p>
+<section class="panel" id="intro">
+  <p class="label">01 · intro</p>
 
-  <h2>While you type</h2>
-  <p>A line above the prompt says what Enter will do on your Mac.</p>
+  <p>Asking Claude to open a folder costs a turn, tokens and a wait, for something your Mac does by itself. <strong>reflex</strong> sees those phrases while you type, shows what Enter will do, and does it on your Mac. The prompt never reaches the model.</p>
+  <p class="mute">Claude Code plugin · MIT · macOS · English and Spanish</p>
+
+  <h2>Type → see → done</h2>
+  <table>
+    <tr><td class="accent">Type</td><td><strong>Say it your way.</strong> «turn the volume down», «open Figma», «show me the invoice», «abre brand».</td></tr>
+    <tr><td class="accent">See</td><td><strong>One line above the prompt</strong> says what Enter will do. Nothing shows for phrases that are not actions.</td></tr>
+    <tr><td class="accent">Done</td><td><strong>Enter runs it here,</strong> in milliseconds, with no turn and no tokens. Anything else goes to Claude as typed.</td></tr>
+  </table>
+</section>
+
+<section class="panel" id="type">
+  <p class="label">02 · while you type</p>
+  <h2>The line above the prompt</h2>
 <pre><span class="accent">⚡ volume down</span>
-<span class="mute">&gt;</span> turn the volume down</pre>
-  <p>Press Enter and it runs here, with one line in the transcript, and Claude never sees it. Nothing shows for phrases that are not actions. It takes a phrase only when the whole phrase is an action: <code>open brand and fix the bug</code> goes to Claude, and a leading <code>\</code> always sends the phrase to Claude as typed.</p>
+<span class="mute">&gt;</span> turn the volume down
 
-  <h2>What it can do</h2>
+<span class="accent">⚡ open ~/Development/brand</span>
+<span class="mute">&gt;</span> abre brand
+
+<span class="accent">⚡ open pelayomendez.github.io/reflex</span>  <span class="mute">the page Claude just showed</span>
+<span class="mute">&gt;</span> open the website
+
+<span class="mute">&gt;</span> open brand and fix the bug        <span class="mute">no line: this one is Claude's</span></pre>
+  <p>It takes a phrase only when the whole phrase is an action. A leading <code>\</code> always sends it to Claude.</p>
+</section>
+
+<section class="panel" id="can">
+  <p class="label">03 · what it can do</p>
+  <h2>Reflexes, not reasoning</h2>
+  <div class="carts">
+    <div class="cart"><b>open brand</b><span>A folder: your repos, your home folders, the ones you visit most</span></div>
+    <div class="cart"><b>open Figma</b><span>An app by name, or by what it does: mail, browser, calendar, music</span></div>
+    <div class="cart"><b>open the website</b><span>The page, PR or doc Claude just showed or wrote in this session</span></div>
+    <div class="cart"><b>show me the invoice</b><span>A file in Finder, by the words of its path, or the newest of a kind</span></div>
+    <div class="cart"><b>open the README in the editor</b><span>A file in your editor, at a line; a terminal in a folder; a repo on GitHub</span></div>
+    <div class="cart"><b>copy the path of brand</b><span>Text, a file, an image or a path to the clipboard</span></div>
+    <div class="cart"><b>run focus mode</b><span>A Shortcut, by its exact name</span></div>
+    <div class="cart"><b>turn the volume down</b><span>Volume, mute, lock, dark mode, displays, screen saver, Settings panes</span></div>
+    <div class="cart"><b>how much battery?</b><span>Battery and disk answered in one line, without Claude</span></div>
+    <div class="cart"><b>empty the trash</b><span>Asks first, with No as the default: the only action that deletes</span></div>
+  </div>
+  <p>A short, closed catalogue of verbs, run as fixed argument lists, never through a shell.</p>
+</section>
+
+<section class="panel" id="decides">
+  <p class="label">04 · how it decides</p>
+  <h2>Templates → small model → Claude</h2>
   <table>
-    <tr><td><code>open brand</code> · <code>open Downloads</code></td><td>Opens a folder: your repos under <code>~/Development</code>, your home folders, zoxide's.</td></tr>
-    <tr><td><code>open Figma</code> · <code>open mail</code></td><td>Opens an app by its name, or by what it does: mail, browser, calendar, music, notes, maps, photos, contacts, messages, the VPN.</td></tr>
-    <tr><td><code>open it</code> · <code>open that doc</code></td><td>Opens the file Claude just wrote in this session.</td></tr>
-    <tr><td><code>show me the watchmen post</code> · <code>find the invoice</code></td><td>Shows a file in Finder, found by the words of its path; or the newest of a kind: <code>open the latest pdf in downloads</code>.</td></tr>
-    <tr><td><code>open the README in the editor</code> · <code>terminal in reflex</code></td><td>Opens a file in your editor, at a line if you say one; a terminal in a folder; a repo on GitHub.</td></tr>
-    <tr><td><code>open linkedin</code></td><td>Opens a page: an address, or an alias you set.</td></tr>
-    <tr><td><code>copy "hello"</code> · <code>copy the path of brand</code></td><td>Copies an image, a file, text or a path to the clipboard.</td></tr>
-    <tr><td><code>run focus mode</code></td><td>Runs a Shortcut from the Shortcuts app, by its exact name.</td></tr>
-    <tr><td><code>turn the volume down</code> · <code>lock the screen</code> · <code>turn on dark mode</code></td><td>Volume, mute, lock, dark mode, sleep the displays, screen saver, hide other apps, screenshot, Mission Control, Settings panes, quit or hide an app.</td></tr>
-    <tr><td><code>how much battery do I have?</code> · <code>disk space</code></td><td>Answers battery, disk and VPN status in one line, without Claude.</td></tr>
-    <tr><td><code>empty the trash</code></td><td>Empties the Trash, after asking, with No as the default.</td></tr>
+    <tr><td class="accent">Templates</td><td><strong>Fixed phrasings,</strong> matched against the whole phrase. Free and instant.</td></tr>
+    <tr><td class="accent">Small model</td><td><strong>reflex-core,</strong> a 270M model on your Mac, finds what you mean in free phrasing. It proposes; reflex checks every target exists before acting.</td></tr>
+    <tr><td class="accent">Claude</td><td><strong>Everything else,</strong> and anything reflex is not sure of, goes to Claude as typed.</td></tr>
   </table>
-  <p>English and Spanish. A short, closed catalogue of verbs, run as fixed argument lists, never through a shell. State changes need a verb: a bare "dark mode" answering Claude's question stays with Claude. The only action that deletes anything, emptying the Trash, asks first.</p>
+  <p>Karpathy's <em>cognitive core</em> at the scale of one machine: a small model that knows your system rather than the world, and asks the big one when it is not sure. Claude was its teacher: it wrote the training phrases for three invented people's Macs, so the model learned the task, not anyone's names.</p>
+  <p><strong>The bar is zero wrong actions.</strong> Passing a phrase to Claude is fine; acting wrongly is not. Every version is kept only if it scores <span class="green">0 wrong</span> on held-out exams full of traps.</p>
+</section>
 
-  <h2>Templates, then a small model, then Claude</h2>
-  <p>reflex is Karpathy's <em>cognitive core</em> at the scale of one machine: a small model that knows your system rather than the world, acts on it locally, and asks a big model, the oracle, when it is not sure.</p>
-  <table>
-    <tr><td class="green">Templates</td><td>Phrase patterns in Spanish and English, matched against the whole phrase. Free and instant.</td></tr>
-    <tr><td class="accent">Small model</td><td>reflex-core: FunctionGemma 270M taught the task on invented Macs, served by Ollama on yours. It finds what you mean in free phrasing ("could you pull up brand for me?"). It proposes; reflex decides: the verb, the place and whether it is a request come from the phrase, and the target must exist in your Mac's own index.</td></tr>
-    <tr><td>Claude</td><td>Anything that is not wholly an action, and anything reflex is not sure of, goes to Claude as typed.</td></tr>
-  </table>
-  <p>Claude is also the teacher. It wrote the training phrases for three invented people's Macs; a small adapter learned from them on a Mac in minutes, and a version is kept only if it scores better on the exam with no wrong action. Because it learned the task and not anyone's names, the same model works on your Mac as it is. <code>reflex learn</code> keeps what it missed, for the next version.</p>
-
-  <h2>The numbers</h2>
-  <p>Precision first: passing a phrase to Claude is fine, acting wrongly is not. On a held-out exam of phrases with the expected action, including traps that must go to Claude:</p>
-  <table>
-    <tr><td>Templates, at the start</td><td>64 of 153 right, 0 wrong</td></tr>
-    <tr><td>Base FunctionGemma</td><td>no phrase gained</td></tr>
-    <tr><td>Better pipeline, no model</td><td>81 of 224 right, 0 wrong</td></tr>
-    <tr><td>Trained model alone, v1 → v4</td><td>44 → 88 of 127 reachable requests, but 11 → 19 wrong</td></tr>
-    <tr><td>v4, with reflex deciding what the phrase states</td><td>99 of 127 right, <span class="green">0 wrong</span></td></tr>
-    <tr><td>v4 packaged in Ollama</td><td>97 of 127 right, <span class="green">0 wrong</span>, p95 about 155 ms</td></tr>
-    <tr><td>Public model, never saw this Mac</td><td>106 of 127 right, <span class="green">0 wrong</span></td></tr>
-    <tr><td>On an invented person's Mac</td><td>180 of 200 requests right, <span class="green">0 wrong</span></td></tr>
-  </table>
-  <p>Most of the gains came from what surrounds the model: templates, grounding every target in what really exists, and an allow-list of request words.</p>
-
+<section class="panel" id="start">
+  <p class="label">insert coin</p>
   <h2 id="install">Install</h2>
 <pre>/plugin install reflex --marketplace pelayomendez/reflex</pre>
-  <p>Needs macOS and Node.js 20 or newer. It works with templates alone; <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a> adds the folders you visit most.</p>
+  <p><strong>Needs:</strong> macOS and Node.js 20 or newer. Templates work alone; <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a> adds the folders you visit most.</p>
+  <p>For freer phrasing, add the small model with <a href="https://ollama.com/mfpelayo/reflex-core">Ollama</a> and point <code>~/.config/reflex/config.toml</code> at it:</p>
+<pre>ollama pull mfpelayo/reflex-core
 
-  <h2>Optional: the small model</h2>
-  <p>For freer phrasing, pull reflex-core with <a href="https://ollama.com/mfpelayo/reflex-core">Ollama</a> and point reflex at it in <code>~/.config/reflex/config.toml</code>:</p>
-<pre>ollama pull mfpelayo/reflex-core</pre>
-<pre>[model]
+<span class="mute"># ~/.config/reflex/config.toml</span>
+[model]
 url = "http://localhost:11434/v1"
 name = "mfpelayo/reflex-core"</pre>
-  <p>Without it, templates still do the fixed phrasings. Commands, aliases, <code>reflex teach</code> and the design in the <a href="https://github.com/pelayomendez/reflex#readme">README</a>.</p>
+
+  <h2>FAQ</h2>
+  <p><strong>What if it gets it wrong?</strong> It shows the line before Enter, so you see it first. When in doubt it does nothing and Claude answers.<br>
+  <strong>Does anything leave my Mac?</strong> No. The phrase, the model and the action stay local.<br>
+  <strong>More?</strong> Every verb, aliases, <code>reflex teach</code> and the design are in the <a href="https://github.com/pelayomendez/reflex#readme">README</a>.</p>
+</section>
 
   <footer>MIT · by <a href="https://github.com/pelayomendez">Pelayo Méndez</a> · after Karpathy's <a href="https://x.com/karpathy/status/1938626382248149433">cognitive core</a></footer>
 </main>
