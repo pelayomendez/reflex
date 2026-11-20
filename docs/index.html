@@ -95,19 +95,35 @@
     const fs = `#version 300 es
       precision highp float;
       uniform vec2 r; uniform float t; uniform float hz; out vec4 o;
+      float h1(float n) { return fract(sin(n * 127.1) * 43758.5453); }
+      float vn(float x, float s) { float i = floor(x), f = fract(x); return mix(h1(i + s), h1(i + 1.0 + s), f) * 2.0 - 1.0; }
+      // A strike every few seconds: where it lands and how bright it is now (a flash, a flicker, a fade).
+      const float P = 3.6;
       void main() {
         vec2 uv = gl_FragCoord.xy / r;
-        vec3 ink = vec3(0.035, 0.059, 0.071), vio = vec3(0.180, 0.769, 0.714), pink = vec3(0.42, 0.90, 0.84);
+        float aspect = r.x / r.y;
+        vec3 ink = vec3(0.035, 0.059, 0.071), teal = vec3(0.180, 0.769, 0.714), white = vec3(0.85, 1.0, 0.97);
+        float n = floor(t / P), ph = t - n * P;
+        float side = h1(n * 3.1) < 0.5 ? -1.0 : 1.0;
+        float x0 = side * (0.22 + 0.30 * h1(n * 7.7)) * min(aspect, 1.8);
+        float env = smoothstep(0.0, 0.02, ph) * (exp(-ph * 9.0) + 0.7 * exp(-abs(ph - 0.18) * 40.0));
+        float after = exp(-ph * 1.4);
         vec3 c;
+        float x = (uv.x - 0.5) * aspect;
         if (uv.y > hz) {
           float h = (uv.y - hz) / (1.0 - hz);
-          c = mix(vec3(0.04, 0.17, 0.19), ink, pow(h, 0.55));
-          vec2 q = vec2((uv.x - 0.5) * r.x / r.y, uv.y - hz - 0.2);
-          float d = length(q);
-          float sun = smoothstep(0.36, 0.355, d);
-          if (q.y < 0.08) { float k = fract(q.y * 16.0 + t * 0.12); sun *= step(0.15 + (0.08 - q.y) * 2.2, k); }
-          c = mix(c, mix(pink, vio, clamp(0.5 - q.y * 3.0, 0.0, 1.0)), sun * 0.9);
-          c += vio * 0.30 * exp(-max(d - 0.35, 0.0) * 6.0);
+          c = mix(vec3(0.03, 0.13, 0.15), ink, pow(h, 0.55));
+          c += teal * 0.10 * exp(-length(vec2(x, (uv.y - hz) * 1.6)) * 2.2);
+          // The bolt: a jagged line from the top down to where it lands, with a fork near the bottom.
+          float s = n * 13.0;
+          float bx = x0 + 0.10 * vn(h * 7.0, s) + 0.035 * vn(h * 23.0, s + 5.0);
+          float d = abs(x - bx);
+          float fork = abs(x - (bx + side * -1.0 * (0.35 - h) * 0.5 * step(h, 0.35) + 0.02 * vn(h * 31.0, s + 9.0))) + step(0.35, h);
+          float bolt = smoothstep(0.004, 0.0, d) + 0.6 * smoothstep(0.003, 0.0, fork);
+          float glow = exp(-d * 55.0) * 0.8 + exp(-fork * 70.0) * 0.4;
+          c = mix(c, white, clamp(bolt * env * 1.6, 0.0, 1.0));
+          c += teal * glow * env * 1.4;
+          c += teal * 0.18 * env * (1.0 - h * 0.6);
         } else {
           float y = hz - uv.y;
           float z = 0.32 / max(y, 0.0008);
@@ -116,8 +132,14 @@
           vec2 l = abs(fract(g - 0.5) - 0.5) / max(w, vec2(1e-4));
           float line = 1.0 - min(min(l.x, l.y), 1.0);
           c = mix(vec3(0.03, 0.12, 0.13), ink, clamp(y / hz * 1.6, 0.0, 1.0));
-          c += vio * line * exp(-z * 0.09) * 1.25;
-          c += vio * 0.35 * exp(-y * 28.0);
+          // Where it landed the grid lights up, and a ring runs out across it.
+          vec2 p = vec2(x - x0, y * 3.0);
+          float dist = length(p);
+          float ring = exp(-abs(dist - ph * 0.9) * 18.0) * after;
+          float hit = exp(-dist * 6.0) * (env * 2.0 + after * 0.4);
+          c += teal * line * exp(-z * 0.09) * (1.0 + ring * 3.0 + hit * 3.0);
+          c += teal * 0.25 * exp(-y * 28.0) * (1.0 + env * 2.0);
+          c += white * 0.25 * hit * exp(-y * 10.0);
         }
         o = vec4(c, 1.0);
       }`
