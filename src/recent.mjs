@@ -10,7 +10,11 @@ export const RECENT_CAP = 20
 const ODD_CHARACTERS = /[\u0000-\u001f\u007f‪-‮⁦-⁩]/
 
 /** A file entry reflex may keep and act on: an absolute path with no control characters, and a time. */
-export const validEntry = entry => !!entry && typeof entry.path === 'string' && entry.path.startsWith('/') && !ODD_CHARACTERS.test(entry.path) && Number.isFinite(entry.at)
+export const validEntry = entry => !!entry && typeof entry.path === 'string' && entry.path.startsWith('/') && !ODD_CHARACTERS.test(entry.path) && Number.isFinite(entry.at) && (entry.dir === undefined || entry.dir === true)
+/** A file entry, not a folder: what «it» and «the doc» may mean. */
+export const fileEntry = entry => validEntry(entry) && !entry.dir
+/** A folder Claude named in a reply: what «the folder» may mean. */
+export const dirEntry = entry => validEntry(entry) && entry.dir === true
 
 // An address that carries a secret is never kept: a query key that reads like a credential, a value that looks like a
 // token (a JWT, a long opaque run), a webhook. Credentials in the authority are stripped, the fragment is dropped.
@@ -88,10 +92,11 @@ function put(list, item, same, cap) {
  * The list after Claude wrote `path` at `at`: newest first, the path once, at most `cap` files. Only an absolute path with
  * no control characters is kept (a relative one names nothing reflex could open later).
  */
-export function record(list, path, at, cap = RECENT_CAP) {
+export function record(list, path, at, cap = RECENT_CAP, { dir = false } = {}) {
   const before = Array.isArray(list) ? list : []
-  if (!validEntry({ path, at })) return before
-  return put(before, { path, at }, entry => entry.path === path, cap)
+  const item = dir ? { path, at, dir: true } : { path, at }
+  if (!validEntry(item)) return before
+  return put(before, item, entry => entry.path === path, cap)
 }
 
 /** The list after an address showed up at `at`: as `record`, for addresses (cleaned first; an unsafe one changes nothing). */
@@ -103,7 +108,33 @@ export function recordUrl(list, url, at, cap = RECENT_CAP) {
 }
 
 /** The list after one item the CLI reported (`{ path }` or `{ url }`) at `at`; anything else changes nothing. */
-export const recordItem = (list, item, at, cap = RECENT_CAP) => typeof item?.url === 'string' ? recordUrl(list, item.url, at, cap) : typeof item?.path === 'string' ? record(list, item.path, at, cap) : (Array.isArray(list) ? list : [])
+export const recordItem = (list, item, at, cap = RECENT_CAP) => typeof item?.url === 'string' ? recordUrl(list, item.url, at, cap) : typeof item?.path === 'string' ? record(list, item.path, at, cap, { dir: item.dir === true }) : (Array.isArray(list) ? list : [])
+
+// What a person looks at rather than reads as code: an image, a PDF, an office document, a video. Claude reading one of these
+// in the main conversation is showing it, so «open it» can mean it. Code and text files it reads are not kept.
+const VIEWABLE = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'heic', 'tif', 'tiff', 'pdf', 'docx', 'pptx', 'xlsx', 'key', 'pages', 'numbers', 'mp4', 'mov', 'm4v', 'webm'])
+/** The path a Read call showed, when it is something one looks at (an image, a PDF, a document); undefined otherwise. */
+export function viewedPath(event) {
+  const path = event?.file_path
+  if (typeof path !== 'string') return undefined
+  const dot = path.lastIndexOf('.')
+  return dot > path.lastIndexOf('/') && VIEWABLE.has(path.slice(dot + 1).toLowerCase()) ? path : undefined
+}
+
+/**
+ * The paths a reply names: absolute or ~/ paths, each once, in order, at most 20. Text only: whether each is a file or a
+ * folder, and whether it exists, is the CLI's to read (`reflex mentioned`).
+ */
+export function pathsIn(text) {
+  if (typeof text !== 'string') return []
+  const found = []
+  for (const [, raw] of text.matchAll(/(?:^|[\s`'"(«\[])((?:~|\/)(?:\/?[\w@+%,=-][\w.@+%,=-]*)+\/?)/g)) {
+    const path = raw.replace(/[.,;:!?)]+$/, '')
+    if (path.length > 1 && path.length < 1000 && !ODD_CHARACTERS.test(path) && !found.includes(path)) found.push(path)
+    if (found.length >= 20) break
+  }
+  return found
+}
 
 /** The path a Write, Edit or NotebookEdit call is about, from the event's flat arguments. */
 export const writtenPath = event => [event?.file_path, event?.notebook_path].find(value => typeof value === 'string')

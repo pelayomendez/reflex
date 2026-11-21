@@ -9,7 +9,7 @@ import type { EngineInterface, Register } from 'claude-code'
 
 import type { Plan } from './preview.ts'
 import { mightBeAction, previewLine } from './preview.ts'
-import { bashFacts, callSucceeded, record, recordItem, recordUrl, urlsIn, writtenPath } from '../src/recent.mjs'
+import { bashFacts, callSucceeded, pathsIn, record, recordItem, recordUrl, urlsIn, viewedPath, writtenPath } from '../src/recent.mjs'
 import { createObserver } from '../src/observe.mjs'
 
 const preview = atom({ plugin: 'reflex', key: 'preview' } as const, null)
@@ -184,6 +184,13 @@ export const register: Register = (on) => {
         const urls = urlsIn(answer)
         const now = Date.now()
         if (urls.length) await update($, recent, list => [...urls].reverse().reduce((kept: any, url) => recordUrl(kept, url, now), list))
+        // The files and folders the reply named ("all nine are in …/candidates/"): the CLI reads which exist and are worth keeping.
+        const paths = pathsIn(answer)
+        if (paths.length) {
+          const { exitCode, stdout } = await cli($, ['mentioned', '--', JSON.stringify(paths)], 5_000)
+          const found = exitCode === 0 ? JSON.parse(stdout) : undefined
+          if (Array.isArray(found) && found.length) await update($, recent, list => [...found].reverse().reduce((kept: any, item) => recordItem(kept, item, now), list))
+        }
       }
     } catch {}
     return result
@@ -191,6 +198,17 @@ export const register: Register = (on) => {
 
   // Records the files Claude writes, for "open it" / "abre ese doc". Only after the call went through, so a failed write is
   // never "the file Claude made"; a read never reaches here (Read is not listed). Observes only: the call is never touched.
+  // An image, a PDF or a document Claude looked at in the main conversation: what it just showed, so «open it» can mean it.
+  // A subagent's reads are its own work, not something shown to the person.
+  on('tool.call', { tool: 'Read' }, async ($, e, next) => {
+    const result = await next(e)
+    try {
+      const path = viewedPath(e)
+      if (path && !(e as { agentId?: string }).agentId && callSucceeded(result)) await update($, recent, list => record(list, path, Date.now()))
+    } catch {}
+    return result
+  }).catch(($, e, next) => next(e))
+
   for (const tool of ['Write', 'Edit', 'NotebookEdit']) {
     on('tool.call', { tool }, async ($, e, next) => {
       const result = await next(e)
