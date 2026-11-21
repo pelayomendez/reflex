@@ -184,6 +184,8 @@ function pointed(said) {
     // A name made of request leftovers ("the website of reflex and delete it") is no name.
     if (found.name !== undefined && !validName(found.name)) continue
     const kind = nounKind(found.noun)
+    // «my folder» points at nothing Claude did: Claude's.
+    if (kind === 'folder' && /^(my|mi|mis)\s/.test(rest)) return {}
     if (kind) return { verb, kind: kind === 'file' ? 'any' : kind, noun: true, word: found.noun, ...(found.name && { name: found.name }), ...(found.bare && { bare: true }) }
   }
   // Said with more than the template holds. A folder named outright ("the docs folder") is not pointing: AFTER does not allow a name there.
@@ -307,6 +309,9 @@ const defaultStat = path => { try { return statSync(path) } catch { return undef
 // ---- What a reply named -------------------------------------------------------------------------------------------
 // Files a person opens (documents, images, decks, sheets, videos), never code or config a reply happens to cite.
 const SHOWN = new Set(Object.values(NOUN_EXTENSIONS).flat())
+// A folder `open` would launch or hand to an app (an .app, a package, a library), or one holding secrets: never «the folder».
+const BUNDLE = /\.(app|bundle|pkg|mpkg|workflow|action|plugin|appex|framework|kext|prefpane|saver|qlgenerator|photoslibrary|musiclibrary|tvlibrary|xcodeproj|xcworkspace|playground|scptd|rtfd|band|logicx|fcpbundle|imovielibrary|lrlibrary|sparsebundle|dmg|component|vst3?|mdimporter|spotlight|webarchive|key|pages|numbers)$/i
+export const unsafeFolder = (path, home = homedir()) => path.split('/').some(segment => BUNDLE.test(segment)) || path.startsWith(join(home, 'Library') + '/') || path === join(home, 'Library') || path.split('/').some(segment => segment.startsWith('.') && segment.length > 1)
 /**
  * Of the paths a reply named (src/recent.mjs's pathsIn), the ones on disk worth keeping: a document, image, deck, sheet or video
  * file, or a folder deeper than the home folder. `{ path }` or `{ path, dir: true }`, unstamped. Reads the disk (stat) and nothing else.
@@ -321,7 +326,7 @@ export function mentionedIn(paths, { stat = defaultStat, home = homedir() } = {}
     const info = stat(path)
     if (!info) continue
     if (info.isFile?.()) { if (SHOWN.has(extensionOf(path)) && validEntry({ path, at: 0 })) items.push({ path }) }
-    else if (info.isDirectory?.() && path.startsWith(home + '/') || info.isDirectory?.() && /^\/(private\/)?tmp\/.+\/.+/.test(path)) { if (validEntry({ path, at: 0, dir: true })) items.push({ path, dir: true }) }
+    else if (info.isDirectory?.() && (path.startsWith(home + '/') || /^\/(private\/)?tmp\/.+\/.+/.test(path)) && !unsafeFolder(path, home)) { if (validEntry({ path, at: 0, dir: true })) items.push({ path, dir: true }) }
   }
   return items.filter((item, at) => items.findIndex(other => other.path === item.path) === at)
 }
@@ -391,6 +396,9 @@ export function resolveDeictic(phrase, recent, { now = Date.now(), isFile = defa
     const files = entries.filter(fresh).map(entry => entry.at)
     if (links.length && (!files.length || Math.max(...links) >= Math.max(...files) || Math.max(...files) - Math.max(...links) <= SAME_TURN_MS))
       return refuse('Claude also showed an address just now: "it" could be the address or the file, which is not for reflex to guess')
+    const folders = list.filter(dirEntry).filter(fresh).map(entry => entry.at)
+    if (folders.length && (!files.length || Math.max(...folders) >= Math.max(...files) || Math.max(...files) - Math.max(...folders) <= SAME_TURN_MS))
+      return refuse('Claude also named a folder just now: "it" could be the folder or the file, which is not for reflex to guess')
   }
   // «the post», «the report», «the docs»: guarded like any generic noun, but a file answers only if its own name holds the word.
   const wordKey = said.kind === 'docword' ? key(said.word) : undefined
@@ -412,14 +420,14 @@ function defaultIsDir(path) { try { return statSync(path).isDirectory() } catch 
 function folderOf(said, list, { now, act, refuse, isDir = defaultIsDir }) {
   if (said.verb !== 'open' && said.verb !== 'reveal') return refuse('a folder is opened or shown')
   const fresh = entry => now - entry.at >= 0 && now - entry.at <= FRESH_MS
-  // A folder Claude named outright wins; without one, the folder of the newest file.
-  const named = list.filter(entry => fresh(entry) && dirEntry(entry)).map(entry => ({ dir: entry.path, at: entry.at }))
-  const pool = named.length ? named : list.filter(entry => fresh(entry) && fileEntry(entry)).map(entry => ({ dir: dirname(entry.path), at: entry.at }))
+  // The folders Claude named and the folders of the files it wrote or showed, newest first; close ties are refused below.
+  const pool = list.filter(entry => fresh(entry) && (dirEntry(entry) || fileEntry(entry))).map(entry => ({ dir: entry.dir ? entry.path : dirname(entry.path), at: entry.at }))
   const candidates = pool.sort((a, b) => b.at - a.at)
   const [top] = candidates
   if (!top) return refuse('no folder or file from this Claude session in the last 30 minutes: "the folder" names nothing reflex knows')
   const rivals = candidates.filter(entry => entry.dir !== top.dir && top.at - entry.at <= SAME_TURN_MS)
   if (rivals.length) return refuse('Claude named more than one folder close together: which one is meant is not for reflex to guess')
+  if (unsafeFolder(top.dir)) return refuse('that folder is an app, a package or a library: opening it would launch something')
   if (!isDir(top.dir)) return refuse('the folder is no longer there')
   return act({ type: 'folder', value: top.dir, label: top.dir.split('/').pop() || top.dir }, 'the folder from this Claude session')
 }

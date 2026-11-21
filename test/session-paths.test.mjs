@@ -52,3 +52,16 @@ test('«the folder», «them»: the folder Claude named, or the one holding what
   // a folder named outright is not pointing
   assert.equal(resolveDeictic('open the folder brand', [dir], { now: NOW }), undefined)
 })
+
+test('review: an app or package folder never opens; the newer of folder and file wins; «it» refuses beside a newer folder', () => {
+  const stat = path => path.endsWith('.app') || path.endsWith('/x') ? { isFile: () => false, isDirectory: () => true } : undefined
+  assert.deepEqual(mentionedIn(['/h/Applications/Foo.app', '/tmp/a/b/Foo.app', '/h/Library/Keychains', '/h/.ssh/x'], { stat, home: '/h' }), [])
+  assert.equal(resolveDeictic('open the folder', [{ path: '/tmp/x/Foo.app/icon.png', at: NOW - 1000 }], { now: NOW, isDir: () => true }).status, 'pass')
+  // a folder named 25 min ago, a file written now in another folder: the file's folder
+  const got = resolveDeictic('open the folder', [{ path: '/w/b/doc.md', at: NOW - 1000 }, { path: '/w/a', at: NOW - 25 * 60_000, dir: true }], { now: NOW, isDir: () => true })
+  assert.equal(got.action.target.value, '/w/b')
+  // a folder named now, a png read 10 minutes ago: «it» is not for reflex to guess
+  assert.equal(resolveDeictic('open it', [{ path: '/w/a', at: NOW - 1000, dir: true }, { path: '/w/p.png', at: NOW - 600_000 }], { now: NOW, isFile: () => true }).status, 'pass')
+  // «my folder» is Claude's
+  assert.equal(resolveDeictic('open my folder', [{ path: '/w/a', at: NOW - 1000, dir: true }], { now: NOW, isDir: () => true }).status, 'pass')
+})
