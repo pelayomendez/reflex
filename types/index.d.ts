@@ -10,6 +10,8 @@ export type Recent = {
   path: string
   /** When it was recorded, in milliseconds since the epoch. */
   at: number
+  /** A folder Claude named in a reply, rather than a file. */
+  dir?: true
 } | {
   /** ... a web address Claude opened, ran a command on or showed in its reply: http or https, no credentials, no token in it. */
   url: string

@@ -90,10 +90,11 @@ test('Enter asks the CLI for the count; typing never does', async ($, on) => {
 
 // What the hooks keep for «open the doc» / «open the website»: files and addresses from Bash calls and from Claude's reply.
 // The CLI is stubbed (`touched` answers what its disk read would), so what is under test is what the hooks keep and hand over.
-function remember(on: any, { touched = '[]', bash = { result: { stdout: '', stderr: '', interrupted: false } } as any, runs = [] as Run[] } = {}) {
+function remember(on: any, { touched = '[]', mentioned = '[]', bash = { result: { stdout: '', stderr: '', interrupted: false } } as any, runs = [] as Run[] } = {}) {
   on('process.run', (_: unknown, e: Run) => {
     runs.push(e)
     if (e.argv.includes('touched')) return { value: done(touched) }
+    if (e.argv.includes('mentioned')) return { value: done(mentioned) }
     return { value: done(e.argv.includes('--json') ? JSON.stringify({ phrase: 'x', status: 'pass', reason: 'stub' }) : '') }
   })
   on('prompt.submit', (_: unknown, e: { text: string }) => ({ text: e.text }))
@@ -177,4 +178,25 @@ test('a Write still records its file, and an address does not displace it', asyn
   await turn($, 'See https://ada-demo.github.io/orbit-notes/')
   const list = await handed($, runs)
   expect(list.map((item: any) => item.path ?? item.url).sort()).toEqual(['/w/plan.md', 'https://ada-demo.github.io/orbit-notes/'])
+})
+
+test('an image Claude reads in the main conversation goes on the list; a subagent\'s read and a code file do not', async ($, on) => {
+  const runs = remember(on)
+  on('tool.call', { tool: 'Read' }, () => ({ result: { type: 'image' } }))
+  await $.tool.call({ tool: 'Read', file_path: '/w/art/alice-s41.png' })
+  await $.tool.call({ tool: 'Read', file_path: '/w/art/cat-s23.png', agentId: 'sub1' })
+  await $.tool.call({ tool: 'Read', file_path: '/w/src/app.ts' })
+  const list = await handed($, runs)
+  expect(list.map((item: any) => item.path)).toEqual(['/w/art/alice-s41.png'])
+})
+
+test('the folders and files a reply names go on the list as the CLI reports them; a subagent\'s reply asks nothing', async ($, on) => {
+  const runs = remember(on, { mentioned: JSON.stringify([{ path: '/w/art/candidates', dir: true }, { path: '/w/art/candidates/a.png' }]) })
+  await turn($, 'All nine are in `/w/art/candidates/`.', { agentId: 'sub1' })
+  expect(runs.some(r => r.argv.includes('mentioned'))).toBe(false)
+  await turn($, 'All nine are in `/w/art/candidates/`, the pick is /w/art/candidates/a.png.')
+  const asked = runs.find(r => r.argv.includes('mentioned'))!
+  expect(JSON.parse(asked.argv.at(-1)!)).toEqual(['/w/art/candidates/', '/w/art/candidates/a.png'])
+  const list = await handed($, runs)
+  expect(list.map((item: any) => [item.path, item.dir ?? false])).toEqual([['/w/art/candidates', true], ['/w/art/candidates/a.png', false]])
 })

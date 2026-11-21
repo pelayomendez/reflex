@@ -58,7 +58,7 @@ export async function evaluate(cases, deps = {}) {
     const started = performance.now()
     // A case may carry what Claude made or showed: `recent: [{ path | url, ago (seconds), missing? }]` against a fixed clock, files
     // existing unless marked missing. Cases without one see no list, exactly as before.
-    const context = recent && { recent: recent.map(({ path, url, ago }) => ({ ...(url ? { url } : { path }), at: CLOCK - ago * 1000 })), now: CLOCK, isFile: path => !recent.some(entry => entry.path === path && entry.missing) }
+    const context = recent && { recent: recent.map(({ path, url, ago, dir }) => ({ ...(url ? { url } : { path, ...(dir && { dir: true }) }), at: CLOCK - ago * 1000 })), now: CLOCK, isFile: path => !recent.some(entry => entry.path === path && entry.missing), isDir: path => recent.some(entry => !entry.missing && entry.path && (entry.dir ? entry.path === path : entry.path.slice(0, entry.path.lastIndexOf('/')) === path)) }
     const got = await plan(phrase, { zoxide: () => undefined, ...fakeDeps(), ...deps, ...context })
     const ms = performance.now() - started
     results.push({

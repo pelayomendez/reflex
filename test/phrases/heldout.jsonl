@@ -535,3 +535,8 @@
 {"phrase": "open pr", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "bare"]}
 {"phrase": "abre web", "expect": {"status": "pass"}, "tags": ["es", "trap", "generic", "bare"]}
 {"phrase": "abre url", "expect": {"status": "pass"}, "tags": ["es", "trap", "generic", "bare"]}
+{"phrase": "open the folder", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "folder"]}
+{"phrase": "abre la carpeta", "expect": {"status": "pass"}, "tags": ["es", "trap", "generic", "folder"]}
+{"phrase": "open them", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "folder"]}
+{"phrase": "\u00e1brelos", "expect": {"status": "pass"}, "tags": ["es", "trap", "generic", "folder"]}
+{"phrase": "show me the folder", "expect": {"status": "pass"}, "tags": ["en", "trap", "generic", "folder"]}

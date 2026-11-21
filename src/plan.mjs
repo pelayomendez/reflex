@@ -65,7 +65,7 @@ export async function plan(phrase, deps = {}) {
   const config = deps.config ?? loadConfig()
   const index = deps.index ?? loadIndex()
   // "abre ese doc", "open it": the file Claude wrote, from the list the hooks hand over, or Claude's. Never the model's, never a name.
-  const deictic = resolveDeictic(phrase, deps.recent, { now: deps.now, isFile: deps.isFile, index, aliases: config.aliases, remoteOf: deps.remoteOf, siteFiles: deps.siteFiles })
+  const deictic = resolveDeictic(phrase, deps.recent, { now: deps.now, isFile: deps.isFile, isDir: deps.isDir, index, aliases: config.aliases, remoteOf: deps.remoteOf, siteFiles: deps.siteFiles })
   if (deictic) return deictic
   // A fixed system phrase ("abre ajustes de sonido", "bloquea la pantalla", "volumen al 30") is the table's alone.
   const system = systemAction(phrase, { index, config, screenLockStatus: deps.screenLockStatus })

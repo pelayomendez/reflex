@@ -15,7 +15,7 @@ import { homedir } from 'node:os'
 import { createInterface } from 'node:readline/promises'
 import { readFileSync } from 'node:fs'
 import { loadConfig } from './config.mjs'
-import { parseRecent, touchedBy } from './context.mjs'
+import { mentionedIn, parseRecent, touchedBy } from './context.mjs'
 import { evaluate, fakeDeps } from './eval.mjs'
 import { loadIndex, readIndexFile } from './index.mjs'
 import { readTrashCount } from './query.mjs'
@@ -60,6 +60,14 @@ if (args[0] === 'teach') {
     printSummary(result)
     if (!result.written) { console.error(`reflex teach: nothing was kept, ${result.out} is untouched`); process.exit(1) }
   } catch (error) { console.error(`reflex teach: ${error.message}`); process.exit(1) }
+  process.exit(0)
+}
+if (args[0] === 'mentioned') {
+  // From the hooks: of the paths Claude's reply named (a JSON list after --), the files and folders worth keeping. Silent: an empty list.
+  const dash = args.indexOf('--')
+  let items = []
+  try { items = mentionedIn(JSON.parse(args[dash + 1] ?? '[]')) } catch {}
+  console.log(JSON.stringify(items))
   process.exit(0)
 }
 if (args[0] === 'touched') {

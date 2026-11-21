@@ -172,4 +172,5 @@ export const GENERIC_NOUNS = [
   { kind: 'diagram', en: ['diagram', 'chart', 'graph'], es: ['diagrama', 'grafico'] },
   { kind: 'pdf', en: ['pdf'], es: ['pdf'] },
   { kind: 'file', en: ['file'], es: ['archivo', 'fichero'] },
+  { kind: 'folder', en: ['folder', 'directory'], es: ['carpeta', 'directorio'] },
 ]
